@@ -34,6 +34,7 @@ The set includes 10 free resources:
 - customer data anonymization patterns
 - MCP workflow templates
 - Agent Memories examples
+- MIRAI Memory MCP concept notes
 - workflow documentation patterns
 
 ## Why This Exists
@@ -66,6 +67,16 @@ Miraigent templates are built around that operating layer.
 3. Use agent-memories/ to understand the Agent Memories product direction.
 4. Check paid/ for paid kit previews.
 
+## Agent Memories and MIRAI Memory MCP
+
+Agent Memories is the personal and small-team entry point: Skill MCP plus Memory MCP so an agent can use skills with the user's context.
+
+MIRAI Memory MCP is the organizational direction: Memory MCP plus Router MCP so multiple agents, roles, memories, and skills can be coordinated without making every agent read everything.
+
+Concept page:
+
+https://miraigent.com/en/mirai-memory-mcp.html
+
 ## Japanese
 
 このリポジトリは、MiraigentのAI運用テンプレート、MCPワークフロー、Agent Memories関連リソースを公開する場所です。
@@ -77,6 +88,7 @@ Miraigent templates are built around that operating layer.
 ## Links
 
 - Free templates: https://miraigent.com/en/free-ai-operations-templates.html
+- MIRAI Memory MCP: https://miraigent.com/en/mirai-memory-mcp.html
 - Free diagnosis: https://miraigent.com/en/diagnosis.html
 - Website: https://miraigent.com/
 - note: https://note.com/miraigent
