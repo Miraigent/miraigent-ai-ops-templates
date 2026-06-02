@@ -2,6 +2,8 @@
 
 Free AI operations templates, MCP-ready workflow patterns, and Agent Memories resources for teams building practical AI systems.
 
+Keywords: AI operations templates, MCP workflow, AI memory, Memory MCP, Skill MCP, Router MCP, human review gate, AI support workflow, AI-safe CRM notes, prompt risk review.
+
 This repository is the public home for Miraigent's AI operations resources.
 
 It is designed for teams that want to use AI for customer support, CRM notes, FAQ creation, workflow documentation, or internal operations while keeping human review, privacy, and decision logs visible.
@@ -72,6 +74,26 @@ Miraigent templates are built around that operating layer.
 Agent Memories is the personal and small-team entry point: Skill MCP plus Memory MCP so an agent can use skills with the user's context.
 
 MIRAI Memory MCP is the organizational direction: Memory MCP plus Router MCP so multiple agents, roles, memories, and skills can be coordinated without making every agent read everything.
+
+### Layer Map
+
+Personal / B2C:
+
+Skill MCP -> Memory MCP -> Agent Memories
+
+- Skill MCP adds abilities.
+- Memory MCP keeps personal context outside one model.
+- Agent Memories makes one agent useful across multiple tasks.
+
+Organization / B2B:
+
+Memory MCP -> Router MCP -> MIRAI Memory Pro
+
+- Memory MCP keeps company context, source files, decision logs, and review rules.
+- Router MCP selects the right agent, memory, skill, and permission boundary.
+- MIRAI Memory Pro makes multi-agent work reviewable through task cards, decision logs, handoffs, and boards.
+
+The practical difference is simple: one agent can work with memory; an AI team needs routing.
 
 Concept page:
 

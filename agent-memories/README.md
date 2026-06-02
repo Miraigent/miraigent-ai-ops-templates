@@ -4,6 +4,18 @@ Agent Memories is Miraigent's product direction for turning operational memory i
 
 MIRAI Memory MCP is the larger concept: an external memory layer that helps agents use skills correctly across models, tasks, and teams.
 
+## Quick Layer Diagram
+
+Personal use:
+
+Skill MCP -> Memory MCP -> Agent Memories
+
+Organizational use:
+
+Memory MCP -> Router MCP -> MIRAI Memory Pro
+
+The personal product focuses on continuity for one agent. The organizational product focuses on coordination across multiple agents, skills, memories, permissions, and review gates.
+
 ## Core Idea
 
 Teams do not only need prompts or skills.
@@ -70,6 +82,19 @@ This matters when a company has:
 - task cards, decision logs, and handoff summaries
 
 Router MCP is not necessary for simple one-agent use. It becomes important when an organization wants an AI team, not just one assistant.
+
+## When Router MCP Becomes Necessary
+
+Router MCP should be introduced when at least one of these is true:
+
+- more than one agent is working on the same business process
+- different roles need different memory depth
+- some records are private, confidential, or department-specific
+- work requires approval before sending, publishing, or saving
+- tasks move between drafting, review, escalation, and completion
+- the team needs a board or decision log instead of only chat history
+
+If none of these are true, Agent Memories can stay lightweight: Skill MCP plus Memory MCP is usually enough.
 
 ## Personal vs Organizational Use
 
@@ -163,6 +188,10 @@ https://miraigent.com/en/mirai-memory-mcp.html
 Free diagnosis:
 
 https://miraigent.com/en/diagnosis.html
+
+Related article:
+
+https://note.com/miraigent/n/n346475238d34
 
 ## Japanese
 
