@@ -1,61 +1,83 @@
 # Miraigent AI Ops Templates
 
-Free and paid AI operations templates, MCP workflows, and Agent Memories resources for teams building practical AI systems.
+Free AI operations templates, MCP-ready workflow patterns, and Agent Memories resources for teams building practical AI systems.
 
-This repository is the public home for Miraigent's AI operations resources. It provides free starter materials, public examples, and clear paths to paid template kits for teams that want to move from AI experiments to repeatable operations.
+This repository is the public home for Miraigent's AI operations resources.
+
+It is designed for teams that want to use AI for customer support, CRM notes, FAQ creation, workflow documentation, or internal operations while keeping human review, privacy, and decision logs visible.
+
+## Free Template Library
+
+Download the current free template set:
+
+https://miraigent.com/en/free-ai-operations-templates.html
+
+The set includes 10 free resources:
+
+1. Before You Send It to AI Checklist
+2. FAQ Candidate Review Checklist
+3. AI Prompt Risk Review Sheet
+4. Human Review Gate for AI Drafts
+5. AI-Safe CRM Notes Template
+6. Pre-AI Intake Form Questions
+7. Do Not Send to AI List Template
+8. AI Output Review Checklist
+9. Customer Data Anonymization Mini Guide
+10. AI Support Workflow Starter Map
 
 ## What This Repository Covers
 
-- MCP workflow templates
 - AI operations checklists
+- prompt safety review
+- human review gate design
+- CRM and FAQ workflow templates
+- customer data anonymization patterns
+- MCP workflow templates
 - Agent Memories examples
-- Workflow documentation patterns
-- Human review and approval flow templates
-- Public samples for paid Miraigent template kits
+- workflow documentation patterns
+
+## Why This Exists
+
+Most AI adoption problems are not solved by adding another prompt.
+
+Teams also need to decide:
+
+- what AI may receive
+- what must be masked or rewritten
+- what humans must review
+- what should never be sent to AI as raw text
+- what should be logged after AI output is used
+
+Miraigent templates are built around that operating layer.
 
 ## Repository Structure
 
-- `free/` - Free templates, starter kits, and checklists
-- `agent-memories/` - Agent Memories samples and related product paths
-- `paid/` - Paid product indexes and sample previews
-- `ja/` - Japanese guidance for note, BOOTH, and domestic buyers
-- `NAMING.md` - Naming rules for files, folders, products, and URLs
-
-## Free vs Paid
-
-Free resources are designed to help teams understand the operating model:
-
-- What to record before using AI
-- What not to send to AI
-- How to route human review
-- How to structure repeatable workflow templates
-
-Paid resources are designed for implementation:
-
-- Complete template bundles
-- Industry-specific workflow kits
-- Agent Memories starter kits
-- Practical operating manuals
-- Editable templates for team use
-
-Paid files are not stored directly in this public repository. This repository shows the public samples, product maps, and purchase paths.
+- free/ - free templates, starter kits, and public links
+- agent-memories/ - Agent Memories samples and related product paths
+- paid/ - paid product indexes and sample previews
+- ja/ - Japanese guidance for domestic buyers
+- NAMING.md - naming rules for files, folders, products, and URLs
 
 ## Start Here
 
-1. Read `NAMING.md` before adding files.
-2. Browse `free/` for public starter templates.
-3. Use `agent-memories/` to understand the Agent Memories product direction.
-4. Check `paid/` for paid kit previews.
+1. Browse the free template library:
+   https://miraigent.com/en/free-ai-operations-templates.html
+2. Read free/ for the public resource map.
+3. Use agent-memories/ to understand the Agent Memories product direction.
+4. Check paid/ for paid kit previews.
 
-## 日本語案内
+## Japanese
 
 このリポジトリは、MiraigentのAI運用テンプレート、MCPワークフロー、Agent Memories関連リソースを公開する場所です。
 
 国内向けには、まず「AI導入前に何を整えるべきか」をわかりやすく整理します。noteでは考え方や導入前チェックを発信し、BOOTHでは日本語テンプレート、チェックリスト、ワークシートを販売する想定です。
 
-海外向けには、GitHubを入口として、MCP templates、AI operations templates、workflow kits、Agent Memories resources を展開します。
+海外向けには、GitHubを入口として、AI operations templates、MCP workflow patterns、Agent Memories resources を展開します。
 
 ## Links
 
-Links to paid products, note, BOOTH, and other sales pages will be added as they become available.
-
+- Free templates: https://miraigent.com/en/free-ai-operations-templates.html
+- Free diagnosis: https://miraigent.com/en/diagnosis.html
+- Website: https://miraigent.com/
+- note: https://note.com/miraigent
+- X: https://x.com/miraigent
