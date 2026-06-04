@@ -102,9 +102,13 @@ const tools = [
     inputSchema: {
       type: "object",
       properties: {
-        workflow: {
+        operation: {
           type: "string",
           description: "Operations area, such as customer-support, CRM, FAQ, or content."
+        },
+        workflow: {
+          type: "string",
+          description: "Deprecated alias for operation."
         },
         riskLevel: {
           type: "string",
@@ -112,7 +116,27 @@ const tools = [
           description: "Expected risk level for the operation."
         }
       },
-      required: ["workflow"]
+      required: []
+    }
+  },
+  {
+    name: "recommend_ai_ops_template_sequence",
+    description: "Recommend a practical order for applying the public AI operations templates.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        operation: {
+          type: "string",
+          description: "Operations area, such as support, CRM, FAQ, or content."
+        },
+        priorities: {
+          type: "array",
+          items: {
+            type: "string"
+          },
+          description: "Priorities such as privacy, review, intake, CRM, FAQ, or workflow."
+        }
+      }
     }
   }
 ];
@@ -214,11 +238,60 @@ function callTool(name, args) {
 
   if (name === "build_ai_ops_review_checklist") {
     const riskLevel = args.riskLevel ?? "medium";
-    const checklist = buildChecklist(args.workflow, riskLevel);
+    const operation = args.operation ?? args.workflow ?? "general-ai-operations";
+    const checklist = buildChecklist(operation, riskLevel);
     return textResult(checklist.map((item) => `- ${item}`).join("\n"));
   }
 
+  if (name === "recommend_ai_ops_template_sequence") {
+    return textResult(JSON.stringify(recommendTemplateSequence(args), null, 2));
+  }
+
   throw new Error(`Unknown tool: ${name}`);
+}
+
+function recommendTemplateSequence(args) {
+  const priorities = new Set((args.priorities ?? []).map((item) => String(item).toLowerCase()));
+  const sequence = [
+    "before-you-send-it-to-ai-checklist",
+    "do-not-send-to-ai-list-template",
+    "pre-ai-intake-form-questions",
+    "human-review-gate-ai-drafts",
+    "ai-output-review-checklist",
+    "faq-candidate-review-checklist",
+    "ai-safe-crm-notes-template",
+    "customer-data-anonymization-mini-guide",
+    "ai-support-workflow-starter-map"
+  ];
+
+  if (priorities.has("privacy")) {
+    moveBefore(sequence, "customer-data-anonymization-mini-guide", "human-review-gate-ai-drafts");
+    moveBefore(sequence, "do-not-send-to-ai-list-template", "pre-ai-intake-form-questions");
+  }
+
+  if (priorities.has("faq")) {
+    moveBefore(sequence, "faq-candidate-review-checklist", "ai-safe-crm-notes-template");
+  }
+
+  if (priorities.has("crm")) {
+    moveBefore(sequence, "ai-safe-crm-notes-template", "faq-candidate-review-checklist");
+  }
+
+  return {
+    operation: args.operation ?? "general-ai-operations",
+    note: "This is a non-memory AI operations helper sequence. It is not a MIRAI Memory engine or working memory MCP.",
+    templates: sequence.map((id) => templates.find((template) => template.id === id))
+  };
+}
+
+function moveBefore(items, target, before) {
+  const targetIndex = items.indexOf(target);
+  const beforeIndex = items.indexOf(before);
+  if (targetIndex === -1 || beforeIndex === -1 || targetIndex < beforeIndex) {
+    return;
+  }
+  items.splice(targetIndex, 1);
+  items.splice(beforeIndex, 0, target);
 }
 
 function buildChecklist(workflow, riskLevel) {

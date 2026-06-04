@@ -16,11 +16,17 @@ review, and support process mapping.
 npm run mcp
 ```
 
-The server communicates over stdio with JSON-RPC `Content-Length` framing and implements:
+The server communicates over stdio with JSON-RPC Content-Length framing and implements:
 
 - `initialize`
 - `tools/list`
 - `tools/call`
+
+## Quickstart
+
+From the repository root, run npm run mcp.
+
+After npm publication, the intended command will be npx @miraigent/ai-ops-templates.
 
 ## Tools
 
@@ -48,10 +54,19 @@ Input:
 
 ```json
 {
-  "workflow": "customer-support",
+  "operation": "customer-support",
   "riskLevel": "medium"
 }
 ```
+
+### `recommend_ai_ops_template_sequence`
+
+Recommends a practical order for applying the public templates.
+
+Input fields:
+
+- operation: support, CRM, FAQ, content, or another operations area
+- priorities: optional list such as privacy, faq, crm, intake, or review
 
 ## Why This Exists
 
@@ -64,3 +79,6 @@ Many teams adopt AI before they define the operating layer around it:
 - how customer support and CRM notes stay useful without exposing private data
 
 This starter server turns those public patterns into MCP-accessible tools.
+
+It is a non-memory AI operations helper. It is not the MIRAI Memory engine and
+it is not a working memory MCP.

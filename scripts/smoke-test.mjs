@@ -31,17 +31,27 @@ send({
   method: "tools/call",
   params: {
     name: "build_ai_ops_review_checklist",
-    arguments: { workflow: "customer-support", riskLevel: "high" }
+    arguments: { operation: "customer-support", riskLevel: "high" }
+  }
+});
+send({
+  jsonrpc: "2.0",
+  id: 5,
+  method: "tools/call",
+  params: {
+    name: "recommend_ai_ops_template_sequence",
+    arguments: { operation: "support", priorities: ["privacy", "faq"] }
   }
 });
 
-await waitForResponses(4);
+await waitForResponses(5);
 child.kill();
 
 assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", "initialize failed");
-assert(responses[1].result.tools.length === 3, "tools/list failed");
+assert(responses[1].result.tools.length === 4, "tools/list failed");
 assert(responses[2].result.content[0].text.includes("Human Review Gate"), "template lookup failed");
 assert(responses[3].result.content[0].text.includes("escalation owner"), "checklist build failed");
+assert(responses[4].result.content[0].text.includes("not a MIRAI Memory engine"), "sequence recommendation failed");
 
 function send(payload) {
   const body = JSON.stringify(payload);
