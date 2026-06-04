@@ -20,8 +20,13 @@ MIT-licensed paths:
 - starter MCP tools for human-reviewed AI operations
 - Agent Memories resources for reusable operational notes
 
-The paid/ directory is not MIT-licensed. It is a public index for paid product
-names, sample previews, sales-page links, and update notes only.
+The paid/ directory contains only public product indexes, sample previews,
+sales-page links, and update notes. These committed public files are covered by
+the repository root MIT License.
+
+The license does not grant rights to full paid product files, private client
+materials, the MIRAI Memory engine, or working memory MCPs because those assets
+are not included in this repository.
 
 This repository does not include private customer records, credentials,
 company-specific internal manuals, or unpublished product specifications.
