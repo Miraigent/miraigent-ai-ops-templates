@@ -10,24 +10,20 @@ It is designed for teams that want to use AI for customer support, CRM notes, FA
 
 ## Open Source Scope
 
-This repository's committed public files are licensed under the MIT License.
-See LICENSE-SCOPE.md for the boundary between committed public files and assets
-that are not included in this repository.
+This repository is not under one repository-wide MIT license. The open source
+scope is limited by LICENSE-SCOPE.md.
 
-MIT-licensed committed files include:
+MIT-licensed paths:
 
 - public AI operations templates
 - a dependency-free MCP server for template discovery
 - starter MCP tools for human-reviewed AI operations
-- Agent Memories resources for reusable operational notes
 
-The paid/ directory contains only public product indexes, sample previews,
-sales-page links, and update notes. These committed public files are covered by
-the repository root MIT License.
+The paid/ directory is not MIT-licensed. It is a public index for paid product
+names, sample previews, sales-page links, and update notes only.
 
-The license does not grant rights to full paid product files, private client
-materials, the MIRAI Memory engine, or working memory MCPs because those assets
-are not included in this repository.
+The MIT license does not grant rights to full paid product files, private client
+materials, the MIRAI Memory engine, or working memory MCPs.
 
 This repository does not include private customer records, credentials,
 company-specific internal manuals, or unpublished product specifications.

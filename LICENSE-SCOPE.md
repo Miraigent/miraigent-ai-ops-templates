@@ -1,33 +1,31 @@
 # License Scope
 
-This repository's committed public files are licensed under the MIT License.
+This repository is not licensed under one repository-wide license.
 
-The root LICENSE file is the source of truth for committed public files in this
-repository.
+The open source scope is intentionally limited to the public free resources and
+starter MCP code listed below.
 
-## What Is Included
+## MIT-Licensed Paths
 
-The MIT License applies to the public files committed here, including:
+The MIT License applies only to files under these paths:
 
 - free/
 - mcp/
-- agent-memories/
-- ja/
-- paid/
-- README.md
-- NAMING.md
-- package.json
-- scripts/
 
-The files under paid/ are only public product indexes, sample descriptions,
-sales-page links, and update notes.
+The full MIT License text is available in:
 
-## What Is Not Included
+- free/LICENSE
+- mcp/LICENSE
 
-The MIT License does not grant rights to materials that are not committed to
-this repository, including full paid product files, private client materials,
-internal operating manuals, credentials, unpublished product specifications, the
-MIRAI Memory engine, or working memory MCPs.
+## Not MIT-Licensed
+
+The paid/ directory is not MIT-licensed.
+
+It is included only as a public index for paid product names, sample previews,
+sales-page links, and update notes. Full paid product files, private client
+materials, internal operating manuals, credentials, unpublished product
+specifications, the MIRAI Memory engine, and working memory MCPs must not be
+committed to this public repository.
 
 If paid product files are published later, they should be stored in a separate
 private repository or shipped through the intended paid distribution channel.
