@@ -1,7 +1,7 @@
 {
   "name": "@miraigent/ai-ops-templates",
   "version": "0.1.0",
-  "description": "Open AI operations templates and a starter MCP server for human-reviewed AI operations.",
+  "description": "Public AI operations templates and a starter MCP server for human-reviewed AI operations.",
   "type": "module",
   "private": false,
   "license": "SEE LICENSE IN LICENSE-SCOPE.md",
@@ -22,7 +22,7 @@
   "keywords": [
     "mcp",
     "ai-operations",
-    "agent-memory",
+    "agent-tools",
     "human-review",
     "ai-safety",
     "templates"

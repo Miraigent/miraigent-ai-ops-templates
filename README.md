@@ -2,7 +2,7 @@
 
 Open AI operations templates and starter MCP tooling for teams that want to use AI with practical human review.
 
-Keywords: MCP, AI operations templates, agent memory, prompt safety review, human review gate, AI support workflow, AI-safe CRM notes, customer data anonymization, FAQ candidate review.
+Keywords: MCP, AI operations templates, agent tools, prompt safety review, human review gate, AI support process, AI-safe CRM notes, customer data anonymization, FAQ candidate review.
 
 This repository is the public home for Miraigent's free AI operations resources and open MCP starter tools.
 
@@ -26,18 +26,33 @@ names, sample previews, sales-page links, and update notes only.
 This repository does not include private customer records, credentials,
 company-specific internal manuals, or unpublished product specifications.
 
+## Public Boundary
+
+MIRAI Memory is the private memory engine. This repository does not open-source
+the MIRAI Memory engine itself.
+
+The public layer is limited to tools and resources that can sit around that
+engine:
+
+- free AI operations templates
+- the starter MCP server in mcp/
+- future MIRAI skill MCP tools
+- public Agent Memories guidance
+
+In short: this repository opens the tool layer, not the MIRAI Memory engine.
+
 ## Naming Layers
 
 Miraigent uses these public names consistently:
 
 - Service: Agent Memories
-- Engine / memory concept: MIRAI Memory
+- Private engine / memory concept: MIRAI Memory
 - Public repository: Miraigent AI Ops Templates
 
 In Japanese materials:
 
 - サービス名: エージェントメモリーズ
-- エンジン名 / 記憶コンセプト: MIRAI Memory
+- 非公開エンジン名 / 記憶コンセプト: MIRAI Memory
 - 公開repo名: Miraigent AI Ops Templates
 
 ## MCP Starter Server
@@ -62,7 +77,7 @@ mcp/ai-ops-template-server/
 
 The server exposes tools for listing the public template catalog, fetching one template, and building a short AI operations review checklist.
 
-This repository currently publishes a starter MCP server. It does not claim to provide a full orchestration workflow engine.
+This repository currently publishes a starter MCP server. It does not claim to provide a full orchestration or automation engine.
 
 ## Free Template Library
 
@@ -139,9 +154,9 @@ Examples:
 - prompt safety checklists
 - customer data anonymization examples
 
-This repository only contains public-facing resources. Private company context, internal operating manuals, credentials, customer records, and deep product specifications should not be stored here.
+This repository only contains public-facing resources and tool-layer examples. The MIRAI Memory engine itself is private and is not included here. Private company context, internal operating manuals, credentials, customer records, and deep product specifications should not be stored here.
 
-Concept page:
+Public introduction page:
 
 https://miraigent.com/en/mirai-memory-mcp.html
 
@@ -163,7 +178,7 @@ https://miraigent.com/en/mirai-memory-mcp.html
 ## Links
 
 - Free templates: https://miraigent.com/en/free-ai-operations-templates.html
-- MIRAI Memory concept: https://miraigent.com/en/mirai-memory-mcp.html
+- MIRAI Memory public introduction: https://miraigent.com/en/mirai-memory-mcp.html
 - Free diagnosis: https://miraigent.com/en/diagnosis.html
 - Website: https://miraigent.com/
 - note: https://note.com/miraigent

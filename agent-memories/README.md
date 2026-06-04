@@ -2,17 +2,31 @@
 
 Agent Memories is a public-facing concept for turning repeated AI operating lessons into reusable notes and templates.
 
-This public repository only explains the lightweight idea. It does not contain private company memory, internal product specifications, customer records, credentials, or implementation details.
+This public repository only explains the lightweight idea and publishes tool-layer resources. It does not contain the MIRAI Memory engine, private company memory, internal product specifications, customer records, credentials, or implementation details.
 
 ## Naming
 
 - Service: Agent Memories
-- Engine / memory concept: MIRAI Memory
+- Private engine / memory concept: MIRAI Memory
+- Public tool layer: MIRAI skill MCP and related helper tools
 
 Japanese:
 
 - サービス名: エージェントメモリーズ
-- エンジン名 / 記憶コンセプト: MIRAI Memory
+- 非公開エンジン名 / 記憶コンセプト: MIRAI Memory
+- 公開道具レイヤー: MIRAI skill MCP と関連ヘルパーツール
+
+## Public Boundary
+
+MIRAI Memory is the private engine behind the service concept. It is not
+open-sourced in this repository.
+
+Public resources in this repository are limited to the surrounding tool layer:
+
+- free AI operations templates
+- public Agent Memories guidance
+- starter MCP tools
+- future MIRAI skill MCP tools
 
 ## Core Idea
 
@@ -27,7 +41,7 @@ Examples:
 - which customer data should be anonymized
 - which FAQ candidates need human review
 
-Agent Memories turns these lessons into practical templates for safer AI operations. MIRAI Memory is the engine and memory concept behind that service name.
+Agent Memories turns these lessons into practical templates for safer AI operations. MIRAI Memory is the private engine and memory concept behind that service name; this repository only publishes surrounding templates and tool-layer resources.
 
 ## Public Examples
 
@@ -59,7 +73,7 @@ Free AI operations templates:
 
 https://miraigent.com/en/free-ai-operations-templates.html
 
-MIRAI Memory public concept page:
+MIRAI Memory public introduction page:
 
 https://miraigent.com/en/mirai-memory-mcp.html
 
@@ -77,4 +91,4 @@ Agent Memoriesは、AI運用で繰り返し使う「確認ポイント」「避�
 
 公開repoには、無料テンプレートと軽い紹介だけを置きます。
 
-深い商品仕様、内部運用、顧客情報、非公開の判断基準はprivate側で管理します。
+MIRAI Memoryのエンジン本体、深い商品仕様、内部運用、顧客情報、非公開の判断基準はprivate側で管理します。
