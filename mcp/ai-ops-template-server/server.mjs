@@ -235,7 +235,7 @@ function route(method, params) {
       },
       serverInfo: {
         name: "miraigent-ai-ops-template-server",
-        version: "0.1.3"
+        version: "0.1.2"
       }
     };
   }
@@ -308,7 +308,16 @@ function recommendTemplateSequence(args) {
   return {
     operation: args.operation ?? "general-ai-operations",
     note: "This is a non-memory AI operations helper sequence. It is not a MIRAI Memory engine or working memory MCP.",
+    nextSteps: buildNextSteps(),
     templates: sequence.map((id) => templates.find((template) => template.id === id))
+  };
+}
+
+function buildNextSteps() {
+  return {
+    label: "Learn more",
+    note: "Use these public templates as a starting point, then review Miraigent and Agent Memories resources for practical AI operations support.",
+    links: []
   };
 }
 

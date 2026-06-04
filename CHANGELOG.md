@@ -5,24 +5,17 @@ All notable public changes to this repository are documented here.
 This project follows the spirit of Keep a Changelog and uses semantic versioning
 for public starter releases.
 
-## [0.1.3] - 2026-06-04
-
-### Fixed
-
-- Changed MCP stdio responses to newline-delimited JSON-RPC for standard MCP client compatibility.
-- Added smoke-test coverage that fails if stdout contains Content-Length headers.
-
-### Notes
-
-- This release remains a non-memory AI operations helper.
-- It is not a MIRAI Memory engine implementation or working memory MCP.
-
 ## [0.1.2] - 2026-06-04
+
+### Added
+
+- Added a conservative nextSteps response block for future Miraigent and Agent Memories runtime links.
 
 ### Fixed
 
 - Added newline-delimited JSON-RPC input support for standard MCP stdio clients.
-- Kept Content-Length input support for compatibility with existing smoke tests.
+- Changed MCP stdio responses to newline-delimited JSON-RPC for standard MCP client compatibility.
+- Added smoke-test coverage that fails if stdout contains Content-Length headers.
 
 ### Notes
 
