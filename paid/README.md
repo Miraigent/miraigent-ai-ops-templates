@@ -2,9 +2,12 @@
 
 Paid products are not stored directly in this public repository.
 
-Files under paid/ are not MIT-licensed.
+Files committed under paid/ are public product indexes and sample descriptions
+covered by the repository root MIT License.
 
-See paid/LICENSE-NOTICE.md and the repository root LICENSE-SCOPE.md.
+This does not include full paid product files, private client materials, the
+MIRAI Memory engine, or working memory MCPs. See paid/LICENSE-NOTICE.md and the
+repository root LICENSE-SCOPE.md.
 
 This folder is for:
 

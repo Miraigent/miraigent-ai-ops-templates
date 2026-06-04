@@ -1,10 +1,10 @@
 # Paid Directory License Notice
 
-Files under paid/ are not covered by the MIT license used for the public free
-resources and starter MCP code.
+The files committed under paid/ are public product indexes, sample descriptions,
+sales-page links, and update notes. These committed files are covered by the
+repository root MIT License.
 
-This directory is only a public index for paid product names, sample previews,
-sales-page links, and update notes.
-
-Do not commit full paid product files, private client materials, internal
-operating manuals, credentials, or unpublished product specifications here.
+Full paid product files, private client materials, internal operating manuals,
+credentials, unpublished product specifications, the MIRAI Memory engine, and
+working memory MCPs are not included in this repository and are not granted by
+this license.
