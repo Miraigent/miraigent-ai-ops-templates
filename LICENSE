@@ -1,0 +1,16 @@
+# License Notice
+
+This repository is not licensed under one repository-wide license.
+
+See LICENSE-SCOPE.md for the exact license boundaries.
+
+Summary:
+
+- free/ is MIT-licensed. See free/LICENSE.
+- mcp/ is MIT-licensed. See mcp/LICENSE.
+- paid/ is not MIT-licensed. See paid/LICENSE-NOTICE.md.
+- The MIRAI Memory engine and working memory MCPs are private and are not
+  included in this repository.
+
+Do not treat this root notice as a grant of rights for paid products, private
+client materials, the MIRAI Memory engine, or working memory MCPs.
