@@ -5,7 +5,7 @@ All notable public changes to this repository are documented here.
 This project follows the spirit of Keep a Changelog and uses semantic versioning
 for public starter releases.
 
-## [0.1.2] - 2026-06-04
+## [0.1.3] - 2026-06-05
 
 ### Added
 
