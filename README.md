@@ -31,15 +31,20 @@ company-specific internal manuals, or unpublished product specifications.
 MIRAI Memory is the private memory engine. This repository does not open-source
 the MIRAI Memory engine itself.
 
+Memory MCP servers that would make MIRAI Memory usable as a working memory
+engine are also private and must not be published here.
+
 The public layer is limited to tools and resources that can sit around that
 engine:
 
 - free AI operations templates
 - the starter MCP server in mcp/
-- future MIRAI skill MCP tools
+- non-memory skill resources
+- non-memory AI operations helper MCP tools
 - public Agent Memories guidance
 
-In short: this repository opens the tool layer, not the MIRAI Memory engine.
+In short: this repository opens free support tools, not the MIRAI Memory engine
+and not a working memory MCP.
 
 ## Naming Layers
 
@@ -154,7 +159,7 @@ Examples:
 - prompt safety checklists
 - customer data anonymization examples
 
-This repository only contains public-facing resources and tool-layer examples. The MIRAI Memory engine itself is private and is not included here. Private company context, internal operating manuals, credentials, customer records, and deep product specifications should not be stored here.
+This repository only contains public-facing resources and tool-layer examples. The MIRAI Memory engine itself and working memory MCPs are private and are not included here. Private company context, internal operating manuals, credentials, customer records, and deep product specifications should not be stored here.
 
 Public introduction page:
 
