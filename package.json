@@ -4,7 +4,17 @@
   "description": "Open AI operations templates and a starter MCP server for human-reviewed AI operations.",
   "type": "module",
   "private": false,
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE-SCOPE.md",
+  "files": [
+    "README.md",
+    "NAMING.md",
+    "LICENSE-SCOPE.md",
+    "free/",
+    "mcp/",
+    "agent-memories/",
+    "ja/",
+    "scripts/"
+  ],
   "scripts": {
     "test": "node scripts/smoke-test.mjs",
     "mcp": "node mcp/ai-ops-template-server/server.mjs"

@@ -3,6 +3,9 @@
 This is a small, dependency-free Model Context Protocol server for Miraigent's
 public AI operations templates.
 
+Files under mcp/ are MIT-licensed. See mcp/LICENSE and the repository root
+LICENSE-SCOPE.md.
+
 It helps an MCP client discover practical resources for human-reviewed AI
 operations, including prompt risk review, data anonymization, CRM notes, FAQ
 review, and support process mapping.

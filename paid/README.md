@@ -2,11 +2,9 @@
 
 Paid products are not stored directly in this public repository.
 
-The MIT license in this repository applies to the public files committed here:
-README files, public samples, starter code, and open template metadata.
+Files under paid/ are not MIT-licensed.
 
-It does not grant rights to private paid product files that are not committed to
-this repository.
+See paid/LICENSE-NOTICE.md and the repository root LICENSE-SCOPE.md.
 
 This folder is for:
 

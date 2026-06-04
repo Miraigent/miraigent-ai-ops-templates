@@ -2,6 +2,9 @@
 
 Miraigent publishes free templates for teams that want to use AI in customer operations without losing reviewability.
 
+Files under free/ are MIT-licensed. See free/LICENSE and the repository root
+LICENSE-SCOPE.md.
+
 Download the current free template library:
 
 https://miraigent.com/en/free-ai-operations-templates.html

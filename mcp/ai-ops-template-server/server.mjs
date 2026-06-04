@@ -98,18 +98,18 @@ const tools = [
   },
   {
     name: "build_ai_ops_review_checklist",
-    description: "Build a short human-review checklist for an AI workflow.",
+    description: "Build a short human-review checklist for an AI operation.",
     inputSchema: {
       type: "object",
       properties: {
         workflow: {
           type: "string",
-          description: "Workflow area, such as customer-support, CRM, FAQ, or content."
+          description: "Operations area, such as customer-support, CRM, FAQ, or content."
         },
         riskLevel: {
           type: "string",
           enum: ["low", "medium", "high"],
-          description: "Expected risk level for the workflow."
+          description: "Expected risk level for the operation."
         }
       },
       required: ["workflow"]

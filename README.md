@@ -10,16 +10,21 @@ It is designed for teams that want to use AI for customer support, CRM notes, FA
 
 ## Open Source Scope
 
-This repository is licensed under MIT.
+This repository is not under one repository-wide MIT license. The open source
+scope is limited by LICENSE-SCOPE.md.
 
-It includes:
+MIT-licensed paths:
 
 - public AI operations templates
 - a dependency-free MCP server for template discovery
 - starter MCP tools for human-reviewed AI operations
 - Agent Memories resources for reusable operational notes
 
-It does not include private customer records, credentials, company-specific internal manuals, or unpublished product specifications.
+The paid/ directory is not MIT-licensed. It is a public index for paid product
+names, sample previews, sales-page links, and update notes only.
+
+This repository does not include private customer records, credentials,
+company-specific internal manuals, or unpublished product specifications.
 
 ## Naming Layers
 
@@ -109,6 +114,7 @@ Miraigent templates are built around that operating layer.
 - agent-memories/ - lightweight public introduction to reusable AI operating notes
 - paid/ - paid product indexes and sample previews
 - ja/ - Japanese guidance for domestic buyers
+- LICENSE-SCOPE.md - license scope and paid-directory boundary
 - NAMING.md - naming rules for files, folders, products, and URLs
 
 ## Start Here
