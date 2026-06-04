@@ -10,10 +10,11 @@ It is designed for teams that want to use AI for customer support, CRM notes, FA
 
 ## Open Source Scope
 
-This repository is not under one repository-wide MIT license. The open source
-scope is limited by LICENSE-SCOPE.md.
+This repository's committed public files are licensed under the MIT License.
+See LICENSE-SCOPE.md for the boundary between committed public files and assets
+that are not included in this repository.
 
-MIT-licensed paths:
+MIT-licensed committed files include:
 
 - public AI operations templates
 - a dependency-free MCP server for template discovery
