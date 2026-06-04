@@ -1,0 +1,30 @@
+name: codex-ready
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  codex-ready:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Codex-ready note
+        run: |
+          echo "This workflow is prepared for future Codex-assisted PR review."
+          echo "It does not run Codex until Miraigent-owned credentials or credits are configured."
+          echo "Do not describe this workflow as active Codex usage before credentials are configured."
+
+      - name: Public boundary checklist
+        run: |
+          test -f LICENSE-SCOPE.md
+          test -f free/LICENSE
+          test -f mcp/LICENSE
+          test ! -f LICENSE
+          grep -R "working memory MCPs are private" README.md agent-memories/README.md

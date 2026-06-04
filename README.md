@@ -1,5 +1,7 @@
 # Miraigent AI Ops Templates
 
+[![check](https://github.com/Miraigent/miraigent-ai-ops-templates/actions/workflows/check.yml/badge.svg)](https://github.com/Miraigent/miraigent-ai-ops-templates/actions/workflows/check.yml)
+
 Open AI operations templates and starter MCP tooling for teams that want to use AI with practical human review.
 
 Keywords: MCP, AI operations templates, agent tools, prompt safety review, human review gate, AI support process, AI-safe CRM notes, customer data anonymization, FAQ candidate review.
@@ -76,6 +78,12 @@ Run the smoke test:
 npm test
 ```
 
+Run all repository checks:
+
+```bash
+npm run check
+```
+
 Server path:
 
 ```text
@@ -85,6 +93,16 @@ mcp/ai-ops-template-server/
 The server exposes tools for listing the public template catalog, fetching one template, and building a short AI operations review checklist.
 
 This repository currently publishes a starter MCP server. It does not claim to provide a full orchestration or automation engine.
+
+## Maintenance
+
+This repository includes:
+
+- CHANGELOG.md for public release notes
+- CONTRIBUTING.md for contribution rules and public-boundary checks
+- issue and pull request templates
+- GitHub Actions for syntax checks, repository boundary checks, and MCP smoke tests
+- a Codex-ready workflow that is prepared for future Miraigent-owned Codex credentials but does not claim active Codex usage before those credentials are configured
 
 ## Free Template Library
 
