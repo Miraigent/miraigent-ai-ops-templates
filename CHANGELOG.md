@@ -5,11 +5,18 @@ All notable public changes to this repository are documented here.
 This project follows the spirit of Keep a Changelog and uses semantic versioning
 for public starter releases.
 
-## [0.1.3] - 2026-06-05
+## [0.1.4] - 2026-06-05
 
 ### Added
 
 - Added a conservative nextSteps response block for future Miraigent and Agent Memories runtime links.
+
+### Notes
+
+- The nextSteps links remain empty until the final landing URL is confirmed.
+- This release remains a non-memory AI operations helper.
+
+## [0.1.3] - 2026-06-05
 
 ### Fixed
 
