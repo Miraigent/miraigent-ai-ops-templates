@@ -93,6 +93,7 @@ mcp/ai-ops-template-server/
 The server exposes tools for listing the public template catalog, fetching one template, building a short AI operations review checklist, and recommending a practical template sequence.
 
 This repository currently publishes a starter MCP server. It does not claim to provide a full orchestration or automation engine.
+The server accepts newline-delimited JSON-RPC over stdio for standard MCP clients and also accepts Content-Length framing for compatibility tests.
 
 After npm publication, the intended command will be npx @miraigent/ai-ops-templates.
 Because this is a scoped public npm package, publication uses npm publish --access public.

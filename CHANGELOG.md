@@ -5,6 +5,18 @@ All notable public changes to this repository are documented here.
 This project follows the spirit of Keep a Changelog and uses semantic versioning
 for public starter releases.
 
+## [0.1.2] - 2026-06-04
+
+### Fixed
+
+- Added newline-delimited JSON-RPC input support for standard MCP stdio clients.
+- Kept Content-Length input support for compatibility with existing smoke tests.
+
+### Notes
+
+- This release remains a non-memory AI operations helper.
+- It is not a MIRAI Memory engine implementation or working memory MCP.
+
 ## [0.1.1] - 2026-06-04
 
 ### Added

@@ -150,6 +150,18 @@ process.stdin.on("data", (chunk) => {
 });
 
 function readNextMessage() {
+  if (startsWithContentLength(buffer)) {
+    return readContentLengthMessage();
+  }
+
+  return readNewlineMessage();
+}
+
+function startsWithContentLength(input) {
+  return input.slice(0, 15).toString("utf8").toLowerCase().startsWith("content-length:");
+}
+
+function readContentLengthMessage() {
   const separator = buffer.indexOf("\r\n\r\n");
   if (separator === -1) {
     return false;
@@ -173,6 +185,22 @@ function readNextMessage() {
   const body = buffer.slice(bodyStart, bodyEnd).toString("utf8");
   buffer = buffer.slice(bodyEnd);
   handleMessage(body);
+  return true;
+}
+
+function readNewlineMessage() {
+  const lineEnd = buffer.indexOf("\n");
+  if (lineEnd === -1) {
+    return false;
+  }
+
+  const line = buffer.slice(0, lineEnd).toString("utf8").trim();
+  buffer = buffer.slice(lineEnd + 1);
+  if (!line) {
+    return true;
+  }
+
+  handleMessage(line);
   return true;
 }
 
@@ -207,7 +235,7 @@ function route(method, params) {
       },
       serverInfo: {
         name: "miraigent-ai-ops-template-server",
-        version: "0.1.0"
+        version: "0.1.2"
       }
     };
   }
