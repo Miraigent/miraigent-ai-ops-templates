@@ -26,7 +26,7 @@ The server communicates over stdio with JSON-RPC Content-Length framing and impl
 
 From the repository root, run npm run mcp.
 
-After npm publication, the intended command will be npx @miraigent/ai-ops-templates.
+After npm publication, the intended command will be npx miraigent-ai-ops-templates.
 
 ## Tools
 

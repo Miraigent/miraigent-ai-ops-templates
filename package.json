@@ -1,5 +1,5 @@
 {
-  "name": "@miraigent/ai-ops-templates",
+  "name": "miraigent-ai-ops-templates",
   "version": "0.1.1",
   "description": "Public AI operations templates and a starter MCP server for human-reviewed AI operations.",
   "homepage": "https://github.com/Miraigent/miraigent-ai-ops-templates#readme",
