@@ -16,10 +16,24 @@ It includes:
 
 - public AI operations templates
 - a dependency-free MCP server for template discovery
-- starter workflow patterns for human-reviewed AI operations
+- starter MCP tools for human-reviewed AI operations
 - Agent Memories resources for reusable operational notes
 
 It does not include private customer records, credentials, company-specific internal manuals, or unpublished product specifications.
+
+## Naming Layers
+
+Miraigent uses these public names consistently:
+
+- Service: Agent Memories
+- Engine / memory concept: MIRAI Memory
+- Public repository: Miraigent AI Ops Templates
+
+In Japanese materials:
+
+- サービス名: エージェントメモリーズ
+- エンジン名 / 記憶コンセプト: MIRAI Memory
+- 公開repo名: Miraigent AI Ops Templates
 
 ## MCP Starter Server
 
@@ -42,6 +56,8 @@ mcp/ai-ops-template-server/
 ```
 
 The server exposes tools for listing the public template catalog, fetching one template, and building a short AI operations review checklist.
+
+This repository currently publishes a starter MCP server. It does not claim to provide a full orchestration workflow engine.
 
 ## Free Template Library
 
@@ -125,7 +141,7 @@ https://miraigent.com/en/mirai-memory-mcp.html
 
 ## Roadmap
 
-- Add MCP examples for safe prompt review, FAQ candidate review, and AI-safe CRM notes.
+- Add MCP tools for safe prompt review, FAQ candidate review, and AI-safe CRM notes.
 - Publish more template metadata as machine-readable JSON.
 - Add practical examples that show how human-review gates connect to AI agents.
 - Keep free resources open while reserving private customer-specific implementation details for private workspaces.

@@ -4,8 +4,8 @@ This is a small, dependency-free Model Context Protocol server for Miraigent's
 public AI operations templates.
 
 It helps an MCP client discover practical resources for human-reviewed AI
-workflows, including prompt risk review, data anonymization, CRM notes, FAQ
-review, and support workflow mapping.
+operations, including prompt risk review, data anonymization, CRM notes, FAQ
+review, and support process mapping.
 
 ## Run
 
@@ -39,7 +39,7 @@ Input:
 
 ### `build_ai_ops_review_checklist`
 
-Builds a short review checklist for a workflow area.
+Builds a short review checklist for an AI operations area.
 
 Input:
 

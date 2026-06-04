@@ -3,7 +3,7 @@
 This starter kit points to Miraigent's first public AI operations MCP server.
 
 The goal is to make public AI operations templates accessible to agents through
-simple workflow tools, not only static Markdown documents.
+simple MCP tools, not only static Markdown documents.
 
 ## Server
 
@@ -31,7 +31,7 @@ npm test
 
 ## What This Free Kit Includes
 
-- Basic MCP workflow structure
+- Basic MCP server structure
 - Example template discovery tools
 - Human review checklist generation
 - Safe input and output boundary examples
@@ -39,10 +39,10 @@ npm test
 
 ## What It Does Not Include
 
-- Complete paid workflow bundles
+- Complete paid tooling bundles
 - Industry-specific private templates
 - Private client operating manuals
 - Credentials, keys, or internal system details
 
 Use this as the first open implementation path for turning public AI operations
-templates into agent-accessible workflow tooling.
+templates into agent-accessible MCP tooling.
