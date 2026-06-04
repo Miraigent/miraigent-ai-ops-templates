@@ -16,7 +16,7 @@ review, and support process mapping.
 npm run mcp
 ```
 
-The server communicates over stdio with newline-delimited JSON-RPC for standard MCP clients. It also accepts JSON-RPC Content-Length framing for compatibility tests.
+The server communicates over stdio with newline-delimited JSON-RPC for standard MCP clients.
 
 It implements:
 

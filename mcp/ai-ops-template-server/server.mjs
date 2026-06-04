@@ -235,7 +235,7 @@ function route(method, params) {
       },
       serverInfo: {
         name: "miraigent-ai-ops-template-server",
-        version: "0.1.2"
+        version: "0.1.3"
       }
     };
   }
@@ -373,5 +373,5 @@ function respond(id, result = null, error = null) {
     message.result = result;
   }
   const body = JSON.stringify(message);
-  process.stdout.write(`Content-Length: ${Buffer.byteLength(body, "utf8")}\r\n\r\n${body}`);
+  process.stdout.write(`${body}\n`);
 }

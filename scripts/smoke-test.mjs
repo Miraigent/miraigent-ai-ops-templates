@@ -9,12 +9,12 @@ async function runSmokeTest(framing) {
   });
 
   const responses = [];
-  let buffer = Buffer.alloc(0);
-  child.stdout.setEncoding("utf8");
+  let output = "";
   child.stdout.on("data", (chunk) => {
-    buffer = Buffer.concat([buffer, Buffer.from(chunk, "utf8")]);
-    while (readNextResponse()) {
-      // Keep draining complete messages.
+    output += chunk.toString("utf8");
+    assert(!output.includes("Content-Length:"), `${framing}: stdout must not include Content-Length headers`);
+    while (readNextResponseLine()) {
+      // Keep draining complete newline-delimited responses.
     }
   });
 
@@ -67,27 +67,17 @@ async function runSmokeTest(framing) {
   assert(responses[4].result.content[0].text.includes("escalation owner"), `${framing}: checklist build failed`);
   assert(responses[5].result.content[0].text.includes("not a MIRAI Memory engine"), `${framing}: sequence recommendation failed`);
 
-  function readNextResponse() {
-    const separator = buffer.indexOf("\r\n\r\n");
-    if (separator === -1) {
+  function readNextResponseLine() {
+    const lineEnd = output.indexOf("\n");
+    if (lineEnd === -1) {
       return false;
     }
 
-    const header = buffer.slice(0, separator).toString("utf8");
-    const match = header.match(/Content-Length: (\d+)/i);
-    if (!match) {
-      throw new Error(`${framing}: Missing Content-Length in response: ${header}`);
+    const line = output.slice(0, lineEnd).trim();
+    output = output.slice(lineEnd + 1);
+    if (line) {
+      responses.push(JSON.parse(line));
     }
-
-    const bodyStart = separator + 4;
-    const bodyEnd = bodyStart + Number(match[1]);
-    if (buffer.length < bodyEnd) {
-      return false;
-    }
-
-    const body = buffer.slice(bodyStart, bodyEnd).toString("utf8");
-    buffer = buffer.slice(bodyEnd);
-    responses.push(JSON.parse(body));
     return true;
   }
 }
