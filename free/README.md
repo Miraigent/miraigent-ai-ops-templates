@@ -78,5 +78,6 @@ https://miraigent.gumroad.com/l/ai-support-workflow-starter-map
 
 ## Related
 
+- MCP starter server: ../mcp/ai-ops-template-server/
 - Free diagnosis: https://miraigent.com/en/diagnosis.html
 - Miraigent website: https://miraigent.com/

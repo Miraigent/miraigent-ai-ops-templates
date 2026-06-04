@@ -1,12 +1,47 @@
 # Miraigent AI Ops Templates
 
-Free AI operations templates and public AI workflow resources for teams that want to use AI with practical human review.
+Open AI operations templates and starter MCP tooling for teams that want to use AI with practical human review.
 
-Keywords: AI operations templates, prompt safety review, human review gate, AI support workflow, AI-safe CRM notes, customer data anonymization, FAQ candidate review.
+Keywords: MCP, AI operations templates, agent memory, prompt safety review, human review gate, AI support workflow, AI-safe CRM notes, customer data anonymization, FAQ candidate review.
 
-This repository is the public home for Miraigent's free AI operations resources.
+This repository is the public home for Miraigent's free AI operations resources and open MCP starter tools.
 
 It is designed for teams that want to use AI for customer support, CRM notes, FAQ creation, workflow documentation, or internal operations while keeping human review, privacy, and decision logs visible.
+
+## Open Source Scope
+
+This repository is licensed under MIT.
+
+It includes:
+
+- public AI operations templates
+- a dependency-free MCP server for template discovery
+- starter workflow patterns for human-reviewed AI operations
+- Agent Memories resources for reusable operational notes
+
+It does not include private customer records, credentials, company-specific internal manuals, or unpublished product specifications.
+
+## MCP Starter Server
+
+Run the starter Model Context Protocol server:
+
+```bash
+npm run mcp
+```
+
+Run the smoke test:
+
+```bash
+npm test
+```
+
+Server path:
+
+```text
+mcp/ai-ops-template-server/
+```
+
+The server exposes tools for listing the public template catalog, fetching one template, and building a short AI operations review checklist.
 
 ## Free Template Library
 
@@ -54,6 +89,7 @@ Miraigent templates are built around that operating layer.
 ## Repository Structure
 
 - free/ - free templates, starter kits, and public links
+- mcp/ - runnable MCP servers and examples
 - agent-memories/ - lightweight public introduction to reusable AI operating notes
 - paid/ - paid product indexes and sample previews
 - ja/ - Japanese guidance for domestic buyers
@@ -63,9 +99,10 @@ Miraigent templates are built around that operating layer.
 
 1. Browse the free template library:
    https://miraigent.com/en/free-ai-operations-templates.html
-2. Read free/ for the public resource map.
-3. Use agent-memories/ for a lightweight overview of reusable AI operating notes.
-4. Check paid/ for paid kit previews.
+2. Run the starter MCP server with `npm run mcp`.
+3. Read free/ for the public resource map.
+4. Use agent-memories/ for a lightweight overview of reusable AI operating notes.
+5. Check paid/ for paid kit previews.
 
 ## Agent Memories
 
@@ -86,6 +123,13 @@ Concept page:
 
 https://miraigent.com/en/mirai-memory-mcp.html
 
+## Roadmap
+
+- Add MCP examples for safe prompt review, FAQ candidate review, and AI-safe CRM notes.
+- Publish more template metadata as machine-readable JSON.
+- Add practical examples that show how human-review gates connect to AI agents.
+- Keep free resources open while reserving private customer-specific implementation details for private workspaces.
+
 ## Japanese
 
 このリポジトリは、MiraigentのAI運用テンプレートと公開向けスターターリソースを置く場所です。
@@ -102,4 +146,3 @@ https://miraigent.com/en/mirai-memory-mcp.html
 - Website: https://miraigent.com/
 - note: https://note.com/miraigent
 - X: https://x.com/miraigent
-

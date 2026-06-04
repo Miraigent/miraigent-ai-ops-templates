@@ -1,0 +1,24 @@
+{
+  "name": "@miraigent/ai-ops-templates",
+  "version": "0.1.0",
+  "description": "Open AI operations templates and a starter MCP server for human-reviewed AI workflows.",
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "scripts": {
+    "test": "node scripts/smoke-test.mjs",
+    "mcp": "node mcp/ai-ops-template-server/server.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "ai-operations",
+    "agent-memory",
+    "human-review",
+    "ai-safety",
+    "templates"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Miraigent/miraigent-ai-ops-templates.git"
+  }
+}

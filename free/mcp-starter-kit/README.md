@@ -1,23 +1,48 @@
 # MCP Starter Kit
 
-This is the planned public starter kit for teams exploring MCP-based workflows.
+This starter kit points to Miraigent's first public AI operations MCP server.
 
-## What This Free Kit Will Include
+The goal is to make public AI operations templates accessible to agents through
+simple workflow tools, not only static Markdown documents.
+
+## Server
+
+```text
+../../mcp/ai-ops-template-server/
+```
+
+Run from the repository root:
+
+```bash
+npm run mcp
+```
+
+Smoke test:
+
+```bash
+npm test
+```
+
+## Available Tools
+
+- `list_ai_ops_templates`
+- `get_ai_ops_template`
+- `build_ai_ops_review_checklist`
+
+## What This Free Kit Includes
 
 - Basic MCP workflow structure
-- Example resource naming rules
-- Human review checklist
-- Safe input and output boundaries
+- Example template discovery tools
+- Human review checklist generation
+- Safe input and output boundary examples
 - Notes for moving from prototype to operations
 
-## What It Will Not Include
+## What It Does Not Include
 
 - Complete paid workflow bundles
-- Industry-specific templates
+- Industry-specific private templates
 - Private client operating manuals
 - Credentials, keys, or internal system details
 
-## Status
-
-Draft structure. Templates will be added incrementally.
-
+Use this as the first open implementation path for turning public AI operations
+templates into agent-accessible workflow tooling.
