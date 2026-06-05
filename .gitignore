@@ -2,6 +2,10 @@
 node_modules/
 .env
 .env.*
+*.env
+*.env.enc
+.npmrc
+secrets/
+.secrets/
 dist/
 build/
-
