@@ -1,6 +1,6 @@
 {
   "name": "@miraigent/ai-ops-templates",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Public AI operations templates and a starter MCP server for human-reviewed AI operations.",
   "homepage": "https://github.com/Miraigent/miraigent-ai-ops-templates#readme",
   "type": "module",

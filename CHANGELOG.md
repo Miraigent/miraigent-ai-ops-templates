@@ -5,6 +5,17 @@ All notable public changes to this repository are documented here.
 This project follows the spirit of Keep a Changelog and uses semantic versioning
 for public starter releases.
 
+## [0.1.7] - 2026-06-05
+
+### Changed
+
+- Aligned scripts/secret-scan.mjs with organization-level pre-commit token families for GitHub, Google, OpenAI, Stripe, AWS, Slack, Discord, npm, and private-key blocks.
+
+### Notes
+
+- The scanner runs through both npm run check and the versioned pre-commit hook.
+- This release remains a non-memory AI operations helper.
+
 ## [0.1.6] - 2026-06-05
 
 ### Added

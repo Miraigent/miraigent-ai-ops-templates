@@ -24,12 +24,15 @@ const skippedExtensions = new Set([
 ]);
 
 const secretPatterns = [
-  ["private key block", /-----BEGIN (?:RSA |DSA |EC |OPENSSH |PGP )?PRIVATE KEY-----/],
-  ["GitHub token", /\bgh[pousr]_[A-Za-z0-9_]{36,}\b/],
-  ["OpenAI API key", /\bsk-[A-Za-z0-9_-]{32,}\b/],
+  ["private key block", /-----BEGIN [A-Z0-9 ]*PRIVATE KEY-----/],
+  ["GitHub token", /\b(?:ghp|gho|ghs|ghu)_[A-Za-z0-9_]{36,}\b/],
+  ["GitHub fine-grained token", /\bgithub_pat_[A-Za-z0-9_]{22,}\b/],
+  ["OpenAI API key", /\bsk-(?:proj-|ant-|or-v1-)?[A-Za-z0-9_-]{20,}\b/],
+  ["Stripe live key", /\b(?:sk_live|pk_live)_[A-Za-z0-9]{16,}\b/],
+  ["Stripe webhook secret", /\bwhsec_[A-Za-z0-9]{16,}\b/],
   ["npm token", /\bnpm_[A-Za-z0-9]{30,}\b/],
-  ["Slack token", /\bxox[baprs]-[A-Za-z0-9-]{20,}\b/],
-  ["Discord bot token", /\b(?:mfa\.[A-Za-z0-9_-]{20,}|[MN][A-Za-z\d]{23}\.[\w-]{6}\.[\w-]{27,})\b/],
+  ["Slack token", /\bxox[bpoas]-[A-Za-z0-9-]{20,}\b/],
+  ["Discord bot token", /\b(?:mfa\.[A-Za-z0-9_-]{20,}|MTQ[0-9A-Za-z]{20,}\.[\w-]+\.[\w-]+|[MN][A-Za-z\d]{23}\.[\w-]{6}\.[\w-]{27,})\b/],
   ["AWS access key", /\bAKIA[0-9A-Z]{16}\b/],
   ["Google API key", /\bAIza[0-9A-Za-z_-]{35}\b/]
 ];
