@@ -1,6 +1,6 @@
 {
   "name": "@miraigent/ai-ops-templates",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Public AI operations templates and a starter MCP server for human-reviewed AI operations.",
   "homepage": "https://github.com/Miraigent/miraigent-ai-ops-templates#readme",
   "type": "module",
@@ -8,6 +8,7 @@
   "license": "SEE LICENSE IN LICENSE-SCOPE.md",
   "files": [
     "README.md",
+    "MAINTENANCE.md",
     "NAMING.md",
     "LICENSE-SCOPE.md",
     "free/",
@@ -20,7 +21,8 @@
     "miraigent-ai-ops-mcp": "mcp/ai-ops-template-server/server.mjs"
   },
   "scripts": {
-    "check": "node --check mcp/ai-ops-template-server/server.mjs && node --check scripts/smoke-test.mjs && node scripts/check-repository.mjs",
+    "check": "node --check mcp/ai-ops-template-server/server.mjs && node --check scripts/smoke-test.mjs && node --check scripts/secret-scan.mjs && node scripts/check-repository.mjs && node scripts/secret-scan.mjs",
+    "install-hooks": "git config core.hooksPath .githooks",
     "test": "node scripts/smoke-test.mjs",
     "mcp": "node mcp/ai-ops-template-server/server.mjs"
   },

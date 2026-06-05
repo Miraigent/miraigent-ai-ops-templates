@@ -1,4 +1,14 @@
-import { readFileSync, existsSync } from "node:fs";
+import { readdirSync, readFileSync, existsSync, statSync } from "node:fs";
+import { join } from "node:path";
+
+const forbiddenPublicPhrases = [
+  "mcp for agent memory",
+  "agent memory mcp",
+  "memory mcp starter",
+  "mirai memory mcp server",
+  "working memory mcp starter",
+  "open-source mirai memory engine"
+];
 
 const checks = [
   ["README.md", "MIRAI Memory is the private memory engine"],
@@ -15,6 +25,7 @@ for (const [file, expected] of checks) {
 }
 
 assertMissing("LICENSE");
+assertNoForbiddenPublicPositioning(".");
 
 function assertFileContains(file, expected) {
   if (!existsSync(file)) {
@@ -30,4 +41,36 @@ function assertMissing(file) {
   if (existsSync(file)) {
     throw new Error(`Unexpected file exists: ${file}`);
   }
+}
+
+function assertNoForbiddenPublicPositioning(directory) {
+  for (const file of listTextFiles(directory)) {
+    const content = readFileSync(file, "utf8").toLowerCase();
+    for (const phrase of forbiddenPublicPhrases) {
+      if (content.includes(phrase)) {
+        throw new Error("Forbidden public positioning phrase in " + file + ": " + phrase);
+      }
+    }
+  }
+}
+
+function listTextFiles(directory) {
+  const files = [];
+  for (const name of readdirSync(directory)) {
+    if (name === ".git" || name === "node_modules") {
+      continue;
+    }
+
+    const path = join(directory, name);
+    const stat = statSync(path);
+    if (stat.isDirectory()) {
+      files.push(...listTextFiles(path));
+      continue;
+    }
+
+    if (/\.(md|json|mjs|yml|yaml|txt)$/.test(path)) {
+      files.push(path);
+    }
+  }
+  return files.filter((file) => file !== "scripts/check-repository.mjs");
 }

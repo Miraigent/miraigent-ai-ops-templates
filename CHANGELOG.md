@@ -5,6 +5,19 @@ All notable public changes to this repository are documented here.
 This project follows the spirit of Keep a Changelog and uses semantic versioning
 for public starter releases.
 
+## [0.1.6] - 2026-06-05
+
+### Added
+
+- Added scripts/secret-scan.mjs and included it in npm run check.
+- Added a versioned pre-commit hook under .githooks/ plus npm run install-hooks.
+- Added MAINTENANCE.md with daily update, public-boundary, scoped-license, and no-empty-commit rules.
+
+### Notes
+
+- This release remains a non-memory AI operations helper.
+- Public wording must stay within the general AI operations templates / ops MCP starter boundary.
+
 ## [0.1.5] - 2026-06-05
 
 ### Added
