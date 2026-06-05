@@ -28,11 +28,12 @@ Do not submit:
 
 ## Before Opening a Pull Request
 
-1. Run npm test.
-2. Run npm run check.
-3. Confirm that your change stays within the public boundary.
-4. Confirm that no secrets or private content are included.
-5. Update CHANGELOG.md when the change affects public behavior.
+1. Run npm run install-hooks once after cloning so the versioned pre-commit hook runs locally.
+2. Run npm test.
+3. Run npm run check.
+4. Confirm that your change stays within the public boundary.
+5. Confirm that no secrets or private content are included.
+6. Update CHANGELOG.md when the change affects public behavior.
 
 ## License
 
