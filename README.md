@@ -10,6 +10,21 @@ This repository is the public home for Miraigent's free AI operations resources 
 
 It is designed for teams that want to use AI for customer support, CRM notes, FAQ creation, workflow documentation, or internal operations while keeping human review, privacy, and decision logs visible.
 
+## Start Here
+
+- Public resource hub: https://miraigent.com/#resources
+- Free diagnosis: https://miraigent.com/diagnosis.html
+- Free template library: https://miraigent.com/en/free-ai-operations-templates.html
+- npm package: https://www.npmjs.com/package/@miraigent/ai-ops-templates
+- Agent Memories: https://agentmemories.jp/
+- Technical articles: https://qiita.com/Miraigent and https://zenn.dev/miraigent
+
+日本語で確認したい方は、まず Miraigent の公開リソース導線をご確認ください。
+
+- 公開リソース: https://miraigent.com/#resources
+- 無料診断: https://miraigent.com/diagnosis.html
+- 技術記事: https://qiita.com/Miraigent / https://zenn.dev/miraigent
+
 ## Open Source Scope
 
 This repository is not under one repository-wide MIT license. The open source
