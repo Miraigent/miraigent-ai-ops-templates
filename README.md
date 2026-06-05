@@ -181,7 +181,7 @@ Miraigent templates are built around that operating layer.
 - LICENSE-SCOPE.md - license scope and paid-directory boundary
 - NAMING.md - naming rules for files, folders, products, and URLs
 
-## Start Here
+## How to Use This Repo
 
 1. Browse the free template library:
    https://miraigent.com/en/free-ai-operations-templates.html
