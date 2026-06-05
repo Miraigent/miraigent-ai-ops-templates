@@ -12,7 +12,7 @@ It is designed for teams that want to use AI for customer support, CRM notes, FA
 
 ## Start Here
 
-- Public resource hub: https://miraigent.com/#resources
+- Public resource hub: https://miraigent.com/resources.html
 - Free diagnosis: https://miraigent.com/diagnosis.html
 - Free template library: https://miraigent.com/en/free-ai-operations-templates.html
 - npm package: https://www.npmjs.com/package/@miraigent/ai-ops-templates
@@ -21,7 +21,7 @@ It is designed for teams that want to use AI for customer support, CRM notes, FA
 
 日本語で確認したい方は、まず Miraigent の公開リソース導線をご確認ください。
 
-- 公開リソース: https://miraigent.com/#resources
+- 公開リソース: https://miraigent.com/resources.html
 - 無料診断: https://miraigent.com/diagnosis.html
 - 技術記事: https://qiita.com/Miraigent / https://zenn.dev/miraigent
 

@@ -5,6 +5,13 @@ All notable public changes to this repository are documented here.
 This project follows the spirit of Keep a Changelog and uses semantic versioning
 for public starter releases.
 
+## [0.1.8] - 2026-06-05
+
+### Changed
+
+- Added prominent Start Here routes in README for the Miraigent public resource hub, free diagnosis, npm package, Agent Memories, Qiita, and Zenn.
+- Updated package homepage to the Japanese public resource hub.
+
 ## [0.1.7] - 2026-06-05
 
 ### Changed
