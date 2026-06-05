@@ -90,7 +90,7 @@ Server path:
 mcp/ai-ops-template-server/
 ```
 
-The server exposes tools for listing the public template catalog, fetching one template, building a short AI operations review checklist, and recommending a practical template sequence.
+The server exposes tools for listing the public template catalog, fetching one template, building a short AI operations review checklist, recommending a practical template sequence, and drafting a short adoption plan.
 
 This repository currently publishes a starter MCP server. It does not claim to provide a full orchestration or automation engine.
 The server uses newline-delimited JSON-RPC over stdio for standard MCP clients.

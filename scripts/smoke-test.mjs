@@ -56,16 +56,31 @@ async function runSmokeTest(framing) {
       arguments: { operation: "support", priorities: ["privacy", "faq"] }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 7,
+    method: "tools/call",
+    params: {
+      name: "draft_ai_ops_adoption_plan",
+      arguments: {
+        operation: "customer-support",
+        currentPain: "AI replies are drafted before review rules are clear",
+        reviewOwner: "support lead",
+        riskLevel: "high"
+      }
+    }
+  });
 
-  await waitForResponses(responses, 6);
+  await waitForResponses(responses, 7);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
-  assert(responses[1].result.tools.length === 4, `${framing}: tools/list failed`);
+  assert(responses[1].result.tools.length === 5, `${framing}: tools/list failed`);
   assert(responses[2].result.content[0].text.includes("Human Review Gate"), `${framing}: template listing failed`);
   assert(responses[3].result.content[0].text.includes("Human Review Gate"), `${framing}: template lookup failed`);
   assert(responses[4].result.content[0].text.includes("escalation owner"), `${framing}: checklist build failed`);
   assert(responses[5].result.content[0].text.includes("not a MIRAI Memory engine"), `${framing}: sequence recommendation failed`);
+  assert(responses[6].result.content[0].text.includes("support lead"), `${framing}: adoption plan failed`);
 
   function readNextResponseLine() {
     const lineEnd = output.indexOf("\n");

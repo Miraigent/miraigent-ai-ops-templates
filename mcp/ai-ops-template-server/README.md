@@ -70,6 +70,21 @@ Input fields:
 - operation: support, CRM, FAQ, content, or another operations area
 - priorities: optional list such as privacy, faq, crm, intake, or review
 
+### `draft_ai_ops_adoption_plan`
+
+Drafts a short, practical adoption plan for applying the public templates.
+
+Input:
+
+```json
+{
+  "operation": "customer-support",
+  "currentPain": "AI replies are drafted before review rules are clear",
+  "reviewOwner": "support lead",
+  "riskLevel": "high"
+}
+```
+
 ## Why This Exists
 
 Many teams adopt AI before they define the operating layer around it:

@@ -5,6 +5,18 @@ All notable public changes to this repository are documented here.
 This project follows the spirit of Keep a Changelog and uses semantic versioning
 for public starter releases.
 
+## [0.1.5] - 2026-06-05
+
+### Added
+
+- Added `draft_ai_ops_adoption_plan`, a non-memory MCP tool that turns an operations area, pain point, review owner, and risk level into a five-step template adoption plan.
+- Added smoke-test coverage for the adoption-plan tool in both newline JSON-RPC and Content-Length input modes.
+
+### Notes
+
+- This release remains a non-memory AI operations helper.
+- It is not a MIRAI Memory engine implementation or working memory MCP.
+
 ## [0.1.4] - 2026-06-05
 
 ### Added

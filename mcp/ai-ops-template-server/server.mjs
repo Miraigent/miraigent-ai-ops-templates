@@ -138,6 +138,32 @@ const tools = [
         }
       }
     }
+  },
+  {
+    name: "draft_ai_ops_adoption_plan",
+    description: "Draft a short adoption plan for applying Miraigent public AI operations templates.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        operation: {
+          type: "string",
+          description: "Operations area, such as customer support, CRM, FAQ, or content review."
+        },
+        currentPain: {
+          type: "string",
+          description: "Main problem the team wants to reduce."
+        },
+        reviewOwner: {
+          type: "string",
+          description: "Role or team that owns human review."
+        },
+        riskLevel: {
+          type: "string",
+          enum: ["low", "medium", "high"],
+          description: "Expected risk level for the operation."
+        }
+      }
+    }
   }
 ];
 
@@ -235,7 +261,7 @@ function route(method, params) {
       },
       serverInfo: {
         name: "miraigent-ai-ops-template-server",
-        version: "0.1.4"
+        version: "0.1.5"
       }
     };
   }
@@ -273,6 +299,10 @@ function callTool(name, args) {
 
   if (name === "recommend_ai_ops_template_sequence") {
     return textResult(JSON.stringify(recommendTemplateSequence(args), null, 2));
+  }
+
+  if (name === "draft_ai_ops_adoption_plan") {
+    return textResult(JSON.stringify(draftAdoptionPlan(args), null, 2));
   }
 
   throw new Error(`Unknown tool: ${name}`);
@@ -318,6 +348,49 @@ function buildNextSteps() {
     label: "Learn more",
     note: "Use these public templates as a starting point, then review Miraigent and Agent Memories resources for practical AI operations support.",
     links: []
+  };
+}
+
+function draftAdoptionPlan(args) {
+  const operation = args.operation ?? "general-ai-operations";
+  const currentPain = args.currentPain ?? "AI usage is happening before review rules are clear";
+  const reviewOwner = args.reviewOwner ?? "human reviewer";
+  const riskLevel = args.riskLevel ?? "medium";
+
+  return {
+    operation,
+    currentPain,
+    reviewOwner,
+    riskLevel,
+    boundary: "This is a non-memory AI operations helper plan. It is not a MIRAI Memory engine or working memory MCP.",
+    steps: [
+      {
+        day: 1,
+        action: "Define what must not be sent to AI.",
+        templateId: "do-not-send-to-ai-list-template"
+      },
+      {
+        day: 2,
+        action: "Create the intake questions needed before AI drafts anything.",
+        templateId: "pre-ai-intake-form-questions"
+      },
+      {
+        day: 3,
+        action: `Assign ${reviewOwner} as the human review gate before external use.`,
+        templateId: "human-review-gate-ai-drafts"
+      },
+      {
+        day: 4,
+        action: "Review AI output for privacy, accuracy, tone, and policy risk.",
+        templateId: "ai-output-review-checklist"
+      },
+      {
+        day: 5,
+        action: "Turn repeated review points into FAQ candidates or CRM notes.",
+        templateId: riskLevel === "high" ? "customer-data-anonymization-mini-guide" : "faq-candidate-review-checklist"
+      }
+    ],
+    recommendedFirstCheck: buildChecklist(operation, riskLevel)
   };
 }
 
