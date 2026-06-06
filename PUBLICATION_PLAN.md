@@ -51,6 +51,7 @@ Publish:
 - A clearer MCP tool catalog in mcp/ai-ops-template-server/README.md.
 - One example request and response for each public MCP tool.
 - A short note about what the starter server does not automate.
+- Free MCP candidate documentation and issue feedback routing.
 
 Public article:
 
@@ -156,6 +157,8 @@ Publish:
 - Add more example workflows for support, sales intake, FAQ updates, and safe
   CRM notes.
 - Add more MCP starter tools only when they remain non-memory and reviewable.
+- Promote free MCP candidates from documented candidate to alpha tool after
+  smoke tests and public examples are ready.
 - Keep expanding technical articles that explain practical AI operations.
 - Improve machine-readable template metadata.
 - Add docs for how teams can adapt the free templates internally.

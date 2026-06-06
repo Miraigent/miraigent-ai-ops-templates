@@ -12,6 +12,7 @@ operational logs.
 - A dependency-free starter MCP server under mcp/ai-ops-template-server/.
 - Public documentation for template discovery, human review gates, FAQ
   candidate workflows, and AI-safe CRM notes.
+- Free MCP candidate documentation for public alpha feedback.
 - CI checks for repository boundaries, secret scanning, and MCP smoke tests.
 
 ## What Is Not Public
@@ -47,6 +48,7 @@ Inspect the public template catalog:
 - CHANGELOG.md records public updates.
 - MAINTENANCE.md documents boundary and daily maintenance rules.
 - PUBLICATION_PLAN.md shows the next public releases and review schedule.
+- FREE_MCP_CANDIDATES.md shows public alpha MCP candidates and issue routing.
 - CONTRIBUTING.md documents contribution and safety expectations.
 - LICENSE-SCOPE.md explains the path-scoped MIT license.
 

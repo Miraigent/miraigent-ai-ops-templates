@@ -11,6 +11,7 @@ for public starter releases.
 
 - Added OPEN_SOURCE_READINESS.md with public scope, reviewer quick checks, maintained signals, and resource routes.
 - Added PUBLICATION_PLAN.md with a 14-day public release schedule, connected article plan, backlog, and stop conditions.
+- Added FREE_MCP_CANDIDATES.md and a GitHub issue template for public free MCP candidate feedback.
 
 ### Changed
 
