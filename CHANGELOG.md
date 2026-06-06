@@ -7,6 +7,10 @@ for public starter releases.
 
 ## [0.1.9] - 2026-06-06
 
+### Added
+
+- Added OPEN_SOURCE_READINESS.md with public scope, reviewer quick checks, maintained signals, and resource routes.
+
 ### Changed
 
 - Updated the free MCP starter kit README so its tool list matches the current public AI operations MCP server.

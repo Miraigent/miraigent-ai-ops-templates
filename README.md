@@ -18,6 +18,7 @@ It is designed for teams that want to use AI for customer support, CRM notes, FA
 - npm package: https://www.npmjs.com/package/@miraigent/ai-ops-templates
 - Agent Memories: https://agentmemories.jp/
 - Technical articles: https://qiita.com/Miraigent and https://zenn.dev/miraigent
+- Open source readiness: OPEN_SOURCE_READINESS.md
 
 日本語で確認したい方は、まず Miraigent の公開リソース導線をご確認ください。
 
@@ -120,6 +121,7 @@ This repository includes:
 - CHANGELOG.md for public release notes
 - CONTRIBUTING.md for contribution rules and public-boundary checks
 - MAINTENANCE.md for daily update, boundary, and secret-scan rules
+- OPEN_SOURCE_READINESS.md for reviewer-facing public scope, run commands, and inspection routes
 - issue and pull request templates
 - GitHub Actions for syntax checks, repository boundary checks, secret scans, and MCP smoke tests
 - a Codex-ready workflow that is prepared for future Miraigent-owned Codex credentials but does not claim active Codex usage before those credentials are configured
