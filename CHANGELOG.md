@@ -5,6 +5,13 @@ All notable public changes to this repository are documented here.
 This project follows the spirit of Keep a Changelog and uses semantic versioning
 for public starter releases.
 
+## [0.1.9] - 2026-06-06
+
+### Changed
+
+- Updated the free MCP starter kit README so its tool list matches the current public AI operations MCP server.
+- Clarified MCP README wording around reusable operating notes without implying a memory MCP.
+
 ## [0.1.8] - 2026-06-05
 
 ### Changed

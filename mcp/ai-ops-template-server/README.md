@@ -92,7 +92,7 @@ Many teams adopt AI before they define the operating layer around it:
 - what data can be sent to AI
 - what must be masked
 - when a human must review output
-- how repeated review lessons become reusable memory
+- how repeated review lessons become reusable operating notes
 - how customer support and CRM notes stay useful without exposing private data
 
 This starter server turns those public patterns into MCP-accessible tools.

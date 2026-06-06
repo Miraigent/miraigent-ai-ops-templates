@@ -28,12 +28,15 @@ npm test
 - `list_ai_ops_templates`
 - `get_ai_ops_template`
 - `build_ai_ops_review_checklist`
+- `recommend_ai_ops_template_sequence`
+- `draft_ai_ops_adoption_plan`
 
 ## What This Free Kit Includes
 
 - Basic MCP server structure
 - Example template discovery tools
 - Human review checklist generation
+- Template sequence and adoption-plan examples
 - Safe input and output boundary examples
 - Notes for moving from prototype to operations
 
