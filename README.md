@@ -19,6 +19,7 @@ It is designed for teams that want to use AI for customer support, CRM notes, FA
 - Agent Memories: https://agentmemories.jp/
 - Technical articles: https://qiita.com/Miraigent and https://zenn.dev/miraigent
 - Open source readiness: OPEN_SOURCE_READINESS.md
+- Publication plan: PUBLICATION_PLAN.md
 
 日本語で確認したい方は、まず Miraigent の公開リソース導線をご確認ください。
 
@@ -122,6 +123,7 @@ This repository includes:
 - CONTRIBUTING.md for contribution rules and public-boundary checks
 - MAINTENANCE.md for daily update, boundary, and secret-scan rules
 - OPEN_SOURCE_READINESS.md for reviewer-facing public scope, run commands, and inspection routes
+- PUBLICATION_PLAN.md for the next public releases, article plan, and stop conditions
 - issue and pull request templates
 - GitHub Actions for syntax checks, repository boundary checks, secret scans, and MCP smoke tests
 - a Codex-ready workflow that is prepared for future Miraigent-owned Codex credentials but does not claim active Codex usage before those credentials are configured
@@ -213,6 +215,7 @@ https://miraigent.com/en/mirai-memory-mcp.html
 
 ## Roadmap
 
+- Follow the 14-day public schedule in PUBLICATION_PLAN.md.
 - Add MCP tools for safe prompt review, FAQ candidate review, and AI-safe CRM notes.
 - Publish more template metadata as machine-readable JSON.
 - Add practical examples that show how human-review gates connect to AI agents.
