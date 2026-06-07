@@ -5,6 +5,14 @@ All notable public changes to this repository are documented here.
 This project follows the spirit of Keep a Changelog and uses semantic versioning
 for public starter releases.
 
+## Unreleased
+
+### Changed
+
+- Added manual JSON-RPC examples to the MCP server README so reviewers can try
+  tool listing, template lookup, and adoption-plan drafting without extra
+  client setup.
+
 ## [0.1.9] - 2026-06-06
 
 ### Added
