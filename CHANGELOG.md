@@ -7,6 +7,11 @@ for public starter releases.
 
 ## Unreleased
 
+### Added
+
+- Added smoke-test coverage for unknown MCP tool and template-id error
+  responses.
+
 ### Changed
 
 - Added manual JSON-RPC examples to the MCP server README so reviewers can try

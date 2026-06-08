@@ -70,8 +70,26 @@ async function runSmokeTest(framing) {
       }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 8,
+    method: "tools/call",
+    params: {
+      name: "missing_ai_ops_tool",
+      arguments: {}
+    }
+  });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 9,
+    method: "tools/call",
+    params: {
+      name: "get_ai_ops_template",
+      arguments: { id: "missing-template" }
+    }
+  });
 
-  await waitForResponses(responses, 7);
+  await waitForResponses(responses, 9);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -81,6 +99,8 @@ async function runSmokeTest(framing) {
   assert(responses[4].result.content[0].text.includes("escalation owner"), `${framing}: checklist build failed`);
   assert(responses[5].result.content[0].text.includes("not a MIRAI Memory engine"), `${framing}: sequence recommendation failed`);
   assert(responses[6].result.content[0].text.includes("support lead"), `${framing}: adoption plan failed`);
+  assert(responses[7].error.message === "Unknown tool: missing_ai_ops_tool", `${framing}: unknown tool error failed`);
+  assert(responses[8].error.message === "Unknown template id: missing-template", `${framing}: unknown template error failed`);
 
   function readNextResponseLine() {
     const lineEnd = output.indexOf("\n");
