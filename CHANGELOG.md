@@ -5,7 +5,7 @@ All notable public changes to this repository are documented here.
 This project follows the spirit of Keep a Changelog and uses semantic versioning
 for public starter releases.
 
-## Unreleased
+## [0.1.10] - 2026-06-10
 
 ### Added
 
@@ -17,6 +17,9 @@ for public starter releases.
 - Added manual JSON-RPC examples to the MCP server README so reviewers can try
   tool listing, template lookup, and adoption-plan drafting without extra
   client setup.
+- Expanded npm keywords to improve discovery: mcp-server, model-context-protocol,
+  agent-memories, human-in-the-loop, workflow-automation, customer-support, crm,
+  faq, review-gate, claude-desktop, cursor-mcp, developer-tools, npx.
 
 ## [0.1.9] - 2026-06-06
 

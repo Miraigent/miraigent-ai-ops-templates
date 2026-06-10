@@ -1,6 +1,6 @@
 {
   "name": "@miraigent/ai-ops-templates",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Public AI operations templates and a starter MCP server for human-reviewed AI operations.",
   "homepage": "https://miraigent.com/resources.html",
   "type": "module",
@@ -28,11 +28,25 @@
   },
   "keywords": [
     "mcp",
+    "mcp-server",
+    "model-context-protocol",
     "ai-operations",
     "agent-tools",
+    "agent-memories",
     "human-review",
+    "human-in-the-loop",
     "ai-safety",
-    "templates"
+    "templates",
+    "ai-ops",
+    "workflow-automation",
+    "customer-support",
+    "crm",
+    "faq",
+    "review-gate",
+    "claude-desktop",
+    "cursor-mcp",
+    "developer-tools",
+    "npx"
   ],
   "repository": {
     "type": "git",
