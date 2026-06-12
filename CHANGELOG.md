@@ -5,6 +5,13 @@ All notable public changes to this repository are documented here.
 This project follows the spirit of Keep a Changelog and uses semantic versioning
 for public starter releases.
 
+## [Unreleased]
+
+### Fixed
+
+- Aligned the MCP server initialize version with package.json and added smoke
+  test coverage to catch future version drift.
+
 ## [0.1.10] - 2026-06-10
 
 ### Added

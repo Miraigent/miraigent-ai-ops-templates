@@ -261,7 +261,7 @@ function route(method, params) {
       },
       serverInfo: {
         name: "miraigent-ai-ops-template-server",
-        version: "0.1.9"
+        version: "0.1.10"
       }
     };
   }

@@ -1,4 +1,7 @@
 import { spawn } from "node:child_process";
+import { readFile } from "node:fs/promises";
+
+const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
 
 await runSmokeTest("content-length");
 await runSmokeTest("newline");
@@ -93,6 +96,7 @@ async function runSmokeTest(framing) {
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
+  assert(responses[0].result.serverInfo.version === packageJson.version, `${framing}: server version must match package.json`);
   assert(responses[1].result.tools.length === 5, `${framing}: tools/list failed`);
   assert(responses[2].result.content[0].text.includes("Human Review Gate"), `${framing}: template listing failed`);
   assert(responses[3].result.content[0].text.includes("Human Review Gate"), `${framing}: template lookup failed`);
