@@ -91,8 +91,20 @@ async function runSmokeTest(framing) {
       arguments: { id: "missing-template" }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 10,
+    method: "tools/call",
+    params: {
+      name: "draft_ai_ops_adoption_plan",
+      arguments: {
+        operation: "customer-support",
+        riskLevel: "critical"
+      }
+    }
+  });
 
-  await waitForResponses(responses, 9);
+  await waitForResponses(responses, 10);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -105,6 +117,10 @@ async function runSmokeTest(framing) {
   assert(responses[6].result.content[0].text.includes("support lead"), `${framing}: adoption plan failed`);
   assert(responses[7].error.message === "Unknown tool: missing_ai_ops_tool", `${framing}: unknown tool error failed`);
   assert(responses[8].error.message === "Unknown template id: missing-template", `${framing}: unknown template error failed`);
+  assert(
+    responses[9].error.message === "Unsupported riskLevel: critical. Use low, medium, or high.",
+    `${framing}: invalid riskLevel error failed`
+  );
 
   function readNextResponseLine() {
     const lineEnd = output.indexOf("\n");

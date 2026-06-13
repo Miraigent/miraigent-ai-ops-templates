@@ -291,7 +291,7 @@ function callTool(name, args) {
   }
 
   if (name === "build_ai_ops_review_checklist") {
-    const riskLevel = args.riskLevel ?? "medium";
+    const riskLevel = normalizeRiskLevel(args.riskLevel);
     const operation = args.operation ?? args.workflow ?? "general-ai-operations";
     const checklist = buildChecklist(operation, riskLevel);
     return textResult(checklist.map((item) => `- ${item}`).join("\n"));
@@ -355,7 +355,7 @@ function draftAdoptionPlan(args) {
   const operation = args.operation ?? "general-ai-operations";
   const currentPain = args.currentPain ?? "AI usage is happening before review rules are clear";
   const reviewOwner = args.reviewOwner ?? "human reviewer";
-  const riskLevel = args.riskLevel ?? "medium";
+  const riskLevel = normalizeRiskLevel(args.riskLevel);
 
   return {
     operation,
@@ -392,6 +392,14 @@ function draftAdoptionPlan(args) {
     ],
     recommendedFirstCheck: buildChecklist(operation, riskLevel)
   };
+}
+
+function normalizeRiskLevel(value) {
+  const riskLevel = value ?? "medium";
+  if (riskLevel === "low" || riskLevel === "medium" || riskLevel === "high") {
+    return riskLevel;
+  }
+  throw new Error(`Unsupported riskLevel: ${riskLevel}. Use low, medium, or high.`);
 }
 
 function moveBefore(items, target, before) {

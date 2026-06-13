@@ -11,6 +11,8 @@ for public starter releases.
 
 - Aligned the MCP server initialize version with package.json and added smoke
   test coverage to catch future version drift.
+- Added runtime validation and smoke-test coverage for unsupported MCP
+  `riskLevel` values.
 
 ## [0.1.10] - 2026-06-10
 
