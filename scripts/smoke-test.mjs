@@ -113,7 +113,16 @@ async function runSmokeTest(framing) {
   assert(responses[2].result.content[0].text.includes("Human Review Gate"), `${framing}: template listing failed`);
   assert(responses[3].result.content[0].text.includes("Human Review Gate"), `${framing}: template lookup failed`);
   assert(responses[4].result.content[0].text.includes("escalation owner"), `${framing}: checklist build failed`);
-  assert(responses[5].result.content[0].text.includes("not a MIRAI Memory engine"), `${framing}: sequence recommendation failed`);
+  const sequenceRecommendation = JSON.parse(responses[5].result.content[0].text);
+  assert(sequenceRecommendation.note.includes("not a MIRAI Memory engine"), `${framing}: sequence recommendation failed`);
+  assert(
+    sequenceRecommendation.templates.length === responses[2].result.content[0].text.match(/"id":/g).length,
+    `${framing}: sequence recommendation must include the full public template catalog`
+  );
+  assert(
+    sequenceRecommendation.templates.some((template) => template.id === "ai-prompt-risk-review-sheet"),
+    `${framing}: sequence recommendation must include prompt risk review sheet`
+  );
   assert(responses[6].result.content[0].text.includes("support lead"), `${framing}: adoption plan failed`);
   assert(responses[7].error.message === "Unknown tool: missing_ai_ops_tool", `${framing}: unknown tool error failed`);
   assert(responses[8].error.message === "Unknown template id: missing-template", `${framing}: unknown template error failed`);

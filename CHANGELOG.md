@@ -13,6 +13,8 @@ for public starter releases.
   test coverage to catch future version drift.
 - Added runtime validation and smoke-test coverage for unsupported MCP
   `riskLevel` values.
+- Included the AI Prompt Risk Review Sheet in MCP template sequence
+  recommendations and added smoke-test coverage for full catalog inclusion.
 
 ## [0.1.10] - 2026-06-10
 

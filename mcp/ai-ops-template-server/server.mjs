@@ -312,6 +312,7 @@ function recommendTemplateSequence(args) {
   const priorities = new Set((args.priorities ?? []).map((item) => String(item).toLowerCase()));
   const sequence = [
     "before-you-send-it-to-ai-checklist",
+    "ai-prompt-risk-review-sheet",
     "do-not-send-to-ai-list-template",
     "pre-ai-intake-form-questions",
     "human-review-gate-ai-drafts",
