@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
+import { readFileSync } from "node:fs";
+
+const packageJson = JSON.parse(
+  readFileSync(new URL("../../package.json", import.meta.url), "utf8")
+);
+
 const templates = [
   {
     id: "before-you-send-it-to-ai-checklist",
@@ -261,7 +267,7 @@ function route(method, params) {
       },
       serverInfo: {
         name: "miraigent-ai-ops-template-server",
-        version: "0.1.10"
+        version: packageJson.version
       }
     };
   }

@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Fixed
 
+- Read the MCP server initialize version from package.json to prevent manual
+  version drift.
 - Aligned the MCP server initialize version with package.json and added smoke
   test coverage to catch future version drift.
 - Added runtime validation and smoke-test coverage for unsupported MCP
