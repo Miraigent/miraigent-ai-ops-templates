@@ -7,6 +7,11 @@ for public starter releases.
 
 ## [Unreleased]
 
+### Added
+
+- Added smoke-test coverage for the MCP checklist tool's legacy `workflow`
+  alias and default risk-level handling.
+
 ### Fixed
 
 - Read the MCP server initialize version from package.json to prevent manual

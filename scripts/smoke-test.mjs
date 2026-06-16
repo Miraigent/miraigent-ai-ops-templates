@@ -103,8 +103,17 @@ async function runSmokeTest(framing) {
       }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 11,
+    method: "tools/call",
+    params: {
+      name: "build_ai_ops_review_checklist",
+      arguments: { workflow: "legacy-support-workflow" }
+    }
+  });
 
-  await waitForResponses(responses, 10);
+  await waitForResponses(responses, 11);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -129,6 +138,14 @@ async function runSmokeTest(framing) {
   assert(
     responses[9].error.message === "Unsupported riskLevel: critical. Use low, medium, or high.",
     `${framing}: invalid riskLevel error failed`
+  );
+  assert(
+    responses[10].result.content[0].text.includes("legacy-support-workflow"),
+    `${framing}: workflow alias checklist failed`
+  );
+  assert(
+    responses[10].result.content[0].text.includes("Use a review gate"),
+    `${framing}: default risk level checklist failed`
   );
 
   function readNextResponseLine() {
