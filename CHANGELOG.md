@@ -11,9 +11,12 @@ for public starter releases.
 
 - Added smoke-test coverage for the MCP checklist tool's legacy `workflow`
   alias and default risk-level handling.
+- Added smoke-test coverage for malformed MCP `tools/call` requests that omit
+  the tool name.
 
 ### Fixed
 
+- Return a clear MCP error when `tools/call` omits the tool name.
 - Read the MCP server initialize version from package.json to prevent manual
   version drift.
 - Aligned the MCP server initialize version with package.json and added smoke

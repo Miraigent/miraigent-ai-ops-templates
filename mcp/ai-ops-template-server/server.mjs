@@ -277,6 +277,9 @@ function route(method, params) {
   }
 
   if (method === "tools/call") {
+    if (typeof params.name !== "string" || params.name.length === 0) {
+      throw new Error("tools/call requires a non-empty tool name.");
+    }
     return callTool(params.name, params.arguments ?? {});
   }
 

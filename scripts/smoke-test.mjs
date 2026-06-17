@@ -112,8 +112,16 @@ async function runSmokeTest(framing) {
       arguments: { workflow: "legacy-support-workflow" }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 12,
+    method: "tools/call",
+    params: {
+      arguments: {}
+    }
+  });
 
-  await waitForResponses(responses, 11);
+  await waitForResponses(responses, 12);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -146,6 +154,10 @@ async function runSmokeTest(framing) {
   assert(
     responses[10].result.content[0].text.includes("Use a review gate"),
     `${framing}: default risk level checklist failed`
+  );
+  assert(
+    responses[11].error.message === "tools/call requires a non-empty tool name.",
+    `${framing}: missing tool name error failed`
   );
 
   function readNextResponseLine() {
