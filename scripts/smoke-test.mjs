@@ -120,8 +120,35 @@ async function runSmokeTest(framing) {
       arguments: {}
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 13,
+    method: "tools/call",
+    params: {
+      name: "recommend_ai_ops_template_sequence",
+      arguments: { operation: "support", priorities: ["intake"] }
+    }
+  });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 14,
+    method: "tools/call",
+    params: {
+      name: "recommend_ai_ops_template_sequence",
+      arguments: { operation: "support", priorities: ["review"] }
+    }
+  });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 15,
+    method: "tools/call",
+    params: {
+      name: "recommend_ai_ops_template_sequence",
+      arguments: { operation: "support", priorities: ["workflow"] }
+    }
+  });
 
-  await waitForResponses(responses, 12);
+  await waitForResponses(responses, 15);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -159,6 +186,24 @@ async function runSmokeTest(framing) {
     responses[11].error.message === "tools/call requires a non-empty tool name.",
     `${framing}: missing tool name error failed`
   );
+  const intakeRecommendation = JSON.parse(responses[12].result.content[0].text);
+  assert(
+    indexOfTemplate(intakeRecommendation, "pre-ai-intake-form-questions") <
+      indexOfTemplate(intakeRecommendation, "do-not-send-to-ai-list-template"),
+    `${framing}: intake priority should move intake before do-not-send list`
+  );
+  const reviewRecommendation = JSON.parse(responses[13].result.content[0].text);
+  assert(
+    indexOfTemplate(reviewRecommendation, "human-review-gate-ai-drafts") <
+      indexOfTemplate(reviewRecommendation, "pre-ai-intake-form-questions"),
+    `${framing}: review priority should move human review gate before intake`
+  );
+  const workflowRecommendation = JSON.parse(responses[14].result.content[0].text);
+  assert(
+    indexOfTemplate(workflowRecommendation, "ai-support-workflow-starter-map") <
+      indexOfTemplate(workflowRecommendation, "faq-candidate-review-checklist"),
+    `${framing}: workflow priority should move support workflow map before FAQ checklist`
+  );
 
   function readNextResponseLine() {
     const lineEnd = output.indexOf("\n");
@@ -173,6 +218,10 @@ async function runSmokeTest(framing) {
     }
     return true;
   }
+}
+
+function indexOfTemplate(recommendation, id) {
+  return recommendation.templates.findIndex((template) => template.id === id);
 }
 
 function send(child, framing, payload) {

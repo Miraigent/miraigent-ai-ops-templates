@@ -345,6 +345,18 @@ function recommendTemplateSequence(args) {
     moveBefore(sequence, "ai-safe-crm-notes-template", "faq-candidate-review-checklist");
   }
 
+  if (priorities.has("intake")) {
+    moveBefore(sequence, "pre-ai-intake-form-questions", "do-not-send-to-ai-list-template");
+  }
+
+  if (priorities.has("review")) {
+    moveBefore(sequence, "human-review-gate-ai-drafts", "pre-ai-intake-form-questions");
+  }
+
+  if (priorities.has("workflow")) {
+    moveBefore(sequence, "ai-support-workflow-starter-map", "faq-candidate-review-checklist");
+  }
+
   return {
     operation: args.operation ?? "general-ai-operations",
     note: "This is a non-memory AI operations helper sequence. It is not a MIRAI Memory engine or working memory MCP.",

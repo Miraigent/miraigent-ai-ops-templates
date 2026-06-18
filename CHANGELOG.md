@@ -16,6 +16,8 @@ for public starter releases.
 
 ### Fixed
 
+- Honored the documented `review`, `intake`, and `workflow` priorities in MCP
+  template sequence recommendations and added smoke-test coverage for them.
 - Return a clear MCP error when `tools/call` omits the tool name.
 - Read the MCP server initialize version from package.json to prevent manual
   version drift.
