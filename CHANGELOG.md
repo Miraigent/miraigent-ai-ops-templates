@@ -16,6 +16,7 @@ for public starter releases.
 
 ### Fixed
 
+- Return a clear MCP error when `get_ai_ops_template` omits the template id.
 - Honored the documented `review`, `intake`, and `workflow` priorities in MCP
   template sequence recommendations and added smoke-test coverage for them.
 - Return a clear MCP error when `tools/call` omits the tool name.

@@ -292,6 +292,9 @@ function callTool(name, args) {
   }
 
   if (name === "get_ai_ops_template") {
+    if (typeof args.id !== "string" || args.id.length === 0) {
+      throw new Error("get_ai_ops_template requires a non-empty template id.");
+    }
     const template = templates.find((item) => item.id === args.id);
     if (!template) {
       throw new Error(`Unknown template id: ${args.id}`);

@@ -147,8 +147,17 @@ async function runSmokeTest(framing) {
       arguments: { operation: "support", priorities: ["workflow"] }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 16,
+    method: "tools/call",
+    params: {
+      name: "get_ai_ops_template",
+      arguments: {}
+    }
+  });
 
-  await waitForResponses(responses, 15);
+  await waitForResponses(responses, 16);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -203,6 +212,10 @@ async function runSmokeTest(framing) {
     indexOfTemplate(workflowRecommendation, "ai-support-workflow-starter-map") <
       indexOfTemplate(workflowRecommendation, "faq-candidate-review-checklist"),
     `${framing}: workflow priority should move support workflow map before FAQ checklist`
+  );
+  assert(
+    responses[15].error.message === "get_ai_ops_template requires a non-empty template id.",
+    `${framing}: missing template id error failed`
   );
 
   function readNextResponseLine() {
