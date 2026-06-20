@@ -156,8 +156,17 @@ async function runSmokeTest(framing) {
       arguments: {}
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 17,
+    method: "tools/call",
+    params: {
+      name: "recommend_ai_ops_template_sequence",
+      arguments: { operation: "support", priorities: "privacy" }
+    }
+  });
 
-  await waitForResponses(responses, 16);
+  await waitForResponses(responses, 17);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -216,6 +225,10 @@ async function runSmokeTest(framing) {
   assert(
     responses[15].error.message === "get_ai_ops_template requires a non-empty template id.",
     `${framing}: missing template id error failed`
+  );
+  assert(
+    responses[16].error.message === "recommend_ai_ops_template_sequence priorities must be an array of strings.",
+    `${framing}: invalid priorities error failed`
   );
 
   function readNextResponseLine() {

@@ -16,6 +16,8 @@ for public starter releases.
 
 ### Fixed
 
+- Return a clear MCP error when `recommend_ai_ops_template_sequence` receives
+  a non-array `priorities` value.
 - Return a clear MCP error when `get_ai_ops_template` omits the template id.
 - Honored the documented `review`, `intake`, and `workflow` priorities in MCP
   template sequence recommendations and added smoke-test coverage for them.

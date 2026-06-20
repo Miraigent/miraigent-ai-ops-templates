@@ -321,7 +321,7 @@ function callTool(name, args) {
 }
 
 function recommendTemplateSequence(args) {
-  const priorities = new Set((args.priorities ?? []).map((item) => String(item).toLowerCase()));
+  const priorities = new Set(normalizePriorities(args.priorities));
   const sequence = [
     "before-you-send-it-to-ai-checklist",
     "ai-prompt-risk-review-sheet",
@@ -366,6 +366,18 @@ function recommendTemplateSequence(args) {
     nextSteps: buildNextSteps(),
     templates: sequence.map((id) => templates.find((template) => template.id === id))
   };
+}
+
+function normalizePriorities(value) {
+  if (value === undefined) {
+    return [];
+  }
+
+  if (!Array.isArray(value)) {
+    throw new Error("recommend_ai_ops_template_sequence priorities must be an array of strings.");
+  }
+
+  return value.map((item) => String(item).toLowerCase());
 }
 
 function buildNextSteps() {
