@@ -13,12 +13,15 @@ for public starter releases.
   alias and default risk-level handling.
 - Added smoke-test coverage for malformed MCP `tools/call` requests that omit
   the tool name.
+- Added smoke-test coverage for malformed MCP `tools/call` requests that pass
+  non-object arguments.
 
 ### Fixed
 
 - Return a clear MCP error when `recommend_ai_ops_template_sequence` receives
   a non-array `priorities` value.
 - Return a clear MCP error when `get_ai_ops_template` omits the template id.
+- Return a clear MCP error when `tools/call` receives non-object arguments.
 - Honored the documented `review`, `intake`, and `workflow` priorities in MCP
   template sequence recommendations and added smoke-test coverage for them.
 - Return a clear MCP error when `tools/call` omits the tool name.

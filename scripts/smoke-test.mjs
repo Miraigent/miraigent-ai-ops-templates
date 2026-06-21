@@ -165,8 +165,17 @@ async function runSmokeTest(framing) {
       arguments: { operation: "support", priorities: "privacy" }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 18,
+    method: "tools/call",
+    params: {
+      name: "list_ai_ops_templates",
+      arguments: []
+    }
+  });
 
-  await waitForResponses(responses, 17);
+  await waitForResponses(responses, 18);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -229,6 +238,10 @@ async function runSmokeTest(framing) {
   assert(
     responses[16].error.message === "recommend_ai_ops_template_sequence priorities must be an array of strings.",
     `${framing}: invalid priorities error failed`
+  );
+  assert(
+    responses[17].error.message === "tools/call arguments must be an object when provided.",
+    `${framing}: invalid arguments object error failed`
   );
 
   function readNextResponseLine() {

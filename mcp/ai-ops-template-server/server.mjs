@@ -280,10 +280,22 @@ function route(method, params) {
     if (typeof params.name !== "string" || params.name.length === 0) {
       throw new Error("tools/call requires a non-empty tool name.");
     }
-    return callTool(params.name, params.arguments ?? {});
+    return callTool(params.name, normalizeToolArguments(params.arguments));
   }
 
   throw new Error(`Unsupported method: ${method}`);
+}
+
+function normalizeToolArguments(value) {
+  if (value === undefined || value === null) {
+    return {};
+  }
+
+  if (typeof value === "object" && !Array.isArray(value)) {
+    return value;
+  }
+
+  throw new Error("tools/call arguments must be an object when provided.");
 }
 
 function callTool(name, args) {
