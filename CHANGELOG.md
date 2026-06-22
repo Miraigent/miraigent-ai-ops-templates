@@ -9,6 +9,7 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage for non-string MCP template-sequence priorities.
 - Added smoke-test coverage for the MCP checklist tool's legacy `workflow`
   alias and default risk-level handling.
 - Added smoke-test coverage for malformed MCP `tools/call` requests that omit
@@ -18,6 +19,8 @@ for public starter releases.
 
 ### Fixed
 
+- Return a clear MCP error when `recommend_ai_ops_template_sequence` receives
+  non-string priority values.
 - Return a clear MCP error when `recommend_ai_ops_template_sequence` receives
   a non-array `priorities` value.
 - Return a clear MCP error when `get_ai_ops_template` omits the template id.

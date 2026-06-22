@@ -385,11 +385,11 @@ function normalizePriorities(value) {
     return [];
   }
 
-  if (!Array.isArray(value)) {
+  if (!Array.isArray(value) || value.some((item) => typeof item !== "string")) {
     throw new Error("recommend_ai_ops_template_sequence priorities must be an array of strings.");
   }
 
-  return value.map((item) => String(item).toLowerCase());
+  return value.map((item) => item.toLowerCase());
 }
 
 function buildNextSteps() {
