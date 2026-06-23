@@ -316,7 +316,7 @@ function callTool(name, args) {
 
   if (name === "build_ai_ops_review_checklist") {
     const riskLevel = normalizeRiskLevel(args.riskLevel);
-    const operation = args.operation ?? args.workflow ?? "general-ai-operations";
+    const operation = normalizeChecklistOperation(args);
     const checklist = buildChecklist(operation, riskLevel);
     return textResult(checklist.map((item) => `- ${item}`).join("\n"));
   }
@@ -390,6 +390,19 @@ function normalizePriorities(value) {
   }
 
   return value.map((item) => item.toLowerCase());
+}
+
+function normalizeChecklistOperation(args) {
+  const value = args.operation ?? args.workflow;
+  if (value === undefined || value === null) {
+    return "general-ai-operations";
+  }
+
+  if (typeof value !== "string" || value.length === 0) {
+    throw new Error("build_ai_ops_review_checklist operation must be a non-empty string when provided.");
+  }
+
+  return value;
 }
 
 function buildNextSteps() {

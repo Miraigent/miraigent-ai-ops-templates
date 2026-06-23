@@ -183,8 +183,17 @@ async function runSmokeTest(framing) {
       arguments: { operation: "support", priorities: ["privacy", 42] }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 20,
+    method: "tools/call",
+    params: {
+      name: "build_ai_ops_review_checklist",
+      arguments: { operation: ["customer-support"] }
+    }
+  });
 
-  await waitForResponses(responses, 19);
+  await waitForResponses(responses, 20);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -255,6 +264,11 @@ async function runSmokeTest(framing) {
   assert(
     responses[18].error.message === "recommend_ai_ops_template_sequence priorities must be an array of strings.",
     `${framing}: non-string priorities error failed`
+  );
+  assert(
+    responses[19].error.message ===
+      "build_ai_ops_review_checklist operation must be a non-empty string when provided.",
+    `${framing}: invalid checklist operation error failed`
   );
 
   function readNextResponseLine() {
