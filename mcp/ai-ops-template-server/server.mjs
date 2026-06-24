@@ -414,9 +414,21 @@ function buildNextSteps() {
 }
 
 function draftAdoptionPlan(args) {
-  const operation = args.operation ?? "general-ai-operations";
-  const currentPain = args.currentPain ?? "AI usage is happening before review rules are clear";
-  const reviewOwner = args.reviewOwner ?? "human reviewer";
+  const operation = normalizeOptionalString(
+    args.operation,
+    "draft_ai_ops_adoption_plan operation",
+    "general-ai-operations"
+  );
+  const currentPain = normalizeOptionalString(
+    args.currentPain,
+    "draft_ai_ops_adoption_plan currentPain",
+    "AI usage is happening before review rules are clear"
+  );
+  const reviewOwner = normalizeOptionalString(
+    args.reviewOwner,
+    "draft_ai_ops_adoption_plan reviewOwner",
+    "human reviewer"
+  );
   const riskLevel = normalizeRiskLevel(args.riskLevel);
 
   return {
@@ -462,6 +474,18 @@ function normalizeRiskLevel(value) {
     return riskLevel;
   }
   throw new Error(`Unsupported riskLevel: ${riskLevel}. Use low, medium, or high.`);
+}
+
+function normalizeOptionalString(value, label, fallback) {
+  if (value === undefined || value === null) {
+    return fallback;
+  }
+
+  if (typeof value !== "string" || value.length === 0) {
+    throw new Error(`${label} must be a non-empty string when provided.`);
+  }
+
+  return value;
 }
 
 function moveBefore(items, target, before) {

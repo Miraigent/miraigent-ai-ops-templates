@@ -192,8 +192,17 @@ async function runSmokeTest(framing) {
       arguments: { operation: ["customer-support"] }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 21,
+    method: "tools/call",
+    params: {
+      name: "draft_ai_ops_adoption_plan",
+      arguments: { reviewOwner: ["support lead"] }
+    }
+  });
 
-  await waitForResponses(responses, 20);
+  await waitForResponses(responses, 21);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -269,6 +278,11 @@ async function runSmokeTest(framing) {
     responses[19].error.message ===
       "build_ai_ops_review_checklist operation must be a non-empty string when provided.",
     `${framing}: invalid checklist operation error failed`
+  );
+  assert(
+    responses[20].error.message ===
+      "draft_ai_ops_adoption_plan reviewOwner must be a non-empty string when provided.",
+    `${framing}: invalid adoption-plan review owner error failed`
   );
 
   function readNextResponseLine() {
