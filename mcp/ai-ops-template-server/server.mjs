@@ -259,6 +259,10 @@ function handleMessage(body) {
 }
 
 function route(method, params) {
+  if (typeof method !== "string" || method.length === 0) {
+    throw new Error("JSON-RPC requests require a non-empty method string.");
+  }
+
   if (method === "initialize") {
     return {
       protocolVersion: "2024-11-05",

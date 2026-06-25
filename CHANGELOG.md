@@ -9,6 +9,7 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage for empty and non-string JSON-RPC method values.
 - Added smoke-test coverage for non-string MCP checklist operations.
 - Added smoke-test coverage for non-string MCP adoption-plan review owners.
 - Added smoke-test coverage for non-string MCP template-sequence priorities.
@@ -21,6 +22,7 @@ for public starter releases.
 
 ### Fixed
 
+- Return a clear MCP error when JSON-RPC requests omit a valid method string.
 - Return a clear MCP error when `build_ai_ops_review_checklist` receives a
   non-string operation value.
 - Return a clear MCP error when `draft_ai_ops_adoption_plan` receives a

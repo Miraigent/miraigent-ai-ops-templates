@@ -201,8 +201,20 @@ async function runSmokeTest(framing) {
       arguments: { reviewOwner: ["support lead"] }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 22,
+    method: "",
+    params: {}
+  });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 23,
+    method: 42,
+    params: {}
+  });
 
-  await waitForResponses(responses, 21);
+  await waitForResponses(responses, 23);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -283,6 +295,14 @@ async function runSmokeTest(framing) {
     responses[20].error.message ===
       "draft_ai_ops_adoption_plan reviewOwner must be a non-empty string when provided.",
     `${framing}: invalid adoption-plan review owner error failed`
+  );
+  assert(
+    responses[21].error.message === "JSON-RPC requests require a non-empty method string.",
+    `${framing}: empty JSON-RPC method error failed`
+  );
+  assert(
+    responses[22].error.message === "JSON-RPC requests require a non-empty method string.",
+    `${framing}: non-string JSON-RPC method error failed`
   );
 
   function readNextResponseLine() {
