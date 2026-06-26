@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Added
 
+- Added pull request checklist items for the scoped-license boundary and public
+  non-memory MCP positioning.
 - Added smoke-test coverage for empty and non-string JSON-RPC method values.
 - Added smoke-test coverage for non-string MCP checklist operations.
 - Added smoke-test coverage for non-string MCP adoption-plan review owners.
