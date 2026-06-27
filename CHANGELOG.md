@@ -14,6 +14,7 @@ for public starter releases.
 - Added smoke-test coverage for empty and non-string JSON-RPC method values.
 - Added smoke-test coverage for non-string MCP checklist operations.
 - Added smoke-test coverage for non-string MCP adoption-plan review owners.
+- Added smoke-test coverage for non-string MCP template-sequence operations.
 - Added smoke-test coverage for non-string MCP template-sequence priorities.
 - Added smoke-test coverage for the MCP checklist tool's legacy `workflow`
   alias and default risk-level handling.
@@ -29,6 +30,8 @@ for public starter releases.
   non-string operation value.
 - Return a clear MCP error when `draft_ai_ops_adoption_plan` receives a
   non-string review owner.
+- Return a clear MCP error when `recommend_ai_ops_template_sequence` receives
+  a non-string operation value.
 - Return a clear MCP error when `recommend_ai_ops_template_sequence` receives
   non-string priority values.
 - Return a clear MCP error when `recommend_ai_ops_template_sequence` receives

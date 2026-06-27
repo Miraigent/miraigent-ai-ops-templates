@@ -213,8 +213,17 @@ async function runSmokeTest(framing) {
     method: 42,
     params: {}
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 24,
+    method: "tools/call",
+    params: {
+      name: "recommend_ai_ops_template_sequence",
+      arguments: { operation: ["support"] }
+    }
+  });
 
-  await waitForResponses(responses, 23);
+  await waitForResponses(responses, 24);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -303,6 +312,11 @@ async function runSmokeTest(framing) {
   assert(
     responses[22].error.message === "JSON-RPC requests require a non-empty method string.",
     `${framing}: non-string JSON-RPC method error failed`
+  );
+  assert(
+    responses[23].error.message ===
+      "recommend_ai_ops_template_sequence operation must be a non-empty string when provided.",
+    `${framing}: invalid sequence operation error failed`
   );
 
   function readNextResponseLine() {

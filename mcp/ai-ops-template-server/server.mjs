@@ -337,6 +337,11 @@ function callTool(name, args) {
 }
 
 function recommendTemplateSequence(args) {
+  const operation = normalizeOptionalString(
+    args.operation,
+    "recommend_ai_ops_template_sequence operation",
+    "general-ai-operations"
+  );
   const priorities = new Set(normalizePriorities(args.priorities));
   const sequence = [
     "before-you-send-it-to-ai-checklist",
@@ -377,7 +382,7 @@ function recommendTemplateSequence(args) {
   }
 
   return {
-    operation: args.operation ?? "general-ai-operations",
+    operation,
     note: "This is a non-memory AI operations helper sequence. It is not a MIRAI Memory engine or working memory MCP.",
     nextSteps: buildNextSteps(),
     templates: sequence.map((id) => templates.find((template) => template.id === id))
