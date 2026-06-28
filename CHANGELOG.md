@@ -14,6 +14,7 @@ for public starter releases.
 - Added smoke-test coverage for empty and non-string JSON-RPC method values.
 - Added smoke-test coverage for non-string MCP checklist operations.
 - Added smoke-test coverage for non-string MCP adoption-plan review owners.
+- Added smoke-test coverage for non-string MCP adoption-plan current-pain values.
 - Added smoke-test coverage for non-string MCP template-sequence operations.
 - Added smoke-test coverage for non-string MCP template-sequence priorities.
 - Added smoke-test coverage for the MCP checklist tool's legacy `workflow`

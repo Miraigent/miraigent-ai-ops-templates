@@ -222,8 +222,17 @@ async function runSmokeTest(framing) {
       arguments: { operation: ["support"] }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 25,
+    method: "tools/call",
+    params: {
+      name: "draft_ai_ops_adoption_plan",
+      arguments: { currentPain: ["unclear review rules"] }
+    }
+  });
 
-  await waitForResponses(responses, 24);
+  await waitForResponses(responses, 25);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -317,6 +326,11 @@ async function runSmokeTest(framing) {
     responses[23].error.message ===
       "recommend_ai_ops_template_sequence operation must be a non-empty string when provided.",
     `${framing}: invalid sequence operation error failed`
+  );
+  assert(
+    responses[24].error.message ===
+      "draft_ai_ops_adoption_plan currentPain must be a non-empty string when provided.",
+    `${framing}: invalid adoption-plan current pain error failed`
   );
 
   function readNextResponseLine() {
