@@ -231,8 +231,26 @@ async function runSmokeTest(framing) {
       arguments: { currentPain: ["unclear review rules"] }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 26,
+    method: "tools/call",
+    params: {
+      name: "build_ai_ops_review_checklist",
+      arguments: { riskLevel: ["high"] }
+    }
+  });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 27,
+    method: "tools/call",
+    params: {
+      name: "draft_ai_ops_adoption_plan",
+      arguments: { riskLevel: { level: "high" } }
+    }
+  });
 
-  await waitForResponses(responses, 25);
+  await waitForResponses(responses, 27);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -331,6 +349,14 @@ async function runSmokeTest(framing) {
     responses[24].error.message ===
       "draft_ai_ops_adoption_plan currentPain must be a non-empty string when provided.",
     `${framing}: invalid adoption-plan current pain error failed`
+  );
+  assert(
+    responses[25].error.message === "riskLevel must be a non-empty string when provided.",
+    `${framing}: invalid checklist risk level type error failed`
+  );
+  assert(
+    responses[26].error.message === "riskLevel must be a non-empty string when provided.",
+    `${framing}: invalid adoption-plan risk level type error failed`
   );
 
   function readNextResponseLine() {

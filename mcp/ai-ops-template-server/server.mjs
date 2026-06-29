@@ -478,7 +478,15 @@ function draftAdoptionPlan(args) {
 }
 
 function normalizeRiskLevel(value) {
-  const riskLevel = value ?? "medium";
+  if (value === undefined || value === null) {
+    return "medium";
+  }
+
+  if (typeof value !== "string" || value.length === 0) {
+    throw new Error("riskLevel must be a non-empty string when provided.");
+  }
+
+  const riskLevel = value;
   if (riskLevel === "low" || riskLevel === "medium" || riskLevel === "high") {
     return riskLevel;
   }

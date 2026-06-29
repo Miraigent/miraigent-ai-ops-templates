@@ -17,6 +17,7 @@ for public starter releases.
 - Added smoke-test coverage for non-string MCP adoption-plan current-pain values.
 - Added smoke-test coverage for non-string MCP template-sequence operations.
 - Added smoke-test coverage for non-string MCP template-sequence priorities.
+- Added smoke-test coverage for non-string MCP risk-level inputs.
 - Added smoke-test coverage for the MCP checklist tool's legacy `workflow`
   alias and default risk-level handling.
 - Added smoke-test coverage for malformed MCP `tools/call` requests that omit
@@ -37,6 +38,7 @@ for public starter releases.
   non-string priority values.
 - Return a clear MCP error when `recommend_ai_ops_template_sequence` receives
   a non-array `priorities` value.
+- Return a clear MCP error when MCP tools receive non-string `riskLevel` values.
 - Return a clear MCP error when `get_ai_ops_template` omits the template id.
 - Return a clear MCP error when `tools/call` receives non-object arguments.
 - Honored the documented `review`, `intake`, and `workflow` priorities in MCP
