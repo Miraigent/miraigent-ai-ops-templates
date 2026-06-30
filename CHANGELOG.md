@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Added
 
+- Added a manual MCP initialize example to the MCP server README so reviewers can
+  verify the standard handshake before calling tools.
 - Added pull request checklist items for the scoped-license boundary and public
   non-memory MCP positioning.
 - Added smoke-test coverage for empty and non-string JSON-RPC method values.
