@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Added
 
+- Documented supported MCP `riskLevel` and template-sequence `priorities`
+  values in the MCP server README.
 - Added a manual MCP initialize example to the MCP server README so reviewers can
   verify the standard handshake before calling tools.
 - Added pull request checklist items for the scoped-license boundary and public

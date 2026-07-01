@@ -100,6 +100,9 @@ Input:
 }
 ```
 
+Supported `riskLevel` values are `low`, `medium`, and `high`. When omitted,
+the server uses `medium`.
+
 ### `recommend_ai_ops_template_sequence`
 
 Recommends a practical order for applying the public templates.
@@ -108,6 +111,10 @@ Input fields:
 
 - operation: support, CRM, FAQ, content, or another operations area
 - priorities: optional list such as privacy, faq, crm, intake, or review
+
+Supported `priorities` values are `privacy`, `faq`, `crm`, `intake`,
+`review`, and `workflow`. Unknown strings are accepted but ignored so clients
+can pass their own notes without breaking the request.
 
 ### `draft_ai_ops_adoption_plan`
 
@@ -123,6 +130,9 @@ Input:
   "riskLevel": "high"
 }
 ```
+
+Supported `riskLevel` values are `low`, `medium`, and `high`. When omitted,
+the server uses `medium`.
 
 ## Why This Exists
 
