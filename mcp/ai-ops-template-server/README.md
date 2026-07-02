@@ -100,8 +100,9 @@ Input:
 }
 ```
 
-Supported `riskLevel` values are `low`, `medium`, and `high`. When omitted,
-the server uses `medium`.
+Supported `riskLevel` values are `low`, `medium`, and `high`. The server trims
+extra spaces and accepts uppercase/lowercase variants in direct JSON-RPC calls.
+When omitted, the server uses `medium`.
 
 ### `recommend_ai_ops_template_sequence`
 
@@ -113,8 +114,9 @@ Input fields:
 - priorities: optional list such as privacy, faq, crm, intake, or review
 
 Supported `priorities` values are `privacy`, `faq`, `crm`, `intake`,
-`review`, and `workflow`. Unknown strings are accepted but ignored so clients
-can pass their own notes without breaking the request.
+`review`, and `workflow`. The server trims extra spaces and accepts
+uppercase/lowercase variants. Unknown strings are accepted but ignored so
+clients can pass their own notes without breaking the request.
 
 ### `draft_ai_ops_adoption_plan`
 
@@ -131,8 +133,9 @@ Input:
 }
 ```
 
-Supported `riskLevel` values are `low`, `medium`, and `high`. When omitted,
-the server uses `medium`.
+Supported `riskLevel` values are `low`, `medium`, and `high`. The server trims
+extra spaces and accepts uppercase/lowercase variants in direct JSON-RPC calls.
+When omitted, the server uses `medium`.
 
 ## Why This Exists
 

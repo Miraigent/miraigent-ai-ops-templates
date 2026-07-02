@@ -398,7 +398,7 @@ function normalizePriorities(value) {
     throw new Error("recommend_ai_ops_template_sequence priorities must be an array of strings.");
   }
 
-  return value.map((item) => item.toLowerCase());
+  return value.map((item) => item.trim().toLowerCase());
 }
 
 function normalizeChecklistOperation(args) {
@@ -482,11 +482,11 @@ function normalizeRiskLevel(value) {
     return "medium";
   }
 
-  if (typeof value !== "string" || value.length === 0) {
+  if (typeof value !== "string" || value.trim().length === 0) {
     throw new Error("riskLevel must be a non-empty string when provided.");
   }
 
-  const riskLevel = value;
+  const riskLevel = value.trim().toLowerCase();
   if (riskLevel === "low" || riskLevel === "medium" || riskLevel === "high") {
     return riskLevel;
   }

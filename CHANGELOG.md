@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage for case and whitespace normalization in MCP
+  `riskLevel` and template-sequence `priorities` inputs.
 - Documented supported MCP `riskLevel` and template-sequence `priorities`
   values in the MCP server README.
 - Added a manual MCP initialize example to the MCP server README so reviewers can
@@ -31,6 +33,9 @@ for public starter releases.
 
 ### Fixed
 
+- Normalize MCP `riskLevel` and template-sequence `priorities` inputs before
+  validation so direct JSON-RPC clients can pass uppercase or space-padded
+  values.
 - Return a clear MCP error when JSON-RPC requests omit a valid method string.
 - Return a clear MCP error when `build_ai_ops_review_checklist` receives a
   non-string operation value.

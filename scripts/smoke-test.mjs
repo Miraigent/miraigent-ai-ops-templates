@@ -249,8 +249,26 @@ async function runSmokeTest(framing) {
       arguments: { riskLevel: { level: "high" } }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 28,
+    method: "tools/call",
+    params: {
+      name: "build_ai_ops_review_checklist",
+      arguments: { operation: "customer-support", riskLevel: " HIGH " }
+    }
+  });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 29,
+    method: "tools/call",
+    params: {
+      name: "recommend_ai_ops_template_sequence",
+      arguments: { operation: "support", priorities: [" FAQ "] }
+    }
+  });
 
-  await waitForResponses(responses, 27);
+  await waitForResponses(responses, 29);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -357,6 +375,16 @@ async function runSmokeTest(framing) {
   assert(
     responses[26].error.message === "riskLevel must be a non-empty string when provided.",
     `${framing}: invalid adoption-plan risk level type error failed`
+  );
+  assert(
+    responses[27].result.content[0].text.includes("escalation owner"),
+    `${framing}: risk level normalization failed`
+  );
+  const trimmedFaqRecommendation = JSON.parse(responses[28].result.content[0].text);
+  assert(
+    indexOfTemplate(trimmedFaqRecommendation, "faq-candidate-review-checklist") <
+      indexOfTemplate(trimmedFaqRecommendation, "ai-safe-crm-notes-template"),
+    `${framing}: priority normalization should trim and match FAQ`
   );
 
   function readNextResponseLine() {
