@@ -87,6 +87,9 @@ Input:
 }
 ```
 
+The server trims extra spaces and accepts uppercase/lowercase variants in direct
+JSON-RPC calls.
+
 ### `build_ai_ops_review_checklist`
 
 Builds a short review checklist for an AI operations area.

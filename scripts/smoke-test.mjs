@@ -267,8 +267,17 @@ async function runSmokeTest(framing) {
       arguments: { operation: "support", priorities: [" FAQ "] }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 30,
+    method: "tools/call",
+    params: {
+      name: "get_ai_ops_template",
+      arguments: { id: " HUMAN-REVIEW-GATE-AI-DRAFTS " }
+    }
+  });
 
-  await waitForResponses(responses, 29);
+  await waitForResponses(responses, 30);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -385,6 +394,10 @@ async function runSmokeTest(framing) {
     indexOfTemplate(trimmedFaqRecommendation, "faq-candidate-review-checklist") <
       indexOfTemplate(trimmedFaqRecommendation, "ai-safe-crm-notes-template"),
     `${framing}: priority normalization should trim and match FAQ`
+  );
+  assert(
+    responses[29].result.content[0].text.includes("Human Review Gate"),
+    `${framing}: template id normalization failed`
   );
 
   function readNextResponseLine() {
