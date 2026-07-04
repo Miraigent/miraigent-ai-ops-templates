@@ -420,7 +420,12 @@ function normalizeChecklistOperation(args) {
     throw new Error("build_ai_ops_review_checklist operation must be a non-empty string when provided.");
   }
 
-  return value;
+  const operation = value.trim();
+  if (operation.length === 0) {
+    throw new Error("build_ai_ops_review_checklist operation must be a non-empty string when provided.");
+  }
+
+  return operation;
 }
 
 function buildNextSteps() {
@@ -507,11 +512,11 @@ function normalizeOptionalString(value, label, fallback) {
     return fallback;
   }
 
-  if (typeof value !== "string" || value.length === 0) {
+  if (typeof value !== "string" || value.trim().length === 0) {
     throw new Error(`${label} must be a non-empty string when provided.`);
   }
 
-  return value;
+  return value.trim();
 }
 
 function moveBefore(items, target, before) {

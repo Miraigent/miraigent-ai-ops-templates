@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage for whitespace-only MCP operation and adoption-plan
+  inputs.
 - Added smoke-test coverage for case and whitespace normalization in MCP
   `riskLevel` and template-sequence `priorities` inputs.
 - Added smoke-test coverage for case and whitespace normalization in MCP
@@ -35,6 +37,8 @@ for public starter releases.
 
 ### Fixed
 
+- Trim MCP checklist and adoption-plan string inputs before validation so
+  whitespace-only values are rejected consistently.
 - Normalize MCP `riskLevel` and template-sequence `priorities` inputs before
   validation so direct JSON-RPC clients can pass uppercase or space-padded
   values.

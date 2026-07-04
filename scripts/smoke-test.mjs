@@ -276,8 +276,35 @@ async function runSmokeTest(framing) {
       arguments: { id: " HUMAN-REVIEW-GATE-AI-DRAFTS " }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 31,
+    method: "tools/call",
+    params: {
+      name: "build_ai_ops_review_checklist",
+      arguments: { operation: "   " }
+    }
+  });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 32,
+    method: "tools/call",
+    params: {
+      name: "draft_ai_ops_adoption_plan",
+      arguments: { currentPain: "   " }
+    }
+  });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 33,
+    method: "tools/call",
+    params: {
+      name: "draft_ai_ops_adoption_plan",
+      arguments: { reviewOwner: " support lead " }
+    }
+  });
 
-  await waitForResponses(responses, 30);
+  await waitForResponses(responses, 33);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -398,6 +425,21 @@ async function runSmokeTest(framing) {
   assert(
     responses[29].result.content[0].text.includes("Human Review Gate"),
     `${framing}: template id normalization failed`
+  );
+  assert(
+    responses[30].error.message ===
+      "build_ai_ops_review_checklist operation must be a non-empty string when provided.",
+    `${framing}: whitespace-only checklist operation error failed`
+  );
+  assert(
+    responses[31].error.message ===
+      "draft_ai_ops_adoption_plan currentPain must be a non-empty string when provided.",
+    `${framing}: whitespace-only adoption-plan current pain error failed`
+  );
+  const trimmedReviewOwnerPlan = JSON.parse(responses[32].result.content[0].text);
+  assert(
+    trimmedReviewOwnerPlan.reviewOwner === "support lead",
+    `${framing}: adoption-plan review owner should be trimmed`
   );
 
   function readNextResponseLine() {
