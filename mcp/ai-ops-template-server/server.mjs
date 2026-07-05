@@ -259,7 +259,7 @@ function handleMessage(body) {
 }
 
 function route(method, params) {
-  if (typeof method !== "string" || method.length === 0) {
+  if (typeof method !== "string" || method.trim().length === 0) {
     throw new Error("JSON-RPC requests require a non-empty method string.");
   }
 
@@ -281,7 +281,7 @@ function route(method, params) {
   }
 
   if (method === "tools/call") {
-    if (typeof params.name !== "string" || params.name.length === 0) {
+    if (typeof params.name !== "string" || params.name.trim().length === 0) {
       throw new Error("tools/call requires a non-empty tool name.");
     }
     return callTool(params.name, normalizeToolArguments(params.arguments));

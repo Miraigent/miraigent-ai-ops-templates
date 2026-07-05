@@ -303,8 +303,23 @@ async function runSmokeTest(framing) {
       arguments: { reviewOwner: " support lead " }
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 34,
+    method: "   ",
+    params: {}
+  });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 35,
+    method: "tools/call",
+    params: {
+      name: "   ",
+      arguments: {}
+    }
+  });
 
-  await waitForResponses(responses, 33);
+  await waitForResponses(responses, 35);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -440,6 +455,14 @@ async function runSmokeTest(framing) {
   assert(
     trimmedReviewOwnerPlan.reviewOwner === "support lead",
     `${framing}: adoption-plan review owner should be trimmed`
+  );
+  assert(
+    responses[33].error.message === "JSON-RPC requests require a non-empty method string.",
+    `${framing}: whitespace-only JSON-RPC method error failed`
+  );
+  assert(
+    responses[34].error.message === "tools/call requires a non-empty tool name.",
+    `${framing}: whitespace-only tool name error failed`
   );
 
   function readNextResponseLine() {

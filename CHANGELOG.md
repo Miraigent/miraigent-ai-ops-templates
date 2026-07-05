@@ -11,6 +11,8 @@ for public starter releases.
 
 - Added smoke-test coverage for whitespace-only MCP operation and adoption-plan
   inputs.
+- Added smoke-test coverage for whitespace-only JSON-RPC method and MCP tool
+  name values.
 - Added smoke-test coverage for case and whitespace normalization in MCP
   `riskLevel` and template-sequence `priorities` inputs.
 - Added smoke-test coverage for case and whitespace normalization in MCP
@@ -45,6 +47,8 @@ for public starter releases.
 - Normalize MCP template id lookups before matching so direct JSON-RPC clients
   can pass uppercase or space-padded values.
 - Return a clear MCP error when JSON-RPC requests omit a valid method string.
+- Return a clear MCP error when JSON-RPC method or MCP tool name values contain
+  only whitespace.
 - Return a clear MCP error when `build_ai_ops_review_checklist` receives a
   non-string operation value.
 - Return a clear MCP error when `draft_ai_ops_adoption_plan` receives a
