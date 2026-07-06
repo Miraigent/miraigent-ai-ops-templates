@@ -318,8 +318,14 @@ async function runSmokeTest(framing) {
       arguments: {}
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    method: "notifications/initialized",
+    params: {}
+  });
 
   await waitForResponses(responses, 35);
+  await waitForNoExtraResponse(responses, 35);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -502,6 +508,11 @@ async function waitForResponses(responses, count) {
     }
     await new Promise((resolve) => setTimeout(resolve, 25));
   }
+}
+
+async function waitForNoExtraResponse(responses, count) {
+  await new Promise((resolve) => setTimeout(resolve, 100));
+  assert(responses.length === count, `notifications/initialized should not produce a JSON-RPC response`);
 }
 
 function assert(condition, message) {

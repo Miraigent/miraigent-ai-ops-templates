@@ -276,6 +276,10 @@ function route(method, params) {
     };
   }
 
+  if (method === "notifications/initialized") {
+    return null;
+  }
+
   if (method === "tools/list") {
     return { tools };
   }

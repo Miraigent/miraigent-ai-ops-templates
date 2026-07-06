@@ -21,6 +21,7 @@ The server communicates over stdio with newline-delimited JSON-RPC for standard 
 It implements:
 
 - `initialize`
+- `notifications/initialized`
 - `tools/list`
 - `tools/call`
 
