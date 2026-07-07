@@ -11,6 +11,7 @@ for public starter releases.
 
 - Added smoke-test coverage that `notifications/initialized` is accepted
   without sending an extra JSON-RPC response.
+- Added smoke-test coverage for compact MCP `Content-Length` headers.
 - Added smoke-test coverage for whitespace-only MCP operation and adoption-plan
   inputs.
 - Added smoke-test coverage for whitespace-only JSON-RPC method and MCP tool
@@ -43,6 +44,8 @@ for public starter releases.
 
 - Accept the standard MCP `notifications/initialized` notification as a no-op
   so clients do not receive an unsupported-method error after initialization.
+- Accept compact MCP `Content-Length` headers without requiring a space after
+  the colon.
 - Trim MCP checklist and adoption-plan string inputs before validation so
   whitespace-only values are rejected consistently.
 - Normalize MCP `riskLevel` and template-sequence `priorities` inputs before

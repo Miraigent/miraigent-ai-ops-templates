@@ -200,7 +200,7 @@ function readContentLengthMessage() {
   }
 
   const header = buffer.slice(0, separator).toString("utf8");
-  const match = header.match(/Content-Length: (\d+)/i);
+  const match = header.match(/Content-Length:\s*(\d+)/i);
   if (!match) {
     respond(null, null, { code: -32600, message: "Missing Content-Length header" });
     buffer = Buffer.alloc(0);

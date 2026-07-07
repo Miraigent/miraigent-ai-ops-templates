@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
 
 await runSmokeTest("content-length");
+await runSmokeTest("content-length-compact");
 await runSmokeTest("newline");
 
 async function runSmokeTest(framing) {
@@ -494,6 +495,11 @@ function send(child, framing, payload) {
   const body = JSON.stringify(payload);
   if (framing === "newline") {
     child.stdin.write(`${body}\n`);
+    return;
+  }
+
+  if (framing === "content-length-compact") {
+    child.stdin.write(`Content-Length:${Buffer.byteLength(body, "utf8")}\r\n\r\n${body}`);
     return;
   }
 
