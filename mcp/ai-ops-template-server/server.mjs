@@ -285,13 +285,26 @@ function route(method, params) {
   }
 
   if (method === "tools/call") {
-    if (typeof params.name !== "string" || params.name.trim().length === 0) {
+    const toolCallParams = normalizeToolCallParams(params);
+    if (typeof toolCallParams.name !== "string" || toolCallParams.name.trim().length === 0) {
       throw new Error("tools/call requires a non-empty tool name.");
     }
-    return callTool(params.name, normalizeToolArguments(params.arguments));
+    return callTool(toolCallParams.name, normalizeToolArguments(toolCallParams.arguments));
   }
 
   throw new Error(`Unsupported method: ${method}`);
+}
+
+function normalizeToolCallParams(value) {
+  if (value === undefined || value === null) {
+    return {};
+  }
+
+  if (typeof value === "object" && !Array.isArray(value)) {
+    return value;
+  }
+
+  throw new Error("tools/call params must be an object when provided.");
 }
 
 function normalizeToolArguments(value) {

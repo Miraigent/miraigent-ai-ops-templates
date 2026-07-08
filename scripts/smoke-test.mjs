@@ -321,12 +321,24 @@ async function runSmokeTest(framing) {
   });
   send(child, framing, {
     jsonrpc: "2.0",
+    id: 36,
+    method: "tools/call",
+    params: []
+  });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 37,
+    method: "tools/call",
+    params: "list_ai_ops_templates"
+  });
+  send(child, framing, {
+    jsonrpc: "2.0",
     method: "notifications/initialized",
     params: {}
   });
 
-  await waitForResponses(responses, 35);
-  await waitForNoExtraResponse(responses, 35);
+  await waitForResponses(responses, 37);
+  await waitForNoExtraResponse(responses, 37);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -470,6 +482,14 @@ async function runSmokeTest(framing) {
   assert(
     responses[34].error.message === "tools/call requires a non-empty tool name.",
     `${framing}: whitespace-only tool name error failed`
+  );
+  assert(
+    responses[35].error.message === "tools/call params must be an object when provided.",
+    `${framing}: array tools/call params error failed`
+  );
+  assert(
+    responses[36].error.message === "tools/call params must be an object when provided.",
+    `${framing}: string tools/call params error failed`
   );
 
   function readNextResponseLine() {

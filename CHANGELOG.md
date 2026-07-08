@@ -39,6 +39,8 @@ for public starter releases.
   the tool name.
 - Added smoke-test coverage for malformed MCP `tools/call` requests that pass
   non-object arguments.
+- Added smoke-test coverage for malformed MCP `tools/call` requests that pass
+  non-object params.
 
 ### Fixed
 
@@ -69,6 +71,7 @@ for public starter releases.
 - Return a clear MCP error when MCP tools receive non-string `riskLevel` values.
 - Return a clear MCP error when `get_ai_ops_template` omits the template id.
 - Return a clear MCP error when `tools/call` receives non-object arguments.
+- Return a clear MCP error when `tools/call` receives non-object params.
 - Honored the documented `review`, `intake`, and `workflow` priorities in MCP
   template sequence recommendations and added smoke-test coverage for them.
 - Return a clear MCP error when `tools/call` omits the tool name.
