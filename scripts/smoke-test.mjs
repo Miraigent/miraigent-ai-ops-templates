@@ -344,6 +344,13 @@ async function runSmokeTest(framing) {
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
   assert(responses[0].result.serverInfo.version === packageJson.version, `${framing}: server version must match package.json`);
   assert(responses[1].result.tools.length === 5, `${framing}: tools/list failed`);
+  const toolSchemas = Object.fromEntries(responses[1].result.tools.map((tool) => [tool.name, tool.inputSchema]));
+  assert(
+    toolSchemas.get_ai_ops_template.required.includes("id"),
+    `${framing}: get_ai_ops_template schema should require id`
+  );
+  assertRiskLevelSchema(toolSchemas.build_ai_ops_review_checklist, framing, "checklist");
+  assertRiskLevelSchema(toolSchemas.draft_ai_ops_adoption_plan, framing, "adoption plan");
   assert(responses[2].result.content[0].text.includes("Human Review Gate"), `${framing}: template listing failed`);
   assert(responses[3].result.content[0].text.includes("Human Review Gate"), `${framing}: template lookup failed`);
   assert(responses[4].result.content[0].text.includes("escalation owner"), `${framing}: checklist build failed`);
@@ -509,6 +516,13 @@ async function runSmokeTest(framing) {
 
 function indexOfTemplate(recommendation, id) {
   return recommendation.templates.findIndex((template) => template.id === id);
+}
+
+function assertRiskLevelSchema(schema, framing, label) {
+  assert(
+    JSON.stringify(schema.properties.riskLevel.enum) === JSON.stringify(["low", "medium", "high"]),
+    `${framing}: ${label} schema should advertise supported risk levels`
+  );
 }
 
 function send(child, framing, payload) {

@@ -12,6 +12,8 @@ for public starter releases.
 - Added smoke-test coverage that `notifications/initialized` is accepted
   without sending an extra JSON-RPC response.
 - Added smoke-test coverage for compact MCP `Content-Length` headers.
+- Added smoke-test coverage for MCP tool schemas that require template ids and
+  advertise supported `riskLevel` values.
 - Added smoke-test coverage for whitespace-only MCP operation and adoption-plan
   inputs.
 - Added smoke-test coverage for whitespace-only JSON-RPC method and MCP tool
