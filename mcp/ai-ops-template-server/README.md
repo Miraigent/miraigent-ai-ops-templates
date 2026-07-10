@@ -22,6 +22,7 @@ It implements:
 
 - `initialize`
 - `notifications/initialized`
+- `ping`
 - `tools/list`
 - `tools/call`
 
@@ -50,17 +51,24 @@ printf '%s\n' '{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}' \
   | npm run mcp
 ```
 
+Check that the server is responsive:
+
+```bash
+printf '%s\n' '{"jsonrpc":"2.0","id":3,"method":"ping","params":{}}' \
+  | npm run mcp
+```
+
 Fetch one public template:
 
 ```bash
-printf '%s\n' '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"get_ai_ops_template","arguments":{"id":"human-review-gate-ai-drafts"}}}' \
+printf '%s\n' '{"jsonrpc":"2.0","id":4,"method":"tools/call","params":{"name":"get_ai_ops_template","arguments":{"id":"human-review-gate-ai-drafts"}}}' \
   | npm run mcp
 ```
 
 Draft a short adoption plan:
 
 ```bash
-printf '%s\n' '{"jsonrpc":"2.0","id":4,"method":"tools/call","params":{"name":"draft_ai_ops_adoption_plan","arguments":{"operation":"customer-support","currentPain":"AI replies are drafted before review rules are clear","reviewOwner":"support lead","riskLevel":"high"}}}' \
+printf '%s\n' '{"jsonrpc":"2.0","id":5,"method":"tools/call","params":{"name":"draft_ai_ops_adoption_plan","arguments":{"operation":"customer-support","currentPain":"AI replies are drafted before review rules are clear","reviewOwner":"support lead","riskLevel":"high"}}}' \
   | npm run mcp
 ```
 

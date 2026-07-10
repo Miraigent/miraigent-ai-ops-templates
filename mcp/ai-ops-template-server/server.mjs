@@ -280,6 +280,10 @@ function route(method, params) {
     return null;
   }
 
+  if (method === "ping") {
+    return {};
+  }
+
   if (method === "tools/list") {
     return { tools };
   }

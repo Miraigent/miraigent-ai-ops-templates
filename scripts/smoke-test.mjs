@@ -336,9 +336,15 @@ async function runSmokeTest(framing) {
     method: "notifications/initialized",
     params: {}
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 38,
+    method: "ping",
+    params: {}
+  });
 
-  await waitForResponses(responses, 37);
-  await waitForNoExtraResponse(responses, 37);
+  await waitForResponses(responses, 38);
+  await waitForNoExtraResponse(responses, 38);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -497,6 +503,10 @@ async function runSmokeTest(framing) {
   assert(
     responses[36].error.message === "tools/call params must be an object when provided.",
     `${framing}: string tools/call params error failed`
+  );
+  assert(
+    responses[37].id === 38 && Object.keys(responses[37].result).length === 0,
+    `${framing}: ping should return an empty result object`
   );
 
   function readNextResponseLine() {

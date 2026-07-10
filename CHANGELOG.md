@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Added
 
+- Added MCP `ping` support and smoke-test coverage so clients can verify that
+  the starter server is responsive.
 - Added smoke-test coverage that `notifications/initialized` is accepted
   without sending an extra JSON-RPC response.
 - Added smoke-test coverage for compact MCP `Content-Length` headers.
