@@ -336,6 +336,7 @@ async function runSmokeTest(framing) {
     method: "notifications/initialized",
     params: {}
   });
+  sendRaw(child, framing, '{"jsonrpc":"2.0","id":39,"method":');
   send(child, framing, {
     jsonrpc: "2.0",
     id: 38,
@@ -343,8 +344,8 @@ async function runSmokeTest(framing) {
     params: {}
   });
 
-  await waitForResponses(responses, 38);
-  await waitForNoExtraResponse(responses, 38);
+  await waitForResponses(responses, 39);
+  await waitForNoExtraResponse(responses, 39);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -505,7 +506,11 @@ async function runSmokeTest(framing) {
     `${framing}: string tools/call params error failed`
   );
   assert(
-    responses[37].id === 38 && Object.keys(responses[37].result).length === 0,
+    responses[37].error.code === -32700 && responses[37].error.message === "Parse error",
+    `${framing}: malformed JSON should return a parse error`
+  );
+  assert(
+    responses[38].id === 38 && Object.keys(responses[38].result).length === 0,
     `${framing}: ping should return an empty result object`
   );
 
@@ -536,7 +541,10 @@ function assertRiskLevelSchema(schema, framing, label) {
 }
 
 function send(child, framing, payload) {
-  const body = JSON.stringify(payload);
+  sendRaw(child, framing, JSON.stringify(payload));
+}
+
+function sendRaw(child, framing, body) {
   if (framing === "newline") {
     child.stdin.write(`${body}\n`);
     return;

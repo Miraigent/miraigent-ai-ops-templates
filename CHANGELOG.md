@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage for malformed JSON-RPC input and the standard
+  parse-error response across supported input framing modes.
 - Added MCP `ping` support and smoke-test coverage so clients can verify that
   the starter server is responsive.
 - Added smoke-test coverage that `notifications/initialized` is accepted
