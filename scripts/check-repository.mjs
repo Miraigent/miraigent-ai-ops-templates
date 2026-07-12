@@ -24,7 +24,9 @@ for (const [file, expected] of checks) {
   assertFileContains(file, expected);
 }
 
-assertMissing("LICENSE");
+for (const file of ["LICENSE", "LICENSE.md", "LICENSE.txt", "COPYING"]) {
+  assertMissing(file);
+}
 assertNoForbiddenPublicPositioning(".");
 
 function assertFileContains(file, expected) {

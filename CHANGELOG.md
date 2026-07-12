@@ -9,6 +9,9 @@ for public starter releases.
 
 ### Added
 
+- Expanded repository boundary checks to reject common root license filenames,
+  preventing an accidental repository-wide license from overriding scoped MIT
+  licensing.
 - Added smoke-test coverage for malformed JSON-RPC input and the standard
   parse-error response across supported input framing modes.
 - Added MCP `ping` support and smoke-test coverage so clients can verify that
