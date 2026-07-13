@@ -251,10 +251,12 @@ function handleMessage(body) {
       respond(request.id, result);
     }
   } catch (error) {
-    respond(request.id ?? null, null, {
-      code: -32603,
-      message: error.message
-    });
+    if (request.id !== undefined) {
+      respond(request.id, null, {
+        code: -32603,
+        message: error.message
+      });
+    }
   }
 }
 

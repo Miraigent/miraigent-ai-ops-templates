@@ -18,6 +18,8 @@ for public starter releases.
   the starter server is responsive.
 - Added smoke-test coverage that `notifications/initialized` is accepted
   without sending an extra JSON-RPC response.
+- Added smoke-test coverage that unsupported JSON-RPC notifications do not
+  produce a response.
 - Added smoke-test coverage for compact MCP `Content-Length` headers.
 - Added smoke-test coverage for MCP tool schemas that require template ids and
   advertise supported `riskLevel` values.
@@ -55,6 +57,8 @@ for public starter releases.
 
 - Accept the standard MCP `notifications/initialized` notification as a no-op
   so clients do not receive an unsupported-method error after initialization.
+- Suppress error responses for unsupported JSON-RPC notifications, as required
+  for requests without an id.
 - Accept compact MCP `Content-Length` headers without requiring a space after
   the colon.
 - Trim MCP checklist and adoption-plan string inputs before validation so

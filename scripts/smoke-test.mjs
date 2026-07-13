@@ -336,6 +336,11 @@ async function runSmokeTest(framing) {
     method: "notifications/initialized",
     params: {}
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    method: "notifications/unknown",
+    params: {}
+  });
   sendRaw(child, framing, '{"jsonrpc":"2.0","id":39,"method":');
   send(child, framing, {
     jsonrpc: "2.0",
@@ -570,7 +575,7 @@ async function waitForResponses(responses, count) {
 
 async function waitForNoExtraResponse(responses, count) {
   await new Promise((resolve) => setTimeout(resolve, 100));
-  assert(responses.length === count, `notifications/initialized should not produce a JSON-RPC response`);
+  assert(responses.length === count, "JSON-RPC notifications should not produce a response");
 }
 
 function assert(condition, message) {
