@@ -13,10 +13,12 @@ review, and support process mapping.
 ## Run
 
 ```bash
-npm run mcp
+npm run --silent mcp
 ```
 
 The server communicates over stdio with newline-delimited JSON-RPC for standard MCP clients.
+Use npm's `--silent` flag so its command banner is not mixed into the JSON-RPC
+stdout stream.
 
 It implements:
 
@@ -28,7 +30,7 @@ It implements:
 
 ## Quickstart
 
-From the repository root, run npm run mcp.
+From the repository root, run `npm run --silent mcp`.
 
 After npm publication, the intended command will be npx @miraigent/ai-ops-templates.
 
@@ -41,35 +43,35 @@ Initialize the server:
 
 ```bash
 printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}' \
-  | npm run mcp
+  | npm run --silent mcp
 ```
 
 List the available MCP tools:
 
 ```bash
 printf '%s\n' '{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}' \
-  | npm run mcp
+  | npm run --silent mcp
 ```
 
 Check that the server is responsive:
 
 ```bash
 printf '%s\n' '{"jsonrpc":"2.0","id":3,"method":"ping","params":{}}' \
-  | npm run mcp
+  | npm run --silent mcp
 ```
 
 Fetch one public template:
 
 ```bash
 printf '%s\n' '{"jsonrpc":"2.0","id":4,"method":"tools/call","params":{"name":"get_ai_ops_template","arguments":{"id":"human-review-gate-ai-drafts"}}}' \
-  | npm run mcp
+  | npm run --silent mcp
 ```
 
 Draft a short adoption plan:
 
 ```bash
 printf '%s\n' '{"jsonrpc":"2.0","id":5,"method":"tools/call","params":{"name":"draft_ai_ops_adoption_plan","arguments":{"operation":"customer-support","currentPain":"AI replies are drafted before review rules are clear","reviewOwner":"support lead","riskLevel":"high"}}}' \
-  | npm run mcp
+  | npm run --silent mcp
 ```
 
 For the full automated check, run:

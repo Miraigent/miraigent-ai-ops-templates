@@ -87,8 +87,11 @@ In Japanese materials:
 Run the starter Model Context Protocol server:
 
 ```bash
-npm run mcp
+npm run --silent mcp
 ```
+
+The `--silent` flag keeps npm's command banner out of the server's JSON-RPC
+stdout stream.
 
 Run the smoke test:
 

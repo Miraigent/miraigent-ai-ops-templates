@@ -7,6 +7,11 @@ for public starter releases.
 
 ## [Unreleased]
 
+### Changed
+
+- Updated local MCP run examples to use npm's silent mode so command banners do
+  not pollute the JSON-RPC stdout stream.
+
 ### Added
 
 - Expanded repository boundary checks to reject common root license filenames,
