@@ -138,7 +138,8 @@ const tools = [
         priorities: {
           type: "array",
           items: {
-            type: "string"
+            type: "string",
+            enum: ["privacy", "faq", "crm", "intake", "review", "workflow"]
           },
           description: "Priorities such as privacy, review, intake, CRM, FAQ, or workflow."
         }

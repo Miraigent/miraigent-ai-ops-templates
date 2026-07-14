@@ -23,6 +23,8 @@ for public starter releases.
 - Added smoke-test coverage for compact MCP `Content-Length` headers.
 - Added smoke-test coverage for MCP tool schemas that require template ids and
   advertise supported `riskLevel` values.
+- Added supported template-sequence priorities to the MCP input schema and
+  smoke-test coverage so clients can discover the accepted values.
 - Added smoke-test coverage for whitespace-only MCP operation and adoption-plan
   inputs.
 - Added smoke-test coverage for whitespace-only JSON-RPC method and MCP tool

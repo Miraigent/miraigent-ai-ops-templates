@@ -363,6 +363,11 @@ async function runSmokeTest(framing) {
   );
   assertRiskLevelSchema(toolSchemas.build_ai_ops_review_checklist, framing, "checklist");
   assertRiskLevelSchema(toolSchemas.draft_ai_ops_adoption_plan, framing, "adoption plan");
+  assert(
+    toolSchemas.recommend_ai_ops_template_sequence.properties.priorities.items.enum.join(",") ===
+      "privacy,faq,crm,intake,review,workflow",
+    `${framing}: template sequence schema should advertise supported priorities`
+  );
   assert(responses[2].result.content[0].text.includes("Human Review Gate"), `${framing}: template listing failed`);
   assert(responses[3].result.content[0].text.includes("Human Review Gate"), `${framing}: template lookup failed`);
   assert(responses[4].result.content[0].text.includes("escalation owner"), `${framing}: checklist build failed`);
