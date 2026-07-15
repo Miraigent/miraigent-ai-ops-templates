@@ -34,6 +34,29 @@ From the repository root, run `npm run --silent mcp`.
 
 After npm publication, the intended command will be npx @miraigent/ai-ops-templates.
 
+## Connect an MCP Client Locally
+
+Until the package is published, point an MCP client at the checked-out server
+file. Replace `/absolute/path/to/repository` with this repository's absolute
+path:
+
+```json
+{
+  "mcpServers": {
+    "miraigent-ai-ops-templates": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/repository/mcp/ai-ops-template-server/server.mjs"
+      ]
+    }
+  }
+}
+```
+
+Restart the client after saving its configuration, then verify that it can list
+the five tools documented below. The server writes protocol messages to stdout,
+so do not wrap this command in another program that adds banners or log output.
+
 ## Manual JSON-RPC Examples
 
 The server accepts one JSON-RPC message per line. These examples are safe to run

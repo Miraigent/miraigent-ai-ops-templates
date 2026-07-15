@@ -11,6 +11,8 @@ for public starter releases.
 
 - Updated local MCP run examples to use npm's silent mode so command banners do
   not pollute the JSON-RPC stdout stream.
+- Added a local MCP client configuration example that runs the checked-out
+  server directly without implying that the npm package is already published.
 
 ### Added
 
