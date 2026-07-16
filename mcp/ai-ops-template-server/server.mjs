@@ -247,13 +247,20 @@ function handleMessage(body) {
   }
 
   try {
+    if (request === null || typeof request !== "object" || Array.isArray(request)) {
+      throw new Error("JSON-RPC requests must be objects.");
+    }
+    if (request.jsonrpc !== "2.0") {
+      throw new Error('JSON-RPC requests require jsonrpc: "2.0".');
+    }
     const result = route(request.method, request.params ?? {});
     if (request.id !== undefined) {
       respond(request.id, result);
     }
   } catch (error) {
-    if (request.id !== undefined) {
-      respond(request.id, null, {
+    const requestId = request !== null && typeof request === "object" ? request.id : null;
+    if (requestId !== undefined) {
+      respond(requestId, null, {
         code: -32603,
         message: error.message
       });

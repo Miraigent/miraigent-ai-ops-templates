@@ -348,9 +348,21 @@ async function runSmokeTest(framing) {
     method: "ping",
     params: {}
   });
+  send(child, framing, {
+    id: 40,
+    method: "ping",
+    params: {}
+  });
+  send(child, framing, {
+    jsonrpc: "1.0",
+    id: 41,
+    method: "ping",
+    params: {}
+  });
+  sendRaw(child, framing, "null");
 
-  await waitForResponses(responses, 39);
-  await waitForNoExtraResponse(responses, 39);
+  await waitForResponses(responses, 42);
+  await waitForNoExtraResponse(responses, 42);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -522,6 +534,18 @@ async function runSmokeTest(framing) {
   assert(
     responses[38].id === 38 && Object.keys(responses[38].result).length === 0,
     `${framing}: ping should return an empty result object`
+  );
+  assert(
+    responses[39].error.message === 'JSON-RPC requests require jsonrpc: "2.0".',
+    `${framing}: missing JSON-RPC version error failed`
+  );
+  assert(
+    responses[40].error.message === 'JSON-RPC requests require jsonrpc: "2.0".',
+    `${framing}: invalid JSON-RPC version error failed`
+  );
+  assert(
+    responses[41].id === null && responses[41].error.message === "JSON-RPC requests must be objects.",
+    `${framing}: non-object JSON-RPC request error failed`
   );
 
   function readNextResponseLine() {

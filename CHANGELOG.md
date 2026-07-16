@@ -16,6 +16,8 @@ for public starter releases.
 
 ### Added
 
+- Added MCP smoke-test coverage for missing and unsupported JSON-RPC protocol
+  versions and non-object requests.
 - Expanded repository boundary checks to reject common root license filenames,
   preventing an accidental repository-wide license from overriding scoped MIT
   licensing.
@@ -64,6 +66,8 @@ for public starter releases.
 
 ### Fixed
 
+- Reject requests that do not declare JSON-RPC 2.0 instead of processing them
+  as valid MCP messages.
 - Accept the standard MCP `notifications/initialized` notification as a no-op
   so clients do not receive an unsupported-method error after initialization.
 - Suppress error responses for unsupported JSON-RPC notifications, as required
