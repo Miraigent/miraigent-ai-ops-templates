@@ -16,6 +16,8 @@ for public starter releases.
 
 ### Added
 
+- Added MCP smoke-test coverage that preserves valid `null` and zero JSON-RPC
+  request ids in responses.
 - Added MCP smoke-test coverage for missing and unsupported JSON-RPC protocol
   versions and non-object requests.
 - Expanded repository boundary checks to reject common root license filenames,

@@ -360,9 +360,21 @@ async function runSmokeTest(framing) {
     params: {}
   });
   sendRaw(child, framing, "null");
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: null,
+    method: "ping",
+    params: {}
+  });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 0,
+    method: "ping",
+    params: {}
+  });
 
-  await waitForResponses(responses, 42);
-  await waitForNoExtraResponse(responses, 42);
+  await waitForResponses(responses, 44);
+  await waitForNoExtraResponse(responses, 44);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -546,6 +558,14 @@ async function runSmokeTest(framing) {
   assert(
     responses[41].id === null && responses[41].error.message === "JSON-RPC requests must be objects.",
     `${framing}: non-object JSON-RPC request error failed`
+  );
+  assert(
+    responses[42].id === null && Object.keys(responses[42].result).length === 0,
+    `${framing}: null request id should be preserved`
+  );
+  assert(
+    responses[43].id === 0 && Object.keys(responses[43].result).length === 0,
+    `${framing}: zero request id should be preserved`
   );
 
   function readNextResponseLine() {
