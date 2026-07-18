@@ -24,7 +24,17 @@ for (const [file, expected] of checks) {
   assertFileContains(file, expected);
 }
 
-for (const file of ["LICENSE", "LICENSE.md", "LICENSE.txt", "COPYING"]) {
+for (const file of [
+  "LICENSE",
+  "LICENSE.md",
+  "LICENSE.txt",
+  "LICENCE",
+  "LICENCE.md",
+  "LICENCE.txt",
+  "COPYING",
+  "COPYING.md",
+  "COPYING.txt"
+]) {
   assertMissing(file);
 }
 assertNoForbiddenPublicPositioning(".");
