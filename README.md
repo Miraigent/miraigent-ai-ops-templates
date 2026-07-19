@@ -116,8 +116,16 @@ The server exposes tools for listing the public template catalog, fetching one t
 This repository currently publishes a starter MCP server. It does not claim to provide a full orchestration or automation engine.
 The server uses newline-delimited JSON-RPC over stdio for standard MCP clients.
 
-After npm publication, the intended command will be npx @miraigent/ai-ops-templates.
-Because this is a scoped public npm package, publication uses npm publish --access public.
+The package is published publicly on npm. Run the MCP server without cloning
+the repository:
+
+```bash
+npx --yes @miraigent/ai-ops-templates
+```
+
+Pin a version in production client configuration instead of relying on the
+latest published release. Because this is a scoped public npm package, future
+releases use `npm publish --access public` after release checks pass.
 
 ## Maintenance
 

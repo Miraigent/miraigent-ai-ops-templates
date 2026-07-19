@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Replaced outdated pre-publication npm wording with the working `npx` command
+  and version-pinning guidance for repeatable MCP client configuration.
 - Updated local MCP run examples to use npm's silent mode so command banners do
   not pollute the JSON-RPC stdout stream.
 - Added a local MCP client configuration example that runs the checked-out

@@ -32,7 +32,15 @@ It implements:
 
 From the repository root, run `npm run --silent mcp`.
 
-After npm publication, the intended command will be npx @miraigent/ai-ops-templates.
+The package is published publicly on npm. Run the server without cloning the
+repository:
+
+```bash
+npx --yes @miraigent/ai-ops-templates
+```
+
+For repeatable production configuration, pin the package version in the
+command instead of relying on the latest published release.
 
 ## Connect an MCP Client Locally
 
