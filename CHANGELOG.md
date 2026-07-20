@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Clarified that the checked-out MCP client configuration is for local
+  development or source review, removing outdated pre-publication wording.
 - Replaced outdated pre-publication npm wording with the working `npx` command
   and version-pinning guidance for repeatable MCP client configuration.
 - Updated local MCP run examples to use npm's silent mode so command banners do

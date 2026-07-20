@@ -44,9 +44,9 @@ command instead of relying on the latest published release.
 
 ## Connect an MCP Client Locally
 
-Until the package is published, point an MCP client at the checked-out server
-file. Replace `/absolute/path/to/repository` with this repository's absolute
-path:
+For local development or source review, point an MCP client at the checked-out
+server file. Replace `/absolute/path/to/repository` with this repository's
+absolute path:
 
 ```json
 {
