@@ -6,6 +6,8 @@ const packageJson = JSON.parse(
   readFileSync(new URL("../../package.json", import.meta.url), "utf8")
 );
 
+const supportedPriorities = ["privacy", "faq", "crm", "intake", "review", "workflow"];
+
 const templates = [
   {
     id: "before-you-send-it-to-ai-checklist",
@@ -139,7 +141,7 @@ const tools = [
           type: "array",
           items: {
             type: "string",
-            enum: ["privacy", "faq", "crm", "intake", "review", "workflow"]
+            enum: supportedPriorities
           },
           description: "Priorities such as privacy, review, intake, CRM, FAQ, or workflow."
         }
@@ -430,7 +432,15 @@ function normalizePriorities(value) {
     throw new Error("recommend_ai_ops_template_sequence priorities must be an array of strings.");
   }
 
-  return value.map((item) => item.trim().toLowerCase());
+  const priorities = value.map((item) => item.trim().toLowerCase());
+  const unsupportedPriority = priorities.find((item) => !supportedPriorities.includes(item));
+  if (unsupportedPriority) {
+    throw new Error(
+      `Unsupported priority: ${unsupportedPriority}. Use ${supportedPriorities.join(", ")}.`
+    );
+  }
+
+  return priorities;
 }
 
 function normalizeTemplateId(value) {

@@ -74,6 +74,8 @@ for public starter releases.
 
 ### Fixed
 
+- Reject unsupported template-sequence priorities at runtime instead of
+  silently ignoring values outside the advertised MCP input schema.
 - Reject requests that do not declare JSON-RPC 2.0 instead of processing them
   as valid MCP messages.
 - Accept the standard MCP `notifications/initialized` notification as a no-op

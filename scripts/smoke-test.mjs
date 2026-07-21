@@ -181,7 +181,7 @@ async function runSmokeTest(framing) {
     method: "tools/call",
     params: {
       name: "recommend_ai_ops_template_sequence",
-      arguments: { operation: "support", priorities: ["privacy", 42] }
+      arguments: { operation: "support", priorities: ["privacy", "speed"] }
     }
   });
   send(child, framing, {
@@ -455,8 +455,9 @@ async function runSmokeTest(framing) {
     `${framing}: invalid arguments object error failed`
   );
   assert(
-    responses[18].error.message === "recommend_ai_ops_template_sequence priorities must be an array of strings.",
-    `${framing}: non-string priorities error failed`
+    responses[18].error.message ===
+      "Unsupported priority: speed. Use privacy, faq, crm, intake, review, workflow.",
+    `${framing}: unsupported priority error failed`
   );
   assert(
     responses[19].error.message ===
