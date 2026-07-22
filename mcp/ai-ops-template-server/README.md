@@ -160,8 +160,8 @@ Input fields:
 
 Supported `priorities` values are `privacy`, `faq`, `crm`, `intake`,
 `review`, and `workflow`. The server trims extra spaces and accepts
-uppercase/lowercase variants. Unknown strings are accepted but ignored so
-clients can pass their own notes without breaking the request.
+uppercase/lowercase variants. Unsupported values return an error that lists
+the accepted values; keep free-form context in the `operation` field instead.
 
 ### `draft_ai_ops_adoption_plan`
 

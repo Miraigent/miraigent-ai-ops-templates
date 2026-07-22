@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Corrected the MCP README to document that unsupported template-sequence
+  priorities return a validation error instead of being silently ignored.
 - Clarified that the checked-out MCP client configuration is for local
   development or source review, removing outdated pre-publication wording.
 - Replaced outdated pre-publication npm wording with the working `npx` command
