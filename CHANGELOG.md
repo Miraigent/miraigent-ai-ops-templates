@@ -22,6 +22,9 @@ for public starter releases.
 
 ### Added
 
+- Added a repository check that rejects npm package file lists containing
+  `paid/` or repository-wide entries, reinforcing the scoped-license boundary
+  for published package contents.
 - Added MCP smoke-test coverage that preserves valid `null` and zero JSON-RPC
   request ids in responses.
 - Added MCP smoke-test coverage for missing and unsupported JSON-RPC protocol

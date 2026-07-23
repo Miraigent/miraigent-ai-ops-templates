@@ -37,6 +37,7 @@ for (const file of [
 ]) {
   assertMissing(file);
 }
+assertPackageFilesRespectLicenseScope();
 assertNoForbiddenPublicPositioning(".");
 
 function assertFileContains(file, expected) {
@@ -52,6 +53,21 @@ function assertFileContains(file, expected) {
 function assertMissing(file) {
   if (existsSync(file)) {
     throw new Error(`Unexpected file exists: ${file}`);
+  }
+}
+
+function assertPackageFilesRespectLicenseScope() {
+  const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
+  const packageFiles = packageJson.files;
+
+  if (!Array.isArray(packageFiles)) {
+    throw new Error("package.json files must be an explicit array.");
+  }
+
+  for (const entry of packageFiles) {
+    if (entry === "." || entry === "*" || entry.startsWith("paid/")) {
+      throw new Error(`package.json files must not publish outside the scoped license boundary: ${entry}`);
+    }
   }
 }
 
