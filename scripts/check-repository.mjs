@@ -65,7 +65,19 @@ function assertPackageFilesRespectLicenseScope() {
   }
 
   for (const entry of packageFiles) {
-    if (entry === "." || entry === "*" || entry.startsWith("paid/")) {
+    if (typeof entry !== "string" || entry.trim().length === 0) {
+      throw new Error("package.json files entries must be non-empty strings.");
+    }
+
+    const normalizedEntry = entry.trim().replaceAll("\\", "/").replace(/^\.\/+/, "");
+    const pathParts = normalizedEntry.split("/");
+    if (
+      normalizedEntry === "." ||
+      normalizedEntry === "*" ||
+      normalizedEntry.startsWith("/") ||
+      pathParts.includes("..") ||
+      pathParts[0] === "paid"
+    ) {
       throw new Error(`package.json files must not publish outside the scoped license boundary: ${entry}`);
     }
   }

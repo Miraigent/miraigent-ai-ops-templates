@@ -22,6 +22,8 @@ for public starter releases.
 
 ### Added
 
+- Hardened npm package boundary checks against alternate `paid/` path syntax,
+  absolute paths, and parent-directory traversal entries.
 - Added a repository check that rejects npm package file lists containing
   `paid/` or repository-wide entries, reinforcing the scoped-license boundary
   for published package contents.
