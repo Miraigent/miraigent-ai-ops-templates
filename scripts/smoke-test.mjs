@@ -372,9 +372,18 @@ async function runSmokeTest(framing) {
     method: "ping",
     params: {}
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 45,
+    method: "tools/call",
+    params: {
+      name: " list_ai_ops_templates ",
+      arguments: {}
+    }
+  });
 
-  await waitForResponses(responses, 44);
-  await waitForNoExtraResponse(responses, 44);
+  await waitForResponses(responses, 45);
+  await waitForNoExtraResponse(responses, 45);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -567,6 +576,10 @@ async function runSmokeTest(framing) {
   assert(
     responses[43].id === 0 && Object.keys(responses[43].result).length === 0,
     `${framing}: zero request id should be preserved`
+  );
+  assert(
+    responses[44].id === 45 && responses[44].result.content[0].text.includes("Human Review Gate"),
+    `${framing}: tool names should be trimmed before lookup`
   );
 
   function readNextResponseLine() {

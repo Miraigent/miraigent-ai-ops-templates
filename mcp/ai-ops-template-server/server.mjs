@@ -305,7 +305,7 @@ function route(method, params) {
     if (typeof toolCallParams.name !== "string" || toolCallParams.name.trim().length === 0) {
       throw new Error("tools/call requires a non-empty tool name.");
     }
-    return callTool(toolCallParams.name, normalizeToolArguments(toolCallParams.arguments));
+    return callTool(toolCallParams.name.trim(), normalizeToolArguments(toolCallParams.arguments));
   }
 
   throw new Error(`Unsupported method: ${method}`);

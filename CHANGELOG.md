@@ -81,6 +81,8 @@ for public starter releases.
 
 ### Fixed
 
+- Trim MCP tool names before lookup so otherwise valid `tools/call` requests
+  with accidental surrounding spaces do not return an unknown-tool error.
 - Reject unsupported template-sequence priorities at runtime instead of
   silently ignoring values outside the advertised MCP input schema.
 - Reject requests that do not declare JSON-RPC 2.0 instead of processing them

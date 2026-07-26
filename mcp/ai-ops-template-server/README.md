@@ -132,6 +132,9 @@ Input:
 The server trims extra spaces and accepts uppercase/lowercase variants in direct
 JSON-RPC calls.
 
+The server also trims accidental leading or trailing spaces from MCP tool names
+before lookup.
+
 ### `build_ai_ops_review_checklist`
 
 Builds a short review checklist for an AI operations area.
