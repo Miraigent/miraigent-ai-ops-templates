@@ -16,9 +16,27 @@ Describe the issue.
 - MCP tool:
 - File path:
 
+## Reproduction
+
+List the smallest steps that reproduce the problem. If this is an MCP server
+issue, include:
+
+- package version or commit:
+- run method (`npx`, `npm run --silent mcp`, or direct `node`):
+- input framing (newline-delimited JSON-RPC or `Content-Length`):
+- a minimal public-safe request:
+
+Do not paste credentials, private client data, or private company context into
+the request.
+
 ## Expected behavior
 
 What should happen instead?
+
+## Actual behavior
+
+Include the exact error or response when it is safe to share. Remove private
+data before posting logs.
 
 ## Public boundary check
 

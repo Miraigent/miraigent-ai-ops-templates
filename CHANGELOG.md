@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Expanded the bug report template with MCP version, run method, input framing,
+  minimal reproduction, and safe actual-response fields.
 - Corrected the MCP README to document that unsupported template-sequence
   priorities return a validation error instead of being silently ignored.
 - Clarified that the checked-out MCP client configuration is for local
