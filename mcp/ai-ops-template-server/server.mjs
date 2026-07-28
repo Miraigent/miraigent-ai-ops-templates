@@ -275,7 +275,9 @@ function route(method, params) {
     throw new Error("JSON-RPC requests require a non-empty method string.");
   }
 
-  if (method === "initialize") {
+  const normalizedMethod = method.trim();
+
+  if (normalizedMethod === "initialize") {
     return {
       protocolVersion: "2024-11-05",
       capabilities: {
@@ -288,19 +290,19 @@ function route(method, params) {
     };
   }
 
-  if (method === "notifications/initialized") {
+  if (normalizedMethod === "notifications/initialized") {
     return null;
   }
 
-  if (method === "ping") {
+  if (normalizedMethod === "ping") {
     return {};
   }
 
-  if (method === "tools/list") {
+  if (normalizedMethod === "tools/list") {
     return { tools };
   }
 
-  if (method === "tools/call") {
+  if (normalizedMethod === "tools/call") {
     const toolCallParams = normalizeToolCallParams(params);
     if (typeof toolCallParams.name !== "string" || toolCallParams.name.trim().length === 0) {
       throw new Error("tools/call requires a non-empty tool name.");
@@ -308,7 +310,7 @@ function route(method, params) {
     return callTool(toolCallParams.name.trim(), normalizeToolArguments(toolCallParams.arguments));
   }
 
-  throw new Error(`Unsupported method: ${method}`);
+  throw new Error(`Unsupported method: ${normalizedMethod}`);
 }
 
 function normalizeToolCallParams(value) {

@@ -381,9 +381,15 @@ async function runSmokeTest(framing) {
       arguments: {}
     }
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 46,
+    method: " ping ",
+    params: {}
+  });
 
-  await waitForResponses(responses, 45);
-  await waitForNoExtraResponse(responses, 45);
+  await waitForResponses(responses, 46);
+  await waitForNoExtraResponse(responses, 46);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -580,6 +586,10 @@ async function runSmokeTest(framing) {
   assert(
     responses[44].id === 45 && responses[44].result.content[0].text.includes("Human Review Gate"),
     `${framing}: tool names should be trimmed before lookup`
+  );
+  assert(
+    responses[45].id === 46 && Object.keys(responses[45].result).length === 0,
+    `${framing}: JSON-RPC method names should be trimmed before lookup`
   );
 
   function readNextResponseLine() {

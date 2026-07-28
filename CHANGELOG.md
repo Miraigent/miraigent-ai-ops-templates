@@ -24,6 +24,8 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage for JSON-RPC method names with accidental
+  surrounding whitespace across supported input framing modes.
 - Hardened npm package boundary checks against alternate `paid/` path syntax,
   absolute paths, and parent-directory traversal entries.
 - Added a repository check that rejects npm package file lists containing
@@ -83,6 +85,8 @@ for public starter releases.
 
 ### Fixed
 
+- Trim JSON-RPC method names before routing so otherwise valid requests with
+  accidental surrounding whitespace do not return an unsupported-method error.
 - Trim MCP tool names before lookup so otherwise valid `tools/call` requests
   with accidental surrounding spaces do not return an unknown-tool error.
 - Reject unsupported template-sequence priorities at runtime instead of
