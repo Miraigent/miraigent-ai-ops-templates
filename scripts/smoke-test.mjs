@@ -387,9 +387,15 @@ async function runSmokeTest(framing) {
     method: " ping ",
     params: {}
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: 47,
+    method: "resources/list",
+    params: {}
+  });
 
-  await waitForResponses(responses, 46);
-  await waitForNoExtraResponse(responses, 46);
+  await waitForResponses(responses, 47);
+  await waitForNoExtraResponse(responses, 47);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -590,6 +596,12 @@ async function runSmokeTest(framing) {
   assert(
     responses[45].id === 46 && Object.keys(responses[45].result).length === 0,
     `${framing}: JSON-RPC method names should be trimmed before lookup`
+  );
+  assert(
+    responses[46].id === 47 &&
+      responses[46].error.code === -32601 &&
+      responses[46].error.message === "Unsupported method: resources/list",
+    `${framing}: unsupported JSON-RPC methods should return method not found`
   );
 
   function readNextResponseLine() {

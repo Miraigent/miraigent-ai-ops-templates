@@ -263,7 +263,7 @@ function handleMessage(body) {
     const requestId = request !== null && typeof request === "object" ? request.id : null;
     if (requestId !== undefined) {
       respond(requestId, null, {
-        code: -32603,
+        code: error.rpcCode ?? -32603,
         message: error.message
       });
     }
@@ -310,7 +310,13 @@ function route(method, params) {
     return callTool(toolCallParams.name.trim(), normalizeToolArguments(toolCallParams.arguments));
   }
 
-  throw new Error(`Unsupported method: ${normalizedMethod}`);
+  throw rpcError(-32601, `Unsupported method: ${normalizedMethod}`);
+}
+
+function rpcError(code, message) {
+  const error = new Error(message);
+  error.rpcCode = code;
+  return error;
 }
 
 function normalizeToolCallParams(value) {

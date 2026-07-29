@@ -85,6 +85,8 @@ for public starter releases.
 
 ### Fixed
 
+- Return the standard JSON-RPC method-not-found code for unsupported MCP
+  methods instead of reporting them as internal errors.
 - Trim JSON-RPC method names before routing so otherwise valid requests with
   accidental surrounding whitespace do not return an unsupported-method error.
 - Trim MCP tool names before lookup so otherwise valid `tools/call` requests
