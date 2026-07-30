@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Added a version-pinned npm MCP client configuration example for repeatable
+  reviewer and production setup.
 - Expanded the bug report template with MCP version, run method, input framing,
   minimal reproduction, and safe actual-response fields.
 - Corrected the MCP README to document that unsupported template-sequence

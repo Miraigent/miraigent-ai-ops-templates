@@ -42,6 +42,26 @@ npx --yes @miraigent/ai-ops-templates
 For repeatable production configuration, pin the package version in the
 command instead of relying on the latest published release.
 
+For example, an MCP client can run the current published package with an
+explicit version:
+
+```json
+{
+  "mcpServers": {
+    "miraigent-ai-ops-templates": {
+      "command": "npx",
+      "args": [
+        "--yes",
+        "@miraigent/ai-ops-templates@0.1.10"
+      ]
+    }
+  }
+}
+```
+
+Review the changelog before changing the pinned version. The package starts the
+same non-memory AI operations helper documented in this directory.
+
 ## Connect an MCP Client Locally
 
 For local development or source review, point an MCP client at the checked-out
