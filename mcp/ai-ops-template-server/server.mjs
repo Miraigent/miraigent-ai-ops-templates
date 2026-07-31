@@ -177,6 +177,7 @@ const tools = [
 ];
 
 let buffer = Buffer.alloc(0);
+const MAX_CONTENT_LENGTH = 1024 * 1024;
 process.stdin.on("data", (chunk) => {
   buffer = Buffer.concat([buffer, chunk]);
   while (readNextMessage()) {
@@ -211,6 +212,12 @@ function readContentLengthMessage() {
   }
 
   const contentLength = Number(match[1]);
+  if (contentLength > MAX_CONTENT_LENGTH) {
+    respond(null, null, { code: -32600, message: "Content-Length exceeds 1 MiB limit" });
+    buffer = Buffer.alloc(0);
+    return false;
+  }
+
   const bodyStart = separator + 4;
   const bodyEnd = bodyStart + contentLength;
   if (buffer.length < bodyEnd) {

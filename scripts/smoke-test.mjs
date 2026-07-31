@@ -6,6 +6,31 @@ const packageJson = JSON.parse(await readFile(new URL("../package.json", import.
 await runSmokeTest("content-length");
 await runSmokeTest("content-length-compact");
 await runSmokeTest("newline");
+await runOversizedContentLengthTest();
+
+async function runOversizedContentLengthTest() {
+  const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {
+    stdio: ["pipe", "pipe", "inherit"]
+  });
+  let output = "";
+  child.stdout.on("data", (chunk) => {
+    output += chunk.toString("utf8");
+  });
+
+  child.stdin.write("Content-Length: 1048577\r\n\r\n");
+  const started = Date.now();
+  while (!output.includes("Content-Length exceeds 1 MiB limit")) {
+    if (Date.now() - started > 3000) {
+      child.kill();
+      throw new Error("oversized Content-Length should fail before waiting for a body");
+    }
+    await new Promise((resolve) => setTimeout(resolve, 25));
+  }
+
+  const response = JSON.parse(output.trim());
+  assert(response.error?.code === -32600, "oversized Content-Length should return invalid request");
+  child.kill();
+}
 
 async function runSmokeTest(framing) {
   const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {

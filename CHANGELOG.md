@@ -26,6 +26,8 @@ for public starter releases.
 
 ### Added
 
+- Added a 1 MiB input limit and smoke-test coverage for oversized MCP
+  `Content-Length` declarations so the server rejects them before waiting for a body.
 - Added smoke-test coverage for JSON-RPC method names with accidental
   surrounding whitespace across supported input framing modes.
 - Hardened npm package boundary checks against alternate `paid/` path syntax,
