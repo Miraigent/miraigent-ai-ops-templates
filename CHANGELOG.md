@@ -89,6 +89,8 @@ for public starter releases.
 
 ### Fixed
 
+- Reject malformed `Content-Length` values with trailing non-numeric text
+  instead of accepting a partial numeric match.
 - Return the standard JSON-RPC method-not-found code for unsupported MCP
   methods instead of reporting them as internal errors.
 - Trim JSON-RPC method names before routing so otherwise valid requests with
