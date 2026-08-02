@@ -26,6 +26,8 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage for invalid object and boolean JSON-RPC request ids
+  across supported input framing modes.
 - Added a 1 MiB input limit and smoke-test coverage for oversized MCP
   `Content-Length` declarations so the server rejects them before waiting for a body.
 - Added smoke-test coverage for JSON-RPC method names with accidental
@@ -89,6 +91,8 @@ for public starter releases.
 
 ### Fixed
 
+- Reject object and boolean JSON-RPC request ids with a standard invalid-request
+  response instead of reflecting unsupported id types.
 - Reject malformed `Content-Length` values with trailing non-numeric text
   instead of accepting a partial numeric match.
 - Return the standard JSON-RPC method-not-found code for unsupported MCP

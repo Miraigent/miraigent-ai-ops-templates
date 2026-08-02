@@ -443,9 +443,21 @@ async function runSmokeTest(framing) {
     method: "resources/list",
     params: {}
   });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: { request: 48 },
+    method: "ping",
+    params: {}
+  });
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: true,
+    method: "ping",
+    params: {}
+  });
 
-  await waitForResponses(responses, 47);
-  await waitForNoExtraResponse(responses, 47);
+  await waitForResponses(responses, 49);
+  await waitForNoExtraResponse(responses, 49);
   child.kill();
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
@@ -652,6 +664,18 @@ async function runSmokeTest(framing) {
       responses[46].error.code === -32601 &&
       responses[46].error.message === "Unsupported method: resources/list",
     `${framing}: unsupported JSON-RPC methods should return method not found`
+  );
+  assert(
+    responses[47].id === null &&
+      responses[47].error.code === -32600 &&
+      responses[47].error.message === "JSON-RPC request ids must be strings, numbers, or null.",
+    `${framing}: object JSON-RPC request ids should return invalid request`
+  );
+  assert(
+    responses[48].id === null &&
+      responses[48].error.code === -32600 &&
+      responses[48].error.message === "JSON-RPC request ids must be strings, numbers, or null.",
+    `${framing}: boolean JSON-RPC request ids should return invalid request`
   );
 
   function readNextResponseLine() {

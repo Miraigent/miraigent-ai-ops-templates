@@ -262,12 +262,18 @@ function handleMessage(body) {
     if (request.jsonrpc !== "2.0") {
       throw new Error('JSON-RPC requests require jsonrpc: "2.0".');
     }
+    if (!isValidRequestId(request.id)) {
+      throw rpcError(-32600, "JSON-RPC request ids must be strings, numbers, or null.");
+    }
     const result = route(request.method, request.params ?? {});
     if (request.id !== undefined) {
       respond(request.id, result);
     }
   } catch (error) {
-    const requestId = request !== null && typeof request === "object" ? request.id : null;
+    const requestId =
+      request !== null && typeof request === "object" && isValidRequestId(request.id)
+        ? request.id
+        : null;
     if (requestId !== undefined) {
       respond(requestId, null, {
         code: error.rpcCode ?? -32603,
@@ -275,6 +281,10 @@ function handleMessage(body) {
       });
     }
   }
+}
+
+function isValidRequestId(value) {
+  return value === undefined || value === null || typeof value === "string" || typeof value === "number";
 }
 
 function route(method, params) {
