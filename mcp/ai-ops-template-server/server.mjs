@@ -233,7 +233,17 @@ function readContentLengthMessage() {
 function readNewlineMessage() {
   const lineEnd = buffer.indexOf("\n");
   if (lineEnd === -1) {
+    if (buffer.length > MAX_CONTENT_LENGTH) {
+      respond(null, null, { code: -32600, message: "Newline message exceeds 1 MiB limit" });
+      buffer = Buffer.alloc(0);
+    }
     return false;
+  }
+
+  if (lineEnd > MAX_CONTENT_LENGTH) {
+    respond(null, null, { code: -32600, message: "Newline message exceeds 1 MiB limit" });
+    buffer = buffer.slice(lineEnd + 1);
+    return true;
   }
 
   const line = buffer.slice(0, lineEnd).toString("utf8").trim();

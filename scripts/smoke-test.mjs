@@ -7,7 +7,32 @@ await runSmokeTest("content-length");
 await runSmokeTest("content-length-compact");
 await runSmokeTest("newline");
 await runOversizedContentLengthTest();
+await runOversizedNewlineTest();
 await runMalformedContentLengthTest();
+
+async function runOversizedNewlineTest() {
+  const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {
+    stdio: ["pipe", "pipe", "inherit"]
+  });
+  let output = "";
+  child.stdout.on("data", (chunk) => {
+    output += chunk.toString("utf8");
+  });
+
+  child.stdin.write("x".repeat(1024 * 1024 + 1));
+  const started = Date.now();
+  while (!output.includes("Newline message exceeds 1 MiB limit")) {
+    if (Date.now() - started > 3000) {
+      child.kill();
+      throw new Error("oversized newline message should fail before waiting for a newline");
+    }
+    await new Promise((resolve) => setTimeout(resolve, 25));
+  }
+
+  const response = JSON.parse(output.trim());
+  assert(response.error?.code === -32600, "oversized newline message should return invalid request");
+  child.kill();
+}
 
 async function runMalformedContentLengthTest() {
   const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {

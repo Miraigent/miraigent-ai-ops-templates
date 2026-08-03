@@ -28,6 +28,8 @@ for public starter releases.
 
 - Added smoke-test coverage for invalid object and boolean JSON-RPC request ids
   across supported input framing modes.
+- Added a 1 MiB input limit and smoke-test coverage for newline-delimited MCP
+  messages, matching the existing `Content-Length` framing protection.
 - Added a 1 MiB input limit and smoke-test coverage for oversized MCP
   `Content-Length` declarations so the server rejects them before waiting for a body.
 - Added smoke-test coverage for JSON-RPC method names with accidental
