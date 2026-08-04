@@ -26,6 +26,8 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage that preserves valid string JSON-RPC request ids
+  across supported input framing modes.
 - Added smoke-test coverage for invalid object and boolean JSON-RPC request ids
   across supported input framing modes.
 - Added a 1 MiB input limit and smoke-test coverage for newline-delimited MCP
