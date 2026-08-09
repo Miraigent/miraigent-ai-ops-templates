@@ -8,6 +8,7 @@ await runSmokeTest("content-length-compact");
 await runSmokeTest("newline");
 await runOversizedContentLengthTest();
 await runOversizedNewlineTest();
+await runOversizedContentLengthHeaderTest();
 await runMalformedContentLengthTest();
 
 async function runOversizedNewlineTest() {
@@ -55,6 +56,30 @@ async function runMalformedContentLengthTest() {
 
   const response = JSON.parse(output.trim());
   assert(response.error?.code === -32600, "malformed Content-Length should return invalid request");
+  child.kill();
+}
+
+async function runOversizedContentLengthHeaderTest() {
+  const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {
+    stdio: ["pipe", "pipe", "inherit"]
+  });
+  let output = "";
+  child.stdout.on("data", (chunk) => {
+    output += chunk.toString("utf8");
+  });
+
+  child.stdin.write(`Content-Length:${"x".repeat(8 * 1024)} `);
+  const started = Date.now();
+  while (!output.includes("Content-Length header exceeds 8 KiB limit")) {
+    if (Date.now() - started > 3000) {
+      child.kill();
+      throw new Error("oversized Content-Length header should fail before waiting for a separator");
+    }
+    await new Promise((resolve) => setTimeout(resolve, 25));
+  }
+
+  const response = JSON.parse(output.trim());
+  assert(response.error?.code === -32600, "oversized Content-Length header should return invalid request");
   child.kill();
 }
 

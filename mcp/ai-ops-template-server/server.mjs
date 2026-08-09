@@ -178,6 +178,7 @@ const tools = [
 
 let buffer = Buffer.alloc(0);
 const MAX_CONTENT_LENGTH = 1024 * 1024;
+const MAX_CONTENT_LENGTH_HEADER = 8 * 1024;
 process.stdin.on("data", (chunk) => {
   buffer = Buffer.concat([buffer, chunk]);
   while (readNextMessage()) {
@@ -200,6 +201,10 @@ function startsWithContentLength(input) {
 function readContentLengthMessage() {
   const separator = buffer.indexOf("\r\n\r\n");
   if (separator === -1) {
+    if (buffer.length > MAX_CONTENT_LENGTH_HEADER) {
+      respond(null, null, { code: -32600, message: "Content-Length header exceeds 8 KiB limit" });
+      buffer = Buffer.alloc(0);
+    }
     return false;
   }
 

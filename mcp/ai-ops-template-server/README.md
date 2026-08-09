@@ -20,6 +20,10 @@ The server communicates over stdio with newline-delimited JSON-RPC for standard 
 Use npm's `--silent` flag so its command banner is not mixed into the JSON-RPC
 stdout stream.
 
+Individual messages are limited to 1 MiB. Incomplete `Content-Length` headers
+are rejected after 8 KiB so a client cannot keep the server waiting on an
+unbounded header.
+
 It implements:
 
 - `initialize`

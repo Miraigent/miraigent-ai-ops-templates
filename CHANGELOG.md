@@ -26,6 +26,8 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage for oversized incomplete `Content-Length` headers
+  so the stdio server rejects them before waiting for a separator.
 - Added smoke-test coverage that preserves valid string JSON-RPC request ids
   across supported input framing modes.
 - Added smoke-test coverage for invalid object and boolean JSON-RPC request ids
@@ -95,6 +97,8 @@ for public starter releases.
 
 ### Fixed
 
+- Capped incomplete `Content-Length` headers at 8 KiB so the stdio input buffer
+  cannot grow without bound while waiting for header termination.
 - Reject object and boolean JSON-RPC request ids with a standard invalid-request
   response instead of reflecting unsupported id types.
 - Reject malformed `Content-Length` values with trailing non-numeric text
