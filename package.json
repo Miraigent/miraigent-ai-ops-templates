@@ -21,7 +21,7 @@
     "miraigent-ai-ops-mcp": "mcp/ai-ops-template-server/server.mjs"
   },
   "scripts": {
-    "check": "node --check mcp/ai-ops-template-server/server.mjs && node --check scripts/smoke-test.mjs && node --check scripts/secret-scan.mjs && node scripts/check-repository.mjs && node scripts/secret-scan.mjs",
+    "check": "node --check mcp/ai-ops-template-server/server.mjs && node --check scripts/smoke-test.mjs && node --check scripts/secret-scan.mjs && node --check scripts/check-package-contents.mjs && node scripts/check-repository.mjs && node scripts/check-package-contents.mjs && node scripts/secret-scan.mjs",
     "install-hooks": "git config core.hooksPath .githooks",
     "test": "node scripts/smoke-test.mjs",
     "mcp": "node mcp/ai-ops-template-server/server.mjs"

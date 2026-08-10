@@ -38,7 +38,10 @@ MIRAI Memory engine.
 
 Code and wording are both part of the boundary.
 
-## Secret Scan
+## Package Boundary and Secret Scan
+
+npm run check also inspects the dry-run npm archive to confirm that required
+public files are included and paid/ entries are excluded.
 
 npm run check includes scripts/secret-scan.mjs.
 

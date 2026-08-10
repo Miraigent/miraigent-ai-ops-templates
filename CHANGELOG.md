@@ -26,6 +26,8 @@ for public starter releases.
 
 ### Added
 
+- Added an npm package-content boundary check that inspects the dry-run archive
+  for required public files and rejects paid/ entries.
 - Added smoke-test coverage for oversized incomplete `Content-Length` headers
   so the stdio server rejects them before waiting for a separator.
 - Added smoke-test coverage that preserves valid string JSON-RPC request ids
