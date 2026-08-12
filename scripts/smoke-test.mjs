@@ -10,6 +10,74 @@ await runOversizedContentLengthTest();
 await runOversizedNewlineTest();
 await runOversizedContentLengthHeaderTest();
 await runMalformedContentLengthTest();
+await runFragmentedInputTest("content-length");
+await runFragmentedInputTest("newline");
+
+async function runFragmentedInputTest(framing) {
+  const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {
+    stdio: ["pipe", "pipe", "inherit"]
+  });
+  const responses = [];
+  let output = "";
+  child.stdout.on("data", (chunk) => {
+    output += chunk.toString("utf8");
+    while (readNextResponseLine()) {
+      // Keep draining complete newline-delimited responses.
+    }
+  });
+
+  try {
+    const body = JSON.stringify({
+      jsonrpc: "2.0",
+      id: `fragmented-${framing}`,
+      method: "ping",
+      params: {}
+    });
+
+    if (framing === "newline") {
+      const split = Math.floor(body.length / 2);
+      child.stdin.write(body.slice(0, split));
+      await pause();
+      child.stdin.write(`${body.slice(split)}\n`);
+    } else {
+      const header = `Content-Length: ${Buffer.byteLength(body, "utf8")}\r\n`;
+      const bodySplit = Math.floor(body.length / 2);
+      child.stdin.write(header.slice(0, 8));
+      await pause();
+      child.stdin.write(header.slice(8) + "\r\n");
+      await pause();
+      child.stdin.write(body.slice(0, bodySplit));
+      await pause();
+      child.stdin.write(body.slice(bodySplit));
+    }
+
+    await waitForResponses(responses, 1);
+    assert(
+      responses[0].id === `fragmented-${framing}` && Object.keys(responses[0].result).length === 0,
+      `${framing}: fragmented input should produce a valid ping response`
+    );
+  } finally {
+    child.kill();
+  }
+
+  function readNextResponseLine() {
+    const lineEnd = output.indexOf("\n");
+    if (lineEnd === -1) {
+      return false;
+    }
+
+    const line = output.slice(0, lineEnd).trim();
+    output = output.slice(lineEnd + 1);
+    if (line) {
+      responses.push(JSON.parse(line));
+    }
+    return true;
+  }
+}
+
+function pause() {
+  return new Promise((resolve) => setTimeout(resolve, 10));
+}
 
 async function runOversizedNewlineTest() {
   const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {
