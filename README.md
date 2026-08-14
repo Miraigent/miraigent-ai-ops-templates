@@ -2,7 +2,7 @@
 
 [![check](https://github.com/Miraigent/miraigent-ai-ops-templates/actions/workflows/check.yml/badge.svg)](https://github.com/Miraigent/miraigent-ai-ops-templates/actions/workflows/check.yml)
 
-Open AI operations templates and starter MCP tooling for teams that want to use AI with practical human review.
+Public AI operations templates and starter MCP tooling for teams that want to use AI with practical human review.
 
 Keywords: MCP, AI operations templates, agent tools, prompt safety review, human review gate, AI support process, AI-safe CRM notes, customer data anonymization, FAQ candidate review.
 

@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Clarified the opening description so the repository is presented as public AI
+  operations resources rather than implying a broader open-source scope.
 - Added a version-pinned npm MCP client configuration example for repeatable
   reviewer and production setup.
 - Expanded the bug report template with MCP version, run method, input framing,
