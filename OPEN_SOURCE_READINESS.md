@@ -32,7 +32,7 @@ Run the local checks:
 
 Run the starter MCP server:
 
-    npm run mcp
+    npm run --silent mcp
 
 Inspect the MCP server source:
 

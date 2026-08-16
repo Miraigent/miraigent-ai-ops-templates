@@ -14,7 +14,7 @@ simple MCP tools, not only static Markdown documents.
 Run from the repository root:
 
 ```bash
-npm run mcp
+npm run --silent mcp
 ```
 
 Smoke test:

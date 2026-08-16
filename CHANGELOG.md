@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Unified the remaining MCP run examples on `npm run --silent mcp` so npm's
+  command banner cannot be mixed into the server's JSON-RPC stdout stream.
 - Clarified the opening description so the repository is presented as public AI
   operations resources rather than implying a broader open-source scope.
 - Added a version-pinned npm MCP client configuration example for repeatable

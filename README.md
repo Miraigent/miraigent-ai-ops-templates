@@ -202,7 +202,7 @@ Miraigent templates are built around that operating layer.
 
 1. Browse the free template library:
    https://miraigent.com/en/free-ai-operations-templates.html
-2. Run the starter MCP server with `npm run mcp`.
+2. Run the starter MCP server with `npm run --silent mcp`.
 3. Read free/ for the public resource map.
 4. Use agent-memories/ for a lightweight overview of reusable AI operating notes.
 5. Check paid/ for paid kit previews.
