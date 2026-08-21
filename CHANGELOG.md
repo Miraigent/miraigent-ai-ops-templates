@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Added a manual JSON-RPC example for template-sequence recommendations so
+  reviewers can exercise every published MCP tool from the README.
 - Unified the remaining MCP run examples on `npm run --silent mcp` so npm's
   command banner cannot be mixed into the server's JSON-RPC stdout stream.
 - Clarified the opening description so the repository is presented as public AI
