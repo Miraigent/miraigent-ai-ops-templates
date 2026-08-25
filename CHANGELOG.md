@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Clarified that the MCP server accepts both newline-delimited and
+  `Content-Length`-framed JSON-RPC over stdio.
 - Added a manual JSON-RPC example for template-sequence recommendations so
   reviewers can exercise every published MCP tool from the README.
 - Unified the remaining MCP run examples on `npm run --silent mcp` so npm's
