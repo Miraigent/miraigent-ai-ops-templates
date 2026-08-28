@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Clarified that daily maintenance must run the MCP smoke test in addition to
+  repository checks before a public commit.
 - Clarified that the MCP server accepts both newline-delimited and
   `Content-Length`-framed JSON-RPC over stdio.
 - Added a manual JSON-RPC example for template-sequence recommendations so

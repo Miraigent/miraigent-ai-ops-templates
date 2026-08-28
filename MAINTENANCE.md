@@ -10,6 +10,7 @@ Before any public update:
 - inspect git status --short --branch
 - make only a meaningful improvement
 - run npm run check
+- run npm test
 - run git diff --check
 - commit only when checks pass
 
