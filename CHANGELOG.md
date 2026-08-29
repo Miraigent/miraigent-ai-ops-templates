@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Declared Node.js 20 or newer as the supported runtime for the published npm
+  package so clients receive a clear compatibility signal.
 - Clarified that daily maintenance must run the MCP smoke test in addition to
   repository checks before a public commit.
 - Clarified that the MCP server accepts both newline-delimited and
