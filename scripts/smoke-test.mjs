@@ -12,6 +12,48 @@ await runOversizedContentLengthHeaderTest();
 await runMalformedContentLengthTest();
 await runFragmentedInputTest("content-length");
 await runFragmentedInputTest("newline");
+await runMixedFramingTest();
+
+async function runMixedFramingTest() {
+  const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {
+    stdio: ["pipe", "pipe", "inherit"]
+  });
+  const responses = [];
+  let output = "";
+  child.stdout.on("data", (chunk) => {
+    output += chunk.toString("utf8");
+    while (readNextResponseLine()) {
+      // Keep draining complete newline-delimited responses.
+    }
+  });
+
+  try {
+    send(child, "content-length", { jsonrpc: "2.0", id: "mixed-content-length", method: "ping", params: {} });
+    send(child, "newline", { jsonrpc: "2.0", id: "mixed-newline", method: "ping", params: {} });
+
+    await waitForResponses(responses, 2);
+    assert(
+      responses[0].id === "mixed-content-length" && responses[1].id === "mixed-newline",
+      "mixed framing should preserve response order and ids"
+    );
+  } finally {
+    child.kill();
+  }
+
+  function readNextResponseLine() {
+    const lineEnd = output.indexOf("\n");
+    if (lineEnd === -1) {
+      return false;
+    }
+
+    const line = output.slice(0, lineEnd).trim();
+    output = output.slice(lineEnd + 1);
+    if (line) {
+      responses.push(JSON.parse(line));
+    }
+    return true;
+  }
+}
 
 async function runFragmentedInputTest(framing) {
   const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {
