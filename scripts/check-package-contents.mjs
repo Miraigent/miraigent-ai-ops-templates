@@ -1,4 +1,5 @@
 import { spawnSync } from "node:child_process";
+import { readFileSync } from "node:fs";
 
 const result = spawnSync("npm", ["pack", "--dry-run", "--json", "--ignore-scripts"], {
   encoding: "utf8",
@@ -26,6 +27,7 @@ if (!Array.isArray(files)) {
 }
 
 const packagePaths = new Set(files.map((entry) => entry.path));
+const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
 const requiredPaths = [
   "package.json",
   "README.md",
@@ -40,6 +42,16 @@ for (const path of requiredPaths) {
   if (!packagePaths.has(path)) {
     throw new Error(`npm package is missing required public file: ${path}`);
   }
+}
+
+const binEntries = Object.entries(packageJson.bin ?? {});
+if (binEntries.length !== 1) {
+  throw new Error("package.json must declare exactly one public bin entry.");
+}
+
+const [binName, binPath] = binEntries[0];
+if (typeof binPath !== "string" || !packagePaths.has(binPath)) {
+  throw new Error(`npm package is missing the bin target for ${binName}: ${binPath}`);
 }
 
 for (const path of packagePaths) {

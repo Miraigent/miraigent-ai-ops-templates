@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Added a package check that verifies the published MCP command's `bin` target
+  is included in the npm archive.
 - Declared Node.js 20 or newer as the supported runtime for the published npm
   package so clients receive a clear compatibility signal.
 - Clarified that daily maintenance must run the MCP smoke test in addition to
