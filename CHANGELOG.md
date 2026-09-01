@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Added a CI step that rejects whitespace errors and conflict markers with
+  `git diff --check`, matching the required local pre-commit checks.
 - Added a package check that verifies the published MCP command's `bin` target
   is included in the npm archive.
 - Declared Node.js 20 or newer as the supported runtime for the published npm
