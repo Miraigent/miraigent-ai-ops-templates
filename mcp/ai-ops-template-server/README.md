@@ -10,6 +10,10 @@ It helps an MCP client discover practical resources for human-reviewed AI
 operations, including prompt risk review, data anonymization, CRM notes, FAQ
 review, and support process mapping.
 
+The server is stateless: it does not persist prompts, tool results, or operating
+notes, and it has no memory or retrieval function. Each response is built from
+the public template catalog bundled with this repository.
+
 ## Run
 
 ```bash

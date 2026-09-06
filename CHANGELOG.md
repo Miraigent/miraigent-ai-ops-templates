@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Clarified that the starter MCP server is stateless and does not persist or
+  retrieve prompts, tool results, or operating notes.
 - Added a CI step that rejects whitespace errors and conflict markers with
   `git diff --check`, matching the required local pre-commit checks.
 - Added a package check that verifies the published MCP command's `bin` target
