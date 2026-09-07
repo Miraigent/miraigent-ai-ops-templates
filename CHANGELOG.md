@@ -44,6 +44,8 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage for UTF-8 JSON-RPC input split inside a multibyte
+  character in `Content-Length` framing.
 - Added smoke-test coverage for switching between newline-delimited and
   `Content-Length`-framed MCP messages within one server process.
 - Added smoke-test coverage for MCP messages split across multiple input

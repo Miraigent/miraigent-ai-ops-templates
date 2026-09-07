@@ -12,7 +12,65 @@ await runOversizedContentLengthHeaderTest();
 await runMalformedContentLengthTest();
 await runFragmentedInputTest("content-length");
 await runFragmentedInputTest("newline");
+await runUtf8FragmentedContentLengthTest();
 await runMixedFramingTest();
+
+async function runUtf8FragmentedContentLengthTest() {
+  const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {
+    stdio: ["pipe", "pipe", "inherit"]
+  });
+  const responses = [];
+  let output = "";
+  child.stdout.on("data", (chunk) => {
+    output += chunk.toString("utf8");
+    while (readNextResponseLine()) {
+      // Keep draining complete newline-delimited responses.
+    }
+  });
+
+  try {
+    const body = JSON.stringify({
+      jsonrpc: "2.0",
+      id: "utf8-fragmented",
+      method: "tools/call",
+      params: {
+        name: "build_ai_ops_review_checklist",
+        arguments: { operation: "顧客サポート", riskLevel: "high" }
+      }
+    });
+    const bodyBuffer = Buffer.from(body, "utf8");
+    const multibyteStart = bodyBuffer.indexOf(Buffer.from("顧", "utf8"));
+    const split = multibyteStart + 1;
+
+    child.stdin.write(`Content-Length: ${bodyBuffer.length}\r\n\r\n`);
+    child.stdin.write(bodyBuffer.slice(0, split));
+    await pause();
+    child.stdin.write(bodyBuffer.slice(split));
+
+    await waitForResponses(responses, 1);
+    assert(
+      responses[0].id === "utf8-fragmented" &&
+        responses[0].result.content[0].text.includes("顧客サポート"),
+      "content-length: UTF-8 input split inside a character should remain valid"
+    );
+  } finally {
+    child.kill();
+  }
+
+  function readNextResponseLine() {
+    const lineEnd = output.indexOf("\n");
+    if (lineEnd === -1) {
+      return false;
+    }
+
+    const line = output.slice(0, lineEnd).trim();
+    output = output.slice(lineEnd + 1);
+    if (line) {
+      responses.push(JSON.parse(line));
+    }
+    return true;
+  }
+}
 
 async function runMixedFramingTest() {
   const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {
