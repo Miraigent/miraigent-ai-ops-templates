@@ -15,6 +15,8 @@ Describe the issue.
 - Template:
 - MCP tool:
 - File path:
+- Node.js version:
+- MCP client and version:
 
 ## Reproduction
 

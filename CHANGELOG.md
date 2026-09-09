@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Expanded the bug report template with Node.js and MCP client version fields
+  so runtime-specific issues can be reproduced more reliably.
 - Clarified that the starter MCP server is stateless and does not persist or
   retrieve prompts, tool results, or operating notes.
 - Added a CI step that rejects whitespace errors and conflict markers with
