@@ -208,6 +208,12 @@ function readContentLengthMessage() {
     return false;
   }
 
+  if (separator > MAX_CONTENT_LENGTH_HEADER) {
+    respond(null, null, { code: -32600, message: "Content-Length header exceeds 8 KiB limit" });
+    buffer = Buffer.alloc(0);
+    return false;
+  }
+
   const header = buffer.slice(0, separator).toString("utf8");
   const match = header.match(/^Content-Length:\s*(\d+)\s*$/im);
   if (!match) {
