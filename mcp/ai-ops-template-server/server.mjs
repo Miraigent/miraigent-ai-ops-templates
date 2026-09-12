@@ -215,7 +215,16 @@ function readContentLengthMessage() {
   }
 
   const header = buffer.slice(0, separator).toString("utf8");
-  const match = header.match(/^Content-Length:\s*(\d+)\s*$/im);
+  const contentLengthHeaderLines = header
+    .split("\r\n")
+    .filter((line) => /^Content-Length\s*:/i.test(line));
+  if (contentLengthHeaderLines.length !== 1) {
+    respond(null, null, { code: -32600, message: "Content-Length header must appear exactly once" });
+    buffer = Buffer.alloc(0);
+    return false;
+  }
+
+  const match = contentLengthHeaderLines[0].match(/^Content-Length:\s*(\d+)\s*$/i);
   if (!match) {
     respond(null, null, { code: -32600, message: "Missing Content-Length header" });
     buffer = Buffer.alloc(0);

@@ -11,6 +11,7 @@ await runOversizedNewlineTest();
 await runOversizedContentLengthHeaderTest();
 await runOversizedCompleteContentLengthHeaderTest();
 await runMalformedContentLengthTest();
+await runDuplicateContentLengthHeaderTest();
 await runFragmentedInputTest("content-length");
 await runFragmentedInputTest("newline");
 await runUtf8FragmentedContentLengthTest();
@@ -225,6 +226,30 @@ async function runMalformedContentLengthTest() {
 
   const response = JSON.parse(output.trim());
   assert(response.error?.code === -32600, "malformed Content-Length should return invalid request");
+  child.kill();
+}
+
+async function runDuplicateContentLengthHeaderTest() {
+  const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {
+    stdio: ["pipe", "pipe", "inherit"]
+  });
+  let output = "";
+  child.stdout.on("data", (chunk) => {
+    output += chunk.toString("utf8");
+  });
+
+  child.stdin.write("Content-Length: 1\r\nContent-Length: 1\r\n\r\n");
+  const started = Date.now();
+  while (!output.includes("Content-Length header must appear exactly once")) {
+    if (Date.now() - started > 3000) {
+      child.kill();
+      throw new Error("duplicate Content-Length headers should be rejected before waiting for a body");
+    }
+    await new Promise((resolve) => setTimeout(resolve, 25));
+  }
+
+  const response = JSON.parse(output.trim());
+  assert(response.error?.code === -32600, "duplicate Content-Length headers should return invalid request");
   child.kill();
 }
 

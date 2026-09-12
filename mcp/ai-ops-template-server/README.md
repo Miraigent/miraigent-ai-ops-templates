@@ -22,7 +22,8 @@ npm run --silent mcp
 
 The server communicates over stdio with newline-delimited or
 `Content-Length`-framed JSON-RPC for standard MCP clients. Use npm's `--silent`
-flag so its command banner is not mixed into the JSON-RPC stdout stream.
+flag so its command banner is not mixed into the JSON-RPC stdout stream. A
+framed message must contain exactly one `Content-Length` header.
 
 Individual messages are limited to 1 MiB. Incomplete `Content-Length` headers
 are rejected after 8 KiB so a client cannot keep the server waiting on an
