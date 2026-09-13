@@ -96,8 +96,9 @@ so do not wrap this command in another program that adds banners or log output.
 
 ## Manual JSON-RPC Examples
 
-The server accepts one JSON-RPC message per line. These examples are safe to run
-from the repository root and do not require network access.
+The following manual examples use one newline-delimited JSON-RPC message per
+line. They are safe to run from the repository root and do not require network
+access; MCP clients may also use the `Content-Length` framing described above.
 
 Initialize the server:
 

@@ -9,6 +9,9 @@ for public starter releases.
 
 ### Changed
 
+- Clarified in the root and MCP README files that the server supports both
+  newline-delimited and `Content-Length`-framed JSON-RPC, while the manual
+  examples use newline-delimited input.
 - Expanded the bug report template with Node.js and MCP client version fields
   so runtime-specific issues can be reproduced more reliably.
 - Clarified that the starter MCP server is stateless and does not persist or
