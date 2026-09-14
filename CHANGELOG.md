@@ -9,6 +9,9 @@ for public starter releases.
 
 ### Changed
 
+- Documented the Node.js 20 or newer runtime requirement in the MCP server
+  README so source reviewers and npm users see the compatibility requirement
+  before starting the server.
 - Clarified in the root and MCP README files that the server supports both
   newline-delimited and `Content-Length`-framed JSON-RPC, while the manual
   examples use newline-delimited input.
