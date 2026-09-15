@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Expanded CI runtime coverage to Node.js 20 and 22, matching the package's
+  supported Node.js 20 or newer requirement more closely.
 - Documented the Node.js 20 or newer runtime requirement in the MCP server
   README so source reviewers and npm users see the compatibility requirement
   before starting the server.
