@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Fixed the CI whitespace check to inspect the actual push or pull request
+  commit range instead of an empty working-tree diff.
 - Expanded CI runtime coverage to Node.js 20 and 22, matching the package's
   supported Node.js 20 or newer requirement more closely.
 - Documented the Node.js 20 or newer runtime requirement in the MCP server
