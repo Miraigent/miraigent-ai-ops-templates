@@ -42,7 +42,8 @@ data before posting logs.
 
 ## Public boundary check
 
-Confirm this report does not include secrets, private client data, Re-BIRTH
-internal content, MIRAI Memory engine details, or working memory MCP details.
+Confirm this report does not include secrets, private client data, private
+internal repository content, MIRAI Memory engine details, or working memory MCP
+details.
 
 - [ ] I confirm.

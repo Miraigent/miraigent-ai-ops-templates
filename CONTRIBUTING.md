@@ -20,7 +20,7 @@ Do not submit:
 
 - API keys, tokens, cookies, or passwords
 - private client information
-- Re-BIRTH internal repository content
+- private internal repository content
 - MIRAI Memory engine code
 - working memory MCP implementations
 - full paid product files

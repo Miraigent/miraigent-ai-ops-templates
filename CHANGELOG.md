@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Replaced internal project-specific boundary wording in contribution and
+  issue templates with generic private-internal wording.
 - Fixed the CI whitespace check to inspect the actual push or pull request
   commit range instead of an empty working-tree diff.
 - Expanded CI runtime coverage to Node.js 20 and 22, matching the package's

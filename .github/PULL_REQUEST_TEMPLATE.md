@@ -20,7 +20,7 @@ Describe the change.
 
 - [ ] No secrets, tokens, passwords, cookies, or credentials
 - [ ] No private client materials
-- [ ] No Re-BIRTH internal repository content
+- [ ] No private internal repository content
 - [ ] No MIRAI Memory engine code
 - [ ] No working memory MCP implementation
 - [ ] No wording that positions this repository as a memory-focused MCP project
