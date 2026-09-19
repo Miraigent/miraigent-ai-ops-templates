@@ -754,6 +754,18 @@ async function runSmokeTest(framing) {
   assert(responses[4].result.content[0].text.includes("escalation owner"), `${framing}: checklist build failed`);
   const sequenceRecommendation = JSON.parse(responses[5].result.content[0].text);
   assert(sequenceRecommendation.note.includes("not a MIRAI Memory engine"), `${framing}: sequence recommendation failed`);
+  const nextStepLinks = sequenceRecommendation.nextSteps.links;
+  assert(
+    Array.isArray(nextStepLinks) &&
+      JSON.stringify(nextStepLinks.map((link) => link.url)) ===
+        JSON.stringify([
+          "https://miraigent.com/resources.html",
+          "https://miraigent.com/en/free-ai-operations-templates.html",
+          "https://miraigent.com/en/diagnosis.html",
+          "https://agentmemories.jp/"
+        ]),
+    `${framing}: sequence recommendation should include the public next-step links`
+  );
   assert(
     sequenceRecommendation.templates.length === responses[2].result.content[0].text.match(/"id":/g).length,
     `${framing}: sequence recommendation must include the full public template catalog`

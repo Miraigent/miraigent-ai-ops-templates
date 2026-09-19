@@ -528,7 +528,24 @@ function buildNextSteps() {
   return {
     label: "Learn more",
     note: "Use these public templates as a starting point, then review Miraigent and Agent Memories resources for practical AI operations support.",
-    links: []
+    links: [
+      {
+        label: "Miraigent resource hub",
+        url: "https://miraigent.com/resources.html"
+      },
+      {
+        label: "Free AI operations templates",
+        url: "https://miraigent.com/en/free-ai-operations-templates.html"
+      },
+      {
+        label: "Free diagnosis",
+        url: "https://miraigent.com/en/diagnosis.html"
+      },
+      {
+        label: "Agent Memories",
+        url: "https://agentmemories.jp/"
+      }
+    ]
   };
 }
 

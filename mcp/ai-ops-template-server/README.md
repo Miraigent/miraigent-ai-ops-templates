@@ -208,6 +208,10 @@ Supported `priorities` values are `privacy`, `faq`, `crm`, `intake`,
 uppercase/lowercase variants. Unsupported values return an error that lists
 the accepted values; keep free-form context in the `operation` field instead.
 
+The response includes `nextSteps.links` with public URLs for the Miraigent
+resource hub, free template library, free diagnosis, and Agent Memories. These
+links are informational; the server does not persist or retrieve client data.
+
 ### `draft_ai_ops_adoption_plan`
 
 Drafts a short, practical adoption plan for applying the public templates.

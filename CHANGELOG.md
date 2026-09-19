@@ -58,6 +58,8 @@ for public starter releases.
 
 ### Added
 
+- Added public resource, free-template, diagnosis, and Agent Memories links to
+  `recommend_ai_ops_template_sequence` next steps, with smoke-test coverage.
 - Added smoke-test coverage for duplicate `Content-Length` headers so framed
   messages fail fast instead of waiting on an ambiguous body length.
 - Added smoke-test coverage for complete `Content-Length` header blocks over
