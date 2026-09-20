@@ -750,6 +750,32 @@ async function runSmokeTest(framing) {
     `${framing}: template sequence schema should advertise supported priorities`
   );
   assert(responses[2].result.content[0].text.includes("Human Review Gate"), `${framing}: template listing failed`);
+  const templateCatalog = JSON.parse(responses[2].result.content[0].text);
+  assert(
+    Array.isArray(templateCatalog) && templateCatalog.length === 10,
+    `${framing}: public template catalog should contain ten entries`
+  );
+  assert(
+    templateCatalog.every(
+      (template) =>
+        typeof template.id === "string" &&
+        template.id.trim().length > 0 &&
+        typeof template.title === "string" &&
+        template.title.trim().length > 0 &&
+        typeof template.useCase === "string" &&
+        template.useCase.trim().length > 0 &&
+        typeof template.url === "string" &&
+        template.url.startsWith("https://") &&
+        Array.isArray(template.reviewPoints) &&
+        template.reviewPoints.length > 0
+    ),
+    `${framing}: public template catalog should contain complete HTTPS entries`
+  );
+  const templateIds = templateCatalog.map((template) => template.id);
+  assert(
+    new Set(templateIds).size === templateIds.length,
+    `${framing}: public template catalog should not contain duplicate ids`
+  );
   assert(responses[3].result.content[0].text.includes("Human Review Gate"), `${framing}: template lookup failed`);
   assert(responses[4].result.content[0].text.includes("escalation owner"), `${framing}: checklist build failed`);
   const sequenceRecommendation = JSON.parse(responses[5].result.content[0].text);
@@ -767,7 +793,7 @@ async function runSmokeTest(framing) {
     `${framing}: sequence recommendation should include the public next-step links`
   );
   assert(
-    sequenceRecommendation.templates.length === responses[2].result.content[0].text.match(/"id":/g).length,
+    sequenceRecommendation.templates.length === templateCatalog.length,
     `${framing}: sequence recommendation must include the full public template catalog`
   );
   assert(
