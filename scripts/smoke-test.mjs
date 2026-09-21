@@ -796,6 +796,12 @@ async function runSmokeTest(framing) {
     sequenceRecommendation.templates.length === templateCatalog.length,
     `${framing}: sequence recommendation must include the full public template catalog`
   );
+  const sequenceTemplateIds = sequenceRecommendation.templates.map((template) => template?.id);
+  assert(
+    sequenceTemplateIds.every((id) => typeof id === "string") &&
+      JSON.stringify([...sequenceTemplateIds].sort()) === JSON.stringify([...templateIds].sort()),
+    `${framing}: sequence recommendation must return every public template exactly once`
+  );
   assert(
     sequenceRecommendation.templates.some((template) => template.id === "ai-prompt-risk-review-sheet"),
     `${framing}: sequence recommendation must include prompt risk review sheet`

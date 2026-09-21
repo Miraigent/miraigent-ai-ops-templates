@@ -58,6 +58,8 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage that requires template-sequence recommendations to
+  return every public catalog entry exactly once.
 - Added smoke-test coverage that validates the public template catalog has ten
   complete HTTPS entries with unique ids.
 - Added public resource, free-template, diagnosis, and Agent Memories links to
