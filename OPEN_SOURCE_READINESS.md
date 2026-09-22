@@ -44,7 +44,7 @@ Inspect the public template catalog:
 
 ## Maintained Public Signals
 
-- GitHub Actions run on every push.
+- GitHub Actions run on pushes to `main`, pull requests, and manual dispatches.
 - CHANGELOG.md records public updates.
 - MAINTENANCE.md documents boundary and daily maintenance rules.
 - PUBLICATION_PLAN.md shows the next public releases and review schedule.

@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Corrected the reviewer-facing CI description to match the workflow triggers for
+  `main` pushes, pull requests, and manual dispatches.
 - Replaced internal project-specific boundary wording in contribution and
   issue templates with generic private-internal wording.
 - Fixed the CI whitespace check to inspect the actual push or pull request
