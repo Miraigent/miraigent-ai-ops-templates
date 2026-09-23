@@ -9,6 +9,7 @@ for public starter releases.
 
 ### Changed
 
+- Expanded CI runtime coverage to Node.js 24 alongside Node.js 20 and 22.
 - Corrected the reviewer-facing CI description to match the workflow triggers for
   `main` pushes, pull requests, and manual dispatches.
 - Replaced internal project-specific boundary wording in contribution and
