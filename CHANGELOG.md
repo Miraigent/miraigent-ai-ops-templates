@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Added a package check that keeps the pinned MCP README example aligned with
+  the current package version.
 - Expanded CI runtime coverage to Node.js 24 alongside Node.js 20 and 22.
 - Corrected the reviewer-facing CI description to match the workflow triggers for
   `main` pushes, pull requests, and manual dispatches.

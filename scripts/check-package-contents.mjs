@@ -28,6 +28,7 @@ if (!Array.isArray(files)) {
 
 const packagePaths = new Set(files.map((entry) => entry.path));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
+const mcpReadme = readFileSync("mcp/ai-ops-template-server/README.md", "utf8");
 const requiredPaths = [
   "package.json",
   "README.md",
@@ -52,6 +53,11 @@ if (binEntries.length !== 1) {
 const [binName, binPath] = binEntries[0];
 if (typeof binPath !== "string" || !packagePaths.has(binPath)) {
   throw new Error(`npm package is missing the bin target for ${binName}: ${binPath}`);
+}
+
+const pinnedPackageReference = `@miraigent/ai-ops-templates@${packageJson.version}`;
+if (!mcpReadme.includes(pinnedPackageReference)) {
+  throw new Error(`MCP README must include the current pinned package reference: ${pinnedPackageReference}`);
 }
 
 for (const path of packagePaths) {
