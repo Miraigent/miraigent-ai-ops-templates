@@ -9,6 +9,7 @@ for public starter releases.
 
 ### Changed
 
+- Restricted the repository check workflow token to read-only contents access.
 - Added a package check that keeps the pinned MCP README example aligned with
   the current package version.
 - Expanded CI runtime coverage to Node.js 24 alongside Node.js 20 and 22.
