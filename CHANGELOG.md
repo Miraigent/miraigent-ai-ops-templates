@@ -64,6 +64,8 @@ for public starter releases.
 
 ### Added
 
+- Added copyable manual JSON-RPC examples for catalog listing and human-review
+  checklist generation so reviewers can try all five MCP tools.
 - Added smoke-test coverage that requires template-sequence recommendations to
   return every public catalog entry exactly once.
 - Added smoke-test coverage that validates the public template catalog has ten

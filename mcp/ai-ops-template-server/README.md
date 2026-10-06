@@ -126,24 +126,38 @@ printf '%s\n' '{"jsonrpc":"2.0","id":3,"method":"ping","params":{}}' \
   | npm run --silent mcp
 ```
 
+List the public template catalog (not just tool names):
+
+```bash
+printf '%s\n' '{"jsonrpc":"2.0","id":4,"method":"tools/call","params":{"name":"list_ai_ops_templates","arguments":{}}}' \
+  | npm run --silent mcp
+```
+
 Fetch one public template:
 
 ```bash
-printf '%s\n' '{"jsonrpc":"2.0","id":4,"method":"tools/call","params":{"name":"get_ai_ops_template","arguments":{"id":"human-review-gate-ai-drafts"}}}' \
+printf '%s\n' '{"jsonrpc":"2.0","id":5,"method":"tools/call","params":{"name":"get_ai_ops_template","arguments":{"id":"human-review-gate-ai-drafts"}}}' \
+  | npm run --silent mcp
+```
+
+Build a human-review checklist for an operations area:
+
+```bash
+printf '%s\n' '{"jsonrpc":"2.0","id":6,"method":"tools/call","params":{"name":"build_ai_ops_review_checklist","arguments":{"operation":"customer-support","riskLevel":"high"}}}' \
   | npm run --silent mcp
 ```
 
 Recommend a practical template sequence:
 
 ```bash
-printf '%s\n' '{"jsonrpc":"2.0","id":5,"method":"tools/call","params":{"name":"recommend_ai_ops_template_sequence","arguments":{"operation":"customer-support","priorities":["privacy","review"]}}}' \
+printf '%s\n' '{"jsonrpc":"2.0","id":7,"method":"tools/call","params":{"name":"recommend_ai_ops_template_sequence","arguments":{"operation":"customer-support","priorities":["privacy","review"]}}}' \
   | npm run --silent mcp
 ```
 
 Draft a short adoption plan:
 
 ```bash
-printf '%s\n' '{"jsonrpc":"2.0","id":6,"method":"tools/call","params":{"name":"draft_ai_ops_adoption_plan","arguments":{"operation":"customer-support","currentPain":"AI replies are drafted before review rules are clear","reviewOwner":"support lead","riskLevel":"high"}}}' \
+printf '%s\n' '{"jsonrpc":"2.0","id":8,"method":"tools/call","params":{"name":"draft_ai_ops_adoption_plan","arguments":{"operation":"customer-support","currentPain":"AI replies are drafted before review rules are clear","reviewOwner":"support lead","riskLevel":"high"}}}' \
   | npm run --silent mcp
 ```
 
