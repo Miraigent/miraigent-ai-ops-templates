@@ -730,9 +730,18 @@ async function runSmokeTest(framing) {
     params: {}
   });
 
-  await waitForResponses(responses, 50);
-  await waitForNoExtraResponse(responses, 50);
-  child.kill();
+  const invalidRequestBodies = ["[]", "42", "true", '"ping"'];
+  for (const body of invalidRequestBodies) {
+    sendRaw(child, framing, body);
+  }
+  send(child, framing, { jsonrpc: "2.0", id: "after-invalid-input", method: "ping", params: {} });
+
+  try {
+    await waitForResponses(responses, 55);
+    await waitForNoExtraResponse(responses, 55);
+  } finally {
+    child.kill();
+  }
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
   assert(responses[0].result.serverInfo.version === packageJson.version, `${framing}: server version must match package.json`);
@@ -958,7 +967,9 @@ async function runSmokeTest(framing) {
     `${framing}: invalid JSON-RPC version error failed`
   );
   assert(
-    responses[41].id === null && responses[41].error.message === "JSON-RPC requests must be objects.",
+    responses[41].id === null &&
+      responses[41].error.code === -32600 &&
+      responses[41].error.message === "JSON-RPC requests must be objects.",
     `${framing}: non-object JSON-RPC request error failed`
   );
   assert(
@@ -998,6 +1009,17 @@ async function runSmokeTest(framing) {
   assert(
     responses[49].id === "health-check" && Object.keys(responses[49].result).length === 0,
     `${framing}: string request ids should be preserved`
+  );
+  for (const [index, body] of invalidRequestBodies.entries()) {
+    const response = responses[50 + index];
+    assert(
+      response.id === null && response.error?.code === -32600,
+      `${framing}: non-object input ${body} should return invalid request`
+    );
+  }
+  assert(
+    responses[54].id === "after-invalid-input" && Object.keys(responses[54].result).length === 0,
+    `${framing}: server should remain responsive after non-object input`
   );
 
   function readNextResponseLine() {

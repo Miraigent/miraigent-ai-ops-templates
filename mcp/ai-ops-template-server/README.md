@@ -30,6 +30,10 @@ The server communicates over stdio with newline-delimited or
 flag so its command banner is not mixed into the JSON-RPC stdout stream. A
 framed message must contain exactly one `Content-Length` header.
 
+Requests must be JSON objects. Non-object input, including `null` and arrays,
+returns an invalid-request error (`-32600`) with a `null` response id. This
+starter does not implement JSON-RPC batch requests.
+
 Individual messages are limited to 1 MiB. Incomplete `Content-Length` headers
 are rejected after 8 KiB so a client cannot keep the server waiting on an
 unbounded header.

@@ -155,6 +155,9 @@ for public starter releases.
 
 ### Fixed
 
+- Return the standard invalid-request error for non-object JSON-RPC input,
+  including arrays, instead of reporting internal errors or silently ignoring
+  the input; added smoke tests for rejection and subsequent server responsiveness.
 - Capped incomplete `Content-Length` headers at 8 KiB so the stdio input buffer
   cannot grow without bound while waiting for header termination.
 - Reject object and boolean JSON-RPC request ids with a standard invalid-request

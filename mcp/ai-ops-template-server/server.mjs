@@ -287,7 +287,7 @@ function handleMessage(body) {
 
   try {
     if (request === null || typeof request !== "object" || Array.isArray(request)) {
-      throw new Error("JSON-RPC requests must be objects.");
+      throw rpcError(-32600, "JSON-RPC requests must be objects.");
     }
     if (request.jsonrpc !== "2.0") {
       throw new Error('JSON-RPC requests require jsonrpc: "2.0".');
@@ -301,7 +301,7 @@ function handleMessage(body) {
     }
   } catch (error) {
     const requestId =
-      request !== null && typeof request === "object" && isValidRequestId(request.id)
+      request !== null && typeof request === "object" && !Array.isArray(request) && isValidRequestId(request.id)
         ? request.id
         : null;
     if (requestId !== undefined) {
