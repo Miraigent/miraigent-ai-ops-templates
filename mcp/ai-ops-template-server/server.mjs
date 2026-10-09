@@ -290,7 +290,7 @@ function handleMessage(body) {
       throw rpcError(-32600, "JSON-RPC requests must be objects.");
     }
     if (request.jsonrpc !== "2.0") {
-      throw new Error('JSON-RPC requests require jsonrpc: "2.0".');
+      throw rpcError(-32600, 'JSON-RPC requests require jsonrpc: "2.0".');
     }
     if (!isValidRequestId(request.id)) {
       throw rpcError(-32600, "JSON-RPC request ids must be strings, numbers, or null.");
@@ -304,8 +304,8 @@ function handleMessage(body) {
       request !== null && typeof request === "object" && !Array.isArray(request) && isValidRequestId(request.id)
         ? request.id
         : null;
-    if (requestId !== undefined) {
-      respond(requestId, null, {
+    if (requestId !== undefined || error.rpcCode === -32600) {
+      respond(requestId ?? null, null, {
         code: error.rpcCode ?? -32603,
         message: error.message
       });
@@ -319,7 +319,7 @@ function isValidRequestId(value) {
 
 function route(method, params) {
   if (typeof method !== "string" || method.trim().length === 0) {
-    throw new Error("JSON-RPC requests require a non-empty method string.");
+    throw rpcError(-32600, "JSON-RPC requests require a non-empty method string.");
   }
 
   const normalizedMethod = method.trim();

@@ -736,9 +736,24 @@ async function runSmokeTest(framing) {
   }
   send(child, framing, { jsonrpc: "2.0", id: "after-invalid-input", method: "ping", params: {} });
 
+  const invalidRequestEnvelopes = [
+    { method: "ping" },
+    { jsonrpc: "1.0", method: "ping" },
+    { jsonrpc: "2.0" },
+    { jsonrpc: "2.0", method: "" },
+    { jsonrpc: "2.0", method: 99 },
+    { jsonrpc: "2.0", method: "   " }
+  ];
+  for (const request of invalidRequestEnvelopes) {
+    send(child, framing, request);
+  }
+  send(child, framing, { jsonrpc: "2.0", method: "ping", params: {} });
+  send(child, framing, { jsonrpc: "2.0", id: "after-invalid-envelope", method: "ping", params: {} });
+  const expectedResponses = 56 + invalidRequestEnvelopes.length;
+
   try {
-    await waitForResponses(responses, 55);
-    await waitForNoExtraResponse(responses, 55);
+    await waitForResponses(responses, expectedResponses);
+    await waitForNoExtraResponse(responses, expectedResponses);
   } finally {
     child.kill();
   }
@@ -880,11 +895,13 @@ async function runSmokeTest(framing) {
     `${framing}: invalid adoption-plan review owner error failed`
   );
   assert(
-    responses[21].error.message === "JSON-RPC requests require a non-empty method string.",
+    responses[21].error.code === -32600 &&
+      responses[21].error.message === "JSON-RPC requests require a non-empty method string.",
     `${framing}: empty JSON-RPC method error failed`
   );
   assert(
-    responses[22].error.message === "JSON-RPC requests require a non-empty method string.",
+    responses[22].error.code === -32600 &&
+      responses[22].error.message === "JSON-RPC requests require a non-empty method string.",
     `${framing}: non-string JSON-RPC method error failed`
   );
   assert(
@@ -935,7 +952,8 @@ async function runSmokeTest(framing) {
     `${framing}: adoption-plan review owner should be trimmed`
   );
   assert(
-    responses[33].error.message === "JSON-RPC requests require a non-empty method string.",
+    responses[33].error.code === -32600 &&
+      responses[33].error.message === "JSON-RPC requests require a non-empty method string.",
     `${framing}: whitespace-only JSON-RPC method error failed`
   );
   assert(
@@ -959,11 +977,13 @@ async function runSmokeTest(framing) {
     `${framing}: ping should return an empty result object`
   );
   assert(
-    responses[39].error.message === 'JSON-RPC requests require jsonrpc: "2.0".',
+    responses[39].error.code === -32600 &&
+      responses[39].error.message === 'JSON-RPC requests require jsonrpc: "2.0".',
     `${framing}: missing JSON-RPC version error failed`
   );
   assert(
-    responses[40].error.message === 'JSON-RPC requests require jsonrpc: "2.0".',
+    responses[40].error.code === -32600 &&
+      responses[40].error.message === 'JSON-RPC requests require jsonrpc: "2.0".',
     `${framing}: invalid JSON-RPC version error failed`
   );
   assert(
@@ -1020,6 +1040,18 @@ async function runSmokeTest(framing) {
   assert(
     responses[54].id === "after-invalid-input" && Object.keys(responses[54].result).length === 0,
     `${framing}: server should remain responsive after non-object input`
+  );
+  for (const [index, request] of invalidRequestEnvelopes.entries()) {
+    const response = responses[55 + index];
+    assert(
+      response.id === null && response.error?.code === -32600,
+      `${framing}: malformed request ${JSON.stringify(request)} without an id should return invalid request`
+    );
+  }
+  const afterInvalidEnvelope = responses[expectedResponses - 1];
+  assert(
+    afterInvalidEnvelope.id === "after-invalid-envelope" && Object.keys(afterInvalidEnvelope.result).length === 0,
+    `${framing}: server should remain responsive after malformed request envelopes`
   );
 
   function readNextResponseLine() {

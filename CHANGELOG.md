@@ -155,6 +155,10 @@ for public starter releases.
 
 ### Fixed
 
+- Return the standard invalid-request error for missing or invalid JSON-RPC
+  versions and methods, including requests without an id, instead of reporting
+  internal errors or silently treating malformed input as notifications; added
+  smoke tests for rejection, valid notifications, and subsequent responsiveness.
 - Return the standard invalid-request error for non-object JSON-RPC input,
   including arrays, instead of reporting internal errors or silently ignoring
   the input; added smoke tests for rejection and subsequent server responsiveness.

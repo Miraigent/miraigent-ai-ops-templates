@@ -34,6 +34,10 @@ Requests must be JSON objects. Non-object input, including `null` and arrays,
 returns an invalid-request error (`-32600`) with a `null` response id. This
 starter does not implement JSON-RPC batch requests.
 
+Objects must declare `jsonrpc: "2.0"` and a non-empty string `method`. Missing
+or invalid values return `-32600`, even without an `id`; malformed requests
+are not valid notifications. Valid notifications do not produce responses.
+
 Individual messages are limited to 1 MiB. Incomplete `Content-Length` headers
 are rejected after 8 KiB so a client cannot keep the server waiting on an
 unbounded header.
