@@ -749,7 +749,23 @@ async function runSmokeTest(framing) {
   }
   send(child, framing, { jsonrpc: "2.0", method: "ping", params: {} });
   send(child, framing, { jsonrpc: "2.0", id: "after-invalid-envelope", method: "ping", params: {} });
-  const expectedResponses = 56 + invalidRequestEnvelopes.length;
+
+  const invalidPriorityInputs = [[""], ["   "], ["privacy", ""], ["", "speed"]];
+  for (const [index, priorities] of invalidPriorityInputs.entries()) {
+    send(child, framing, {
+      jsonrpc: "2.0",
+      id: `invalid-priority-${index}`,
+      method: "tools/call",
+      params: { name: "recommend_ai_ops_template_sequence", arguments: { priorities } }
+    });
+  }
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: "empty-priority-list",
+    method: "tools/call",
+    params: { name: "recommend_ai_ops_template_sequence", arguments: { priorities: [] } }
+  });
+  const expectedResponses = 57 + invalidRequestEnvelopes.length + invalidPriorityInputs.length;
 
   try {
     await waitForResponses(responses, expectedResponses);
@@ -1048,10 +1064,25 @@ async function runSmokeTest(framing) {
       `${framing}: malformed request ${JSON.stringify(request)} without an id should return invalid request`
     );
   }
-  const afterInvalidEnvelope = responses[expectedResponses - 1];
+  const afterInvalidEnvelope = responses[55 + invalidRequestEnvelopes.length];
   assert(
     afterInvalidEnvelope.id === "after-invalid-envelope" && Object.keys(afterInvalidEnvelope.result).length === 0,
     `${framing}: server should remain responsive after malformed request envelopes`
+  );
+  for (const [index, priorities] of invalidPriorityInputs.entries()) {
+    const response = responses[56 + invalidRequestEnvelopes.length + index];
+    assert(
+      response.id === `invalid-priority-${index}` &&
+        response.error?.message ===
+          "Unsupported priority: (empty). Use privacy, faq, crm, intake, review, workflow.",
+      `${framing}: blank priorities ${JSON.stringify(priorities)} should be rejected`
+    );
+  }
+  const emptyPriorityList = responses[expectedResponses - 1];
+  assert(
+    emptyPriorityList.id === "empty-priority-list" &&
+      JSON.parse(emptyPriorityList.result.content[0].text).templates.length === templateCatalog.length,
+    `${framing}: an empty priority list should still return the public catalog after invalid inputs`
   );
 
   function readNextResponseLine() {

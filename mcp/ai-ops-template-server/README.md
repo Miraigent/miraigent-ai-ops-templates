@@ -229,6 +229,8 @@ Supported `priorities` values are `privacy`, `faq`, `crm`, `intake`,
 `review`, and `workflow`. The server trims extra spaces and accepts
 uppercase/lowercase variants. Unsupported values return an error that lists
 the accepted values; keep free-form context in the `operation` field instead.
+Empty or whitespace-only priority values also return an error. Omit
+`priorities` or pass `[]` when no priority is needed.
 
 The response includes `nextSteps.links` with public URLs for the Miraigent
 resource hub, free template library, free diagnosis, and Agent Memories. These

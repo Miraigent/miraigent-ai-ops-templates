@@ -489,9 +489,9 @@ function normalizePriorities(value) {
 
   const priorities = value.map((item) => item.trim().toLowerCase());
   const unsupportedPriority = priorities.find((item) => !supportedPriorities.includes(item));
-  if (unsupportedPriority) {
+  if (unsupportedPriority !== undefined) {
     throw new Error(
-      `Unsupported priority: ${unsupportedPriority}. Use ${supportedPriorities.join(", ")}.`
+      `Unsupported priority: ${unsupportedPriority || "(empty)"}. Use ${supportedPriorities.join(", ")}.`
     );
   }
 

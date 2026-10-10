@@ -155,6 +155,9 @@ for public starter releases.
 
 ### Fixed
 
+- Reject empty or whitespace-only template-sequence priorities instead of
+  silently accepting them; added smoke tests across supported input framing
+  modes, including mixed invalid values and a valid empty priority list.
 - Return the standard invalid-request error for missing or invalid JSON-RPC
   versions and methods, including requests without an id, instead of reporting
   internal errors or silently treating malformed input as notifications; added
