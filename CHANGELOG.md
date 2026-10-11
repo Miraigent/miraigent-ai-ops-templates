@@ -64,6 +64,8 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage for UTF-8 JSON-RPC input split inside a multibyte
+  character in newline-delimited messages, reusing the framed-input test.
 - Added copyable manual JSON-RPC examples for catalog listing and human-review
   checklist generation so reviewers can try all five MCP tools.
 - Added smoke-test coverage that requires template-sequence recommendations to

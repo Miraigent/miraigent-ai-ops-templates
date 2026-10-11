@@ -14,10 +14,11 @@ await runMalformedContentLengthTest();
 await runDuplicateContentLengthHeaderTest();
 await runFragmentedInputTest("content-length");
 await runFragmentedInputTest("newline");
-await runUtf8FragmentedContentLengthTest();
+await runUtf8FragmentedInputTest("content-length");
+await runUtf8FragmentedInputTest("newline");
 await runMixedFramingTest();
 
-async function runUtf8FragmentedContentLengthTest() {
+async function runUtf8FragmentedInputTest(framing) {
   const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {
     stdio: ["pipe", "pipe", "inherit"]
   });
@@ -31,9 +32,12 @@ async function runUtf8FragmentedContentLengthTest() {
   });
 
   try {
+    send(child, framing, { jsonrpc: "2.0", id: "before-utf8", method: "ping", params: {} });
+    await waitForResponses(responses, 1);
+
     const body = JSON.stringify({
       jsonrpc: "2.0",
-      id: "utf8-fragmented",
+      id: `utf8-fragmented-${framing}`,
       method: "tools/call",
       params: {
         name: "build_ai_ops_review_checklist",
@@ -41,19 +45,21 @@ async function runUtf8FragmentedContentLengthTest() {
       }
     });
     const bodyBuffer = Buffer.from(body, "utf8");
-    const multibyteStart = bodyBuffer.indexOf(Buffer.from("顧", "utf8"));
-    const split = multibyteStart + 1;
+    const input = framing === "newline"
+      ? Buffer.concat([bodyBuffer, Buffer.from("\n")])
+      : Buffer.concat([Buffer.from(`Content-Length: ${bodyBuffer.length}\r\n\r\n`), bodyBuffer]);
+    const split = input.indexOf(Buffer.from("顧", "utf8")) + 1;
 
-    child.stdin.write(`Content-Length: ${bodyBuffer.length}\r\n\r\n`);
-    child.stdin.write(bodyBuffer.slice(0, split));
+    child.stdin.write(input.subarray(0, split));
     await pause();
-    child.stdin.write(bodyBuffer.slice(split));
+    assert(responses.length === 1, `${framing}: incomplete UTF-8 input should wait for the remaining bytes`);
+    child.stdin.write(input.subarray(split));
 
-    await waitForResponses(responses, 1);
+    await waitForResponses(responses, 2);
     assert(
-      responses[0].id === "utf8-fragmented" &&
-        responses[0].result.content[0].text.includes("顧客サポート"),
-      "content-length: UTF-8 input split inside a character should remain valid"
+      responses[1].id === `utf8-fragmented-${framing}` &&
+        responses[1].result.content[0].text.includes("顧客サポート"),
+      `${framing}: UTF-8 input split inside a character should remain valid`
     );
   } finally {
     child.kill();
