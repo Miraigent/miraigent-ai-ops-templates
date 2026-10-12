@@ -157,6 +157,9 @@ for public starter releases.
 
 ### Fixed
 
+- Reject numeric JSON-RPC request ids that overflow JavaScript's finite number
+  range instead of returning a successful response with a null id; added smoke
+  tests across supported input framing modes and finite-limit id preservation.
 - Reject empty or whitespace-only template-sequence priorities instead of
   silently accepting them; added smoke tests across supported input framing
   modes, including mixed invalid values and a valid empty priority list.

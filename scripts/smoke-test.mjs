@@ -771,7 +771,16 @@ async function runSmokeTest(framing) {
     method: "tools/call",
     params: { name: "recommend_ai_ops_template_sequence", arguments: { priorities: [] } }
   });
-  const expectedResponses = 57 + invalidRequestEnvelopes.length + invalidPriorityInputs.length;
+  const overflowRequestIds = ["1e400", "-1e400"];
+  for (const id of overflowRequestIds) {
+    sendRaw(child, framing, `{"jsonrpc":"2.0","id":${id},"method":"ping"}`);
+  }
+  const finiteRequestIds = [Number.MAX_VALUE, -Number.MAX_VALUE];
+  for (const id of finiteRequestIds) {
+    send(child, framing, { jsonrpc: "2.0", id, method: "ping", params: {} });
+  }
+  const numericIdResponsesStart = 57 + invalidRequestEnvelopes.length + invalidPriorityInputs.length;
+  const expectedResponses = numericIdResponsesStart + overflowRequestIds.length + finiteRequestIds.length;
 
   try {
     await waitForResponses(responses, expectedResponses);
@@ -1084,12 +1093,26 @@ async function runSmokeTest(framing) {
       `${framing}: blank priorities ${JSON.stringify(priorities)} should be rejected`
     );
   }
-  const emptyPriorityList = responses[expectedResponses - 1];
+  const emptyPriorityList = responses[numericIdResponsesStart - 1];
   assert(
     emptyPriorityList.id === "empty-priority-list" &&
       JSON.parse(emptyPriorityList.result.content[0].text).templates.length === templateCatalog.length,
     `${framing}: an empty priority list should still return the public catalog after invalid inputs`
   );
+  for (const [index, id] of overflowRequestIds.entries()) {
+    const response = responses[numericIdResponsesStart + index];
+    assert(
+      response.id === null && response.error?.code === -32600,
+      `${framing}: overflowing request id ${id} should return invalid request instead of a null-id success`
+    );
+  }
+  for (const [index, id] of finiteRequestIds.entries()) {
+    const response = responses[numericIdResponsesStart + overflowRequestIds.length + index];
+    assert(
+      response.id === id && Object.keys(response.result).length === 0,
+      `${framing}: finite numeric request ids should be preserved after rejecting overflowing ids`
+    );
+  }
 
   function readNextResponseLine() {
     const lineEnd = output.indexOf("\n");

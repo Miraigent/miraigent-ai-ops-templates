@@ -314,7 +314,7 @@ function handleMessage(body) {
 }
 
 function isValidRequestId(value) {
-  return value === undefined || value === null || typeof value === "string" || typeof value === "number";
+  return value === undefined || value === null || typeof value === "string" || Number.isFinite(value);
 }
 
 function route(method, params) {
