@@ -780,7 +780,14 @@ async function runSmokeTest(framing) {
     send(child, framing, { jsonrpc: "2.0", id, method: "ping", params: {} });
   }
   const numericIdResponsesStart = 57 + invalidRequestEnvelopes.length + invalidPriorityInputs.length;
-  const expectedResponses = numericIdResponsesStart + overflowRequestIds.length + finiteRequestIds.length;
+  const defaultPlanResponseIndex = numericIdResponsesStart + overflowRequestIds.length + finiteRequestIds.length;
+  send(child, framing, {
+    jsonrpc: "2.0",
+    id: "default-adoption-plan",
+    method: "tools/call",
+    params: { name: "draft_ai_ops_adoption_plan" }
+  });
+  const expectedResponses = defaultPlanResponseIndex + 1;
 
   try {
     await waitForResponses(responses, expectedResponses);
@@ -861,7 +868,13 @@ async function runSmokeTest(framing) {
     sequenceRecommendation.templates.some((template) => template.id === "ai-prompt-risk-review-sheet"),
     `${framing}: sequence recommendation must include prompt risk review sheet`
   );
-  assert(responses[6].result.content[0].text.includes("support lead"), `${framing}: adoption plan failed`);
+  const customPlan = JSON.parse(responses[6].result.content[0].text);
+  assert(
+    customPlan.operation === "customer-support" &&
+      customPlan.currentPain === "AI replies are drafted before review rules are clear" &&
+      customPlan.reviewOwner === "support lead" && customPlan.riskLevel === "high",
+    `${framing}: adoption plan should use the supplied inputs`
+  );
   assert(responses[7].error.message === "Unknown tool: missing_ai_ops_tool", `${framing}: unknown tool error failed`);
   assert(responses[8].error.message === "Unknown template id: missing-template", `${framing}: unknown template error failed`);
   assert(
@@ -1113,6 +1126,20 @@ async function runSmokeTest(framing) {
       `${framing}: finite numeric request ids should be preserved after rejecting overflowing ids`
     );
   }
+  const defaultPlanResponse = responses[defaultPlanResponseIndex];
+  assert(defaultPlanResponse.id === "default-adoption-plan", `${framing}: default adoption-plan response id should be preserved`);
+  const defaultPlan = JSON.parse(defaultPlanResponse.result.content[0].text);
+  assert(
+    defaultPlan.operation === "general-ai-operations" &&
+      defaultPlan.currentPain === "AI usage is happening before review rules are clear" &&
+      defaultPlan.reviewOwner === "human reviewer" && defaultPlan.riskLevel === "medium",
+    `${framing}: a plan without arguments must use defaults, not retain earlier request inputs`
+  );
+  assert(
+    defaultPlan.steps[2].action === "Assign human reviewer as the human review gate before external use." &&
+      defaultPlan.steps[4].templateId === "faq-candidate-review-checklist",
+    `${framing}: default plan steps must not inherit an earlier review owner or high-risk template`
+  );
 
   function readNextResponseLine() {
     const lineEnd = output.indexOf("\n");

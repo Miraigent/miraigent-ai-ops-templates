@@ -64,6 +64,9 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage that adoption-plan calls without arguments use
+  fresh defaults rather than retaining an earlier request's inputs, including
+  the review owner and risk-dependent template choice, across supported framing modes.
 - Added smoke-test coverage for UTF-8 JSON-RPC input split inside a multibyte
   character in newline-delimited messages, reusing the framed-input test.
 - Added copyable manual JSON-RPC examples for catalog listing and human-review
