@@ -665,6 +665,15 @@ async function runSmokeTest(framing) {
     method: "notifications/unknown",
     params: {}
   });
+  // Valid notifications stay silent even when tool lookup or argument validation fails.
+  const toolNotifications = [
+    { name: "list_ai_ops_templates", arguments: {} },
+    { name: "missing_ai_ops_tool", arguments: {} },
+    { name: "get_ai_ops_template", arguments: {} }
+  ];
+  for (const params of toolNotifications) {
+    send(child, framing, { jsonrpc: "2.0", method: "tools/call", params });
+  }
   sendRaw(child, framing, '{"jsonrpc":"2.0","id":39,"method":');
   send(child, framing, {
     jsonrpc: "2.0",
