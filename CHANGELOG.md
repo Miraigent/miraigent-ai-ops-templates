@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Limited each CI check job to ten minutes so stalled checks or MCP child
+  processes do not consume a runner until the default six-hour limit.
 - Restricted the repository check workflow token to read-only contents access.
 - Added a package check that keeps the pinned MCP README example aligned with
   the current package version.
