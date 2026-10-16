@@ -9,6 +9,9 @@ for public starter releases.
 
 ### Changed
 
+- Added smoke-test coverage that retrieves every listed template by id and checks
+  that its complete metadata matches the public catalog across all tested input
+  framing formats.
 - Limited each CI check job to ten minutes so stalled checks or MCP child
   processes do not consume a runner until the default six-hour limit.
 - Restricted the repository check workflow token to read-only contents access.

@@ -1,5 +1,6 @@
 import { spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
+import { isDeepStrictEqual } from "node:util";
 
 const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
 
@@ -801,6 +802,29 @@ async function runSmokeTest(framing) {
   try {
     await waitForResponses(responses, expectedResponses);
     await waitForNoExtraResponse(responses, expectedResponses);
+
+    const listedTemplates = JSON.parse(responses[2].result.content[0].text);
+    for (const template of listedTemplates) {
+      send(child, framing, {
+        jsonrpc: "2.0",
+        id: `catalog-lookup-${template.id}`,
+        method: "tools/call",
+        params: { name: "get_ai_ops_template", arguments: { id: template.id } }
+      });
+    }
+    await waitForResponses(responses, expectedResponses + listedTemplates.length);
+    for (const [index, template] of listedTemplates.entries()) {
+      const response = responses[expectedResponses + index];
+      assert(
+        response.id === `catalog-lookup-${template.id}` && !response.error,
+        `${framing}: every listed template should be retrievable by its id: ${template.id}`
+      );
+      assert(
+        isDeepStrictEqual(JSON.parse(response.result.content[0].text), template),
+        `${framing}: template lookup must preserve all catalog metadata: ${template.id}`
+      );
+    }
+    await waitForNoExtraResponse(responses, expectedResponses + listedTemplates.length);
   } finally {
     child.kill();
   }
