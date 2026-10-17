@@ -168,6 +168,8 @@ for public starter releases.
 
 ### Fixed
 
+- Reject root license filenames regardless of letter case, including `license.md`
+  and `COPYING.TXT`, so alternate casing cannot bypass the scoped-license check.
 - Reject numeric JSON-RPC request ids that overflow JavaScript's finite number
   range instead of returning a successful response with a null id; added smoke
   tests across supported input framing modes and finite-limit id preservation.

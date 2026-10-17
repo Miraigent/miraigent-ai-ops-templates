@@ -24,18 +24,10 @@ for (const [file, expected] of checks) {
   assertFileContains(file, expected);
 }
 
-for (const file of [
-  "LICENSE",
-  "LICENSE.md",
-  "LICENSE.txt",
-  "LICENCE",
-  "LICENCE.md",
-  "LICENCE.txt",
-  "COPYING",
-  "COPYING.md",
-  "COPYING.txt"
-]) {
-  assertMissing(file);
+for (const file of readdirSync(".")) {
+  if (/^(?:licen[cs]e|copying)(?:\.(?:md|txt))?$/i.test(file)) {
+    assertMissing(file);
+  }
 }
 assertPackageFilesRespectLicenseScope();
 assertNoForbiddenPublicPositioning(".");
