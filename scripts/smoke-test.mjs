@@ -825,6 +825,43 @@ async function runSmokeTest(framing) {
       );
     }
     await waitForNoExtraResponse(responses, expectedResponses + listedTemplates.length);
+
+    const commonChecklistItems = [
+      "Define the workflow goal before using AI: customer-support.",
+      "Remove or mask customer identifiers that are not needed for the AI task.",
+      "Mark which outputs require human approval before use.",
+      "Record the final decision and the reason for future review."
+    ];
+    const riskChecklistItems = {
+      low: ["Sample-check outputs regularly and convert repeated review points into FAQ notes."],
+      medium: ["Use a review gate for uncertain tone, policy, privacy, or factual claims."],
+      high: [
+        "Add an escalation owner before AI output can be sent externally.",
+        "Keep a no-send list for data, claims, and decisions AI must not handle."
+      ]
+    };
+    const checklistResponsesStart = responses.length;
+    for (const riskLevel of Object.keys(riskChecklistItems)) {
+      send(child, framing, {
+        jsonrpc: "2.0",
+        id: `checklist-risk-${riskLevel}`,
+        method: "tools/call",
+        params: {
+          name: "build_ai_ops_review_checklist",
+          arguments: { operation: "customer-support", riskLevel }
+        }
+      });
+    }
+    await waitForResponses(responses, checklistResponsesStart + 3);
+    for (const [index, [riskLevel, items]] of Object.entries(riskChecklistItems).entries()) {
+      const response = responses[checklistResponsesStart + index];
+      assert(
+        response.id === `checklist-risk-${riskLevel}` && !response.error &&
+          response.result.content[0].text === [...commonChecklistItems, ...items].map((item) => `- ${item}`).join("\n"),
+        `${framing}: ${riskLevel}-risk checklist must retain common safety checks and its risk-specific guidance`
+      );
+    }
+    await waitForNoExtraResponse(responses, checklistResponsesStart + 3);
   } finally {
     child.kill();
   }

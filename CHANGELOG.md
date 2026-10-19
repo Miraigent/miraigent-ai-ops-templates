@@ -69,6 +69,9 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage that all three checklist risk levels retain the
+  common privacy and human-approval checks plus their risk-specific guidance
+  across supported input framing modes.
 - Added smoke-test coverage that valid `tools/call` notifications produce no
   responses, including unknown tools and invalid arguments, across supported
   input framing modes while subsequent requests remain responsive.
