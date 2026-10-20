@@ -912,6 +912,11 @@ async function runSmokeTest(framing) {
   assert(responses[4].result.content[0].text.includes("escalation owner"), `${framing}: checklist build failed`);
   const sequenceRecommendation = JSON.parse(responses[5].result.content[0].text);
   assert(sequenceRecommendation.note.includes("not a MIRAI Memory engine"), `${framing}: sequence recommendation failed`);
+  assert(
+    indexOfTemplate(sequenceRecommendation, "customer-data-anonymization-mini-guide") <
+      indexOfTemplate(sequenceRecommendation, "human-review-gate-ai-drafts"),
+    `${framing}: privacy priority should move anonymization guidance before the human review gate`
+  );
   const nextStepLinks = sequenceRecommendation.nextSteps.links;
   assert(
     Array.isArray(nextStepLinks) &&
