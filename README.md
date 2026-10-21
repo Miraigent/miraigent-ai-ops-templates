@@ -19,7 +19,6 @@ It is designed for teams that want to use AI for customer support, CRM notes, FA
 - Agent Memories: https://agentmemories.jp/
 - Technical articles: https://qiita.com/Miraigent and https://zenn.dev/miraigent
 - Open source readiness: OPEN_SOURCE_READINESS.md
-- Publication plan: PUBLICATION_PLAN.md
 - Free MCP candidates: FREE_MCP_CANDIDATES.md
 
 日本語で確認したい方は、まず Miraigent の公開リソース導線をご確認ください。
@@ -136,11 +135,9 @@ This repository includes:
 - CONTRIBUTING.md for contribution rules and public-boundary checks
 - MAINTENANCE.md for daily update, boundary, and secret-scan rules
 - OPEN_SOURCE_READINESS.md for reviewer-facing public scope, run commands, and inspection routes
-- PUBLICATION_PLAN.md for the next public releases, article plan, and stop conditions
 - FREE_MCP_CANDIDATES.md for public alpha MCP candidates and feedback routing
 - issue and pull request templates
 - GitHub Actions for syntax checks, repository boundary checks, secret scans, and MCP smoke tests
-- a Codex-ready workflow that is prepared for future Miraigent-owned Codex credentials but does not claim active Codex usage before those credentials are configured
 
 Enable the local pre-commit check:
 
@@ -229,7 +226,6 @@ https://miraigent.com/en/mirai-memory-mcp.html
 
 ## Roadmap
 
-- Follow the 14-day public schedule in PUBLICATION_PLAN.md.
 - Prepare free MCP candidates listed in FREE_MCP_CANDIDATES.md and collect public issue feedback before expanding automation.
 - Add MCP tools for safe prompt review, FAQ candidate review, and AI-safe CRM notes.
 - Publish more template metadata as machine-readable JSON.
@@ -240,7 +236,6 @@ https://miraigent.com/en/mirai-memory-mcp.html
 
 このリポジトリは、MiraigentのAI運用テンプレートと公開向けスターターリソースを置く場所です。
 
-国内向けには、まず「AI導入前に何を整えるべきか」をわかりやすく整理します。noteでは考え方や導入前チェックを発信し、BOOTHでは日本語テンプレート、チェックリスト、ワークシートを販売する想定です。
 
 公開repoには、無料テンプレートと軽い紹介だけを置きます。深い商品仕様、内部運用、顧客情報、非公開の判断基準は置きません。
 

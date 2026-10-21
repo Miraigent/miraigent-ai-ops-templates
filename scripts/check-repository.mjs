@@ -29,6 +29,7 @@ for (const file of readdirSync(".")) {
     assertMissing(file);
   }
 }
+assertMissing("PUBLICATION_PLAN.md");
 assertPackageFilesRespectLicenseScope();
 assertNoForbiddenPublicPositioning(".");
 

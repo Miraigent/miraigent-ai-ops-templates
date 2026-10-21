@@ -30,6 +30,7 @@ Do not commit:
 - private MIRAI Memory engine details
 - working memory MCPs
 - credentials, customer data, internal manuals, or full paid product files
+- unpublished editorial/publication schedules, acquisition/revenue plans, or staff handoffs
 
 ## Boundary Rule
 

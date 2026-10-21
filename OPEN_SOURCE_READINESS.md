@@ -47,7 +47,6 @@ Inspect the public template catalog:
 - GitHub Actions run on pushes to `main`, pull requests, and manual dispatches.
 - CHANGELOG.md records public updates.
 - MAINTENANCE.md documents boundary and daily maintenance rules.
-- PUBLICATION_PLAN.md shows the next public releases and review schedule.
 - FREE_MCP_CANDIDATES.md shows public alpha MCP candidates and issue routing.
 - CONTRIBUTING.md documents contribution and safety expectations.
 - LICENSE-SCOPE.md explains the path-scoped MIT license.
@@ -69,5 +68,3 @@ It does not claim to be a full production automation platform.
 
 The goal is to keep the public layer simple, inspectable, and safe while private
 customer-specific implementation remains outside this repository.
-
-Next public releases are tracked in PUBLICATION_PLAN.md.
