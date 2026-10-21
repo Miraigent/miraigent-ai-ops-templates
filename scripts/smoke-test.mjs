@@ -669,6 +669,9 @@ async function runSmokeTest(framing) {
   // Valid notifications stay silent even when tool lookup or argument validation fails.
   const toolNotifications = [
     { name: "list_ai_ops_templates", arguments: {} },
+    [],
+    { name: "   ", arguments: {} },
+    { name: "list_ai_ops_templates", arguments: [] },
     { name: "missing_ai_ops_tool", arguments: {} },
     { name: "get_ai_ops_template", arguments: {} }
   ];
@@ -965,7 +968,8 @@ async function runSmokeTest(framing) {
     `${framing}: default risk level checklist failed`
   );
   assert(
-    responses[11].error.message === "tools/call requires a non-empty tool name.",
+    responses[11].error.code === -32602 &&
+      responses[11].error.message === "tools/call requires a non-empty tool name.",
     `${framing}: missing tool name error failed`
   );
   const intakeRecommendation = JSON.parse(responses[12].result.content[0].text);
@@ -995,7 +999,8 @@ async function runSmokeTest(framing) {
     `${framing}: invalid priorities error failed`
   );
   assert(
-    responses[17].error.message === "tools/call arguments must be an object when provided.",
+    responses[17].error.code === -32602 &&
+      responses[17].error.message === "tools/call arguments must be an object when provided.",
     `${framing}: invalid arguments object error failed`
   );
   assert(
@@ -1076,15 +1081,18 @@ async function runSmokeTest(framing) {
     `${framing}: whitespace-only JSON-RPC method error failed`
   );
   assert(
-    responses[34].error.message === "tools/call requires a non-empty tool name.",
+    responses[34].error.code === -32602 &&
+      responses[34].error.message === "tools/call requires a non-empty tool name.",
     `${framing}: whitespace-only tool name error failed`
   );
   assert(
-    responses[35].error.message === "tools/call params must be an object when provided.",
+    responses[35].error.code === -32602 &&
+      responses[35].error.message === "tools/call params must be an object when provided.",
     `${framing}: array tools/call params error failed`
   );
   assert(
-    responses[36].error.message === "tools/call params must be an object when provided.",
+    responses[36].error.code === -32602 &&
+      responses[36].error.message === "tools/call params must be an object when provided.",
     `${framing}: string tools/call params error failed`
   );
   assert(

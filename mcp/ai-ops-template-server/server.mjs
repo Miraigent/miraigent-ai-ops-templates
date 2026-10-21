@@ -352,7 +352,7 @@ function route(method, params) {
   if (normalizedMethod === "tools/call") {
     const toolCallParams = normalizeToolCallParams(params);
     if (typeof toolCallParams.name !== "string" || toolCallParams.name.trim().length === 0) {
-      throw new Error("tools/call requires a non-empty tool name.");
+      throw rpcError(-32602, "tools/call requires a non-empty tool name.");
     }
     return callTool(toolCallParams.name.trim(), normalizeToolArguments(toolCallParams.arguments));
   }
@@ -375,7 +375,7 @@ function normalizeToolCallParams(value) {
     return value;
   }
 
-  throw new Error("tools/call params must be an object when provided.");
+  throw rpcError(-32602, "tools/call params must be an object when provided.");
 }
 
 function normalizeToolArguments(value) {
@@ -387,7 +387,7 @@ function normalizeToolArguments(value) {
     return value;
   }
 
-  throw new Error("tools/call arguments must be an object when provided.");
+  throw rpcError(-32602, "tools/call arguments must be an object when provided.");
 }
 
 function callTool(name, args) {

@@ -174,6 +174,10 @@ for public starter releases.
 
 ### Fixed
 
+- Return the standard JSON-RPC invalid-params code (-32602) for malformed
+  `tools/call` params, arguments, and missing or blank tool names instead of an
+  internal error; test the error codes and silent notifications across all
+  supported input framing modes.
 - Reject root license filenames regardless of letter case, including `license.md`
   and `COPYING.TXT`, so alternate casing cannot bypass the scoped-license check.
 - Reject numeric JSON-RPC request ids that overflow JavaScript's finite number
