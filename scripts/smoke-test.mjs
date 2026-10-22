@@ -1233,7 +1233,17 @@ async function runSmokeTest(framing) {
     const line = output.slice(0, lineEnd).trim();
     output = output.slice(lineEnd + 1);
     if (line) {
-      responses.push(JSON.parse(line));
+      const response = JSON.parse(line);
+      assert(
+        response !== null && typeof response === "object" && !Array.isArray(response) &&
+          response.jsonrpc === "2.0" && Object.hasOwn(response, "id"),
+        `${framing}: responses must be JSON-RPC 2.0 objects with an id`
+      );
+      assert(
+        Object.hasOwn(response, "result") !== Object.hasOwn(response, "error"),
+        `${framing}: responses must contain exactly one of result or error`
+      );
+      responses.push(response);
     }
     return true;
   }

@@ -69,6 +69,9 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage that every response in the main MCP scenarios has a
+  JSON-RPC 2.0 envelope with an id and exactly one of result or error across all
+  supported input framing modes.
 - Added smoke-test coverage that privacy-prioritized template recommendations
   place anonymization guidance before the human review gate across all
   supported input framing modes.
