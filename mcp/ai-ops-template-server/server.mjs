@@ -422,7 +422,7 @@ function callTool(name, args) {
     return textResult(JSON.stringify(draftAdoptionPlan(args), null, 2));
   }
 
-  throw new Error(`Unknown tool: ${name}`);
+  throw rpcError(-32602, `Unknown tool: ${name}`);
 }
 
 function recommendTemplateSequence(args) {

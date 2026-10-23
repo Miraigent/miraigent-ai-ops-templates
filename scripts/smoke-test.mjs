@@ -953,7 +953,11 @@ async function runSmokeTest(framing) {
       customPlan.reviewOwner === "support lead" && customPlan.riskLevel === "high",
     `${framing}: adoption plan should use the supplied inputs`
   );
-  assert(responses[7].error.message === "Unknown tool: missing_ai_ops_tool", `${framing}: unknown tool error failed`);
+  assert(
+    responses[7].id === 8 && responses[7].error.code === -32602 &&
+      responses[7].error.message === "Unknown tool: missing_ai_ops_tool",
+    `${framing}: unknown tools should return invalid params, not an internal server error`
+  );
   assert(responses[8].error.message === "Unknown template id: missing-template", `${framing}: unknown template error failed`);
   assert(
     responses[9].error.message === "Unsupported riskLevel: critical. Use low, medium, or high.",

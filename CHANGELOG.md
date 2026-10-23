@@ -177,6 +177,9 @@ for public starter releases.
 
 ### Fixed
 
+- Return the standard JSON-RPC invalid-params code (-32602) for unknown MCP
+  tool names instead of an internal server error; verify the code and request
+  id across all supported input framing modes.
 - Return the standard JSON-RPC invalid-params code (-32602) for malformed
   `tools/call` params, arguments, and missing or blank tool names instead of an
   internal error; test the error codes and silent notifications across all
