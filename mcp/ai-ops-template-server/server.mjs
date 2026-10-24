@@ -398,11 +398,11 @@ function callTool(name, args) {
   if (name === "get_ai_ops_template") {
     const templateId = normalizeTemplateId(args.id);
     if (templateId.length === 0) {
-      throw new Error("get_ai_ops_template requires a non-empty template id.");
+      throw rpcError(-32602, "get_ai_ops_template requires a non-empty template id.");
     }
     const template = templates.find((item) => item.id === templateId);
     if (!template) {
-      throw new Error(`Unknown template id: ${templateId}`);
+      throw rpcError(-32602, `Unknown template id: ${templateId}`);
     }
     return textResult(JSON.stringify(template, null, 2));
   }

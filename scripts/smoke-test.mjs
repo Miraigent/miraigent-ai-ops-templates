@@ -958,7 +958,11 @@ async function runSmokeTest(framing) {
       responses[7].error.message === "Unknown tool: missing_ai_ops_tool",
     `${framing}: unknown tools should return invalid params, not an internal server error`
   );
-  assert(responses[8].error.message === "Unknown template id: missing-template", `${framing}: unknown template error failed`);
+  assert(
+    responses[8].id === 9 && responses[8].error.code === -32602 &&
+      responses[8].error.message === "Unknown template id: missing-template",
+    `${framing}: unknown template ids should return invalid params, not an internal server error`
+  );
   assert(
     responses[9].error.message === "Unsupported riskLevel: critical. Use low, medium, or high.",
     `${framing}: invalid riskLevel error failed`
@@ -995,8 +999,9 @@ async function runSmokeTest(framing) {
     `${framing}: workflow priority should move support workflow map before FAQ checklist`
   );
   assert(
-    responses[15].error.message === "get_ai_ops_template requires a non-empty template id.",
-    `${framing}: missing template id error failed`
+    responses[15].id === 16 && responses[15].error.code === -32602 &&
+      responses[15].error.message === "get_ai_ops_template requires a non-empty template id.",
+    `${framing}: missing template ids should return invalid params, not an internal server error`
   );
   assert(
     responses[16].error.message === "recommend_ai_ops_template_sequence priorities must be an array of strings.",

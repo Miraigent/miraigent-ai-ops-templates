@@ -177,6 +177,9 @@ for public starter releases.
 
 ### Fixed
 
+- Return the standard JSON-RPC invalid-params code (-32602) for missing or
+  unknown template ids instead of an internal server error; verify the code,
+  request id, and existing error messages across all supported input framing modes.
 - Return the standard JSON-RPC invalid-params code (-32602) for unknown MCP
   tool names instead of an internal server error; verify the code and request
   id across all supported input framing modes.
