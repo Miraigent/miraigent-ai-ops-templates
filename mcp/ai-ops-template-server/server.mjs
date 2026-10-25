@@ -610,14 +610,14 @@ function normalizeRiskLevel(value) {
   }
 
   if (typeof value !== "string" || value.trim().length === 0) {
-    throw new Error("riskLevel must be a non-empty string when provided.");
+    throw rpcError(-32602, "riskLevel must be a non-empty string when provided.");
   }
 
   const riskLevel = value.trim().toLowerCase();
   if (riskLevel === "low" || riskLevel === "medium" || riskLevel === "high") {
     return riskLevel;
   }
-  throw new Error(`Unsupported riskLevel: ${riskLevel}. Use low, medium, or high.`);
+  throw rpcError(-32602, `Unsupported riskLevel: ${riskLevel}. Use low, medium, or high.`);
 }
 
 function normalizeOptionalString(value, label, fallback) {

@@ -673,7 +673,9 @@ async function runSmokeTest(framing) {
     { name: "   ", arguments: {} },
     { name: "list_ai_ops_templates", arguments: [] },
     { name: "missing_ai_ops_tool", arguments: {} },
-    { name: "get_ai_ops_template", arguments: {} }
+    { name: "get_ai_ops_template", arguments: {} },
+    { name: "build_ai_ops_review_checklist", arguments: { riskLevel: "critical" } },
+    { name: "draft_ai_ops_adoption_plan", arguments: { riskLevel: [] } }
   ];
   for (const params of toolNotifications) {
     send(child, framing, { jsonrpc: "2.0", method: "tools/call", params });
@@ -964,8 +966,9 @@ async function runSmokeTest(framing) {
     `${framing}: unknown template ids should return invalid params, not an internal server error`
   );
   assert(
-    responses[9].error.message === "Unsupported riskLevel: critical. Use low, medium, or high.",
-    `${framing}: invalid riskLevel error failed`
+    responses[9].id === 10 && responses[9].error.code === -32602 &&
+      responses[9].error.message === "Unsupported riskLevel: critical. Use low, medium, or high.",
+    `${framing}: unsupported risk levels should return invalid params, not an internal server error`
   );
   assert(
     responses[10].result.content[0].text.includes("legacy-support-workflow"),
@@ -1048,12 +1051,14 @@ async function runSmokeTest(framing) {
     `${framing}: invalid adoption-plan current pain error failed`
   );
   assert(
-    responses[25].error.message === "riskLevel must be a non-empty string when provided.",
-    `${framing}: invalid checklist risk level type error failed`
+    responses[25].id === 26 && responses[25].error.code === -32602 &&
+      responses[25].error.message === "riskLevel must be a non-empty string when provided.",
+    `${framing}: invalid checklist risk level types should return invalid params`
   );
   assert(
-    responses[26].error.message === "riskLevel must be a non-empty string when provided.",
-    `${framing}: invalid adoption-plan risk level type error failed`
+    responses[26].id === 27 && responses[26].error.code === -32602 &&
+      responses[26].error.message === "riskLevel must be a non-empty string when provided.",
+    `${framing}: invalid adoption-plan risk level types should return invalid params`
   );
   assert(
     responses[27].result.content[0].text.includes("escalation owner"),

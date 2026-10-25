@@ -177,6 +177,10 @@ for public starter releases.
 
 ### Fixed
 
+- Return the standard JSON-RPC invalid-params code (-32602) for invalid
+  `riskLevel` values in checklist and adoption-plan tools instead of an internal
+  server error; verify request ids, error messages, and silent notifications
+  across all supported input framing modes.
 - Return the standard JSON-RPC invalid-params code (-32602) for missing or
   unknown template ids instead of an internal server error; verify the code,
   request id, and existing error messages across all supported input framing modes.
