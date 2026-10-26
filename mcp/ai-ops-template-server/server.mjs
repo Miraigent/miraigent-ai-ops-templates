@@ -484,13 +484,14 @@ function normalizePriorities(value) {
   }
 
   if (!Array.isArray(value) || value.some((item) => typeof item !== "string")) {
-    throw new Error("recommend_ai_ops_template_sequence priorities must be an array of strings.");
+    throw rpcError(-32602, "recommend_ai_ops_template_sequence priorities must be an array of strings.");
   }
 
   const priorities = value.map((item) => item.trim().toLowerCase());
   const unsupportedPriority = priorities.find((item) => !supportedPriorities.includes(item));
   if (unsupportedPriority !== undefined) {
-    throw new Error(
+    throw rpcError(
+      -32602,
       `Unsupported priority: ${unsupportedPriority || "(empty)"}. Use ${supportedPriorities.join(", ")}.`
     );
   }
@@ -513,12 +514,12 @@ function normalizeChecklistOperation(args) {
   }
 
   if (typeof value !== "string" || value.length === 0) {
-    throw new Error("build_ai_ops_review_checklist operation must be a non-empty string when provided.");
+    throw rpcError(-32602, "build_ai_ops_review_checklist operation must be a non-empty string when provided.");
   }
 
   const operation = value.trim();
   if (operation.length === 0) {
-    throw new Error("build_ai_ops_review_checklist operation must be a non-empty string when provided.");
+    throw rpcError(-32602, "build_ai_ops_review_checklist operation must be a non-empty string when provided.");
   }
 
   return operation;
@@ -626,7 +627,7 @@ function normalizeOptionalString(value, label, fallback) {
   }
 
   if (typeof value !== "string" || value.trim().length === 0) {
-    throw new Error(`${label} must be a non-empty string when provided.`);
+    throw rpcError(-32602, `${label} must be a non-empty string when provided.`);
   }
 
   return value.trim();

@@ -675,7 +675,12 @@ async function runSmokeTest(framing) {
     { name: "missing_ai_ops_tool", arguments: {} },
     { name: "get_ai_ops_template", arguments: {} },
     { name: "build_ai_ops_review_checklist", arguments: { riskLevel: "critical" } },
-    { name: "draft_ai_ops_adoption_plan", arguments: { riskLevel: [] } }
+    { name: "draft_ai_ops_adoption_plan", arguments: { riskLevel: [] } },
+    { name: "recommend_ai_ops_template_sequence", arguments: { priorities: "privacy" } },
+    { name: "recommend_ai_ops_template_sequence", arguments: { priorities: ["speed"] } },
+    { name: "build_ai_ops_review_checklist", arguments: { operation: [] } },
+    { name: "build_ai_ops_review_checklist", arguments: { operation: "   " } },
+    { name: "draft_ai_ops_adoption_plan", arguments: { reviewOwner: [] } }
   ];
   for (const params of toolNotifications) {
     send(child, framing, { jsonrpc: "2.0", method: "tools/call", params });
@@ -1007,7 +1012,8 @@ async function runSmokeTest(framing) {
     `${framing}: missing template ids should return invalid params, not an internal server error`
   );
   assert(
-    responses[16].error.message === "recommend_ai_ops_template_sequence priorities must be an array of strings.",
+    responses[16].id === 17 && responses[16].error.code === -32602 &&
+      responses[16].error.message === "recommend_ai_ops_template_sequence priorities must be an array of strings.",
     `${framing}: invalid priorities error failed`
   );
   assert(
@@ -1016,18 +1022,21 @@ async function runSmokeTest(framing) {
     `${framing}: invalid arguments object error failed`
   );
   assert(
-    responses[18].error.message ===
-      "Unsupported priority: speed. Use privacy, faq, crm, intake, review, workflow.",
+    responses[18].id === 19 && responses[18].error.code === -32602 &&
+      responses[18].error.message ===
+        "Unsupported priority: speed. Use privacy, faq, crm, intake, review, workflow.",
     `${framing}: unsupported priority error failed`
   );
   assert(
-    responses[19].error.message ===
-      "build_ai_ops_review_checklist operation must be a non-empty string when provided.",
+    responses[19].id === 20 && responses[19].error.code === -32602 &&
+      responses[19].error.message ===
+        "build_ai_ops_review_checklist operation must be a non-empty string when provided.",
     `${framing}: invalid checklist operation error failed`
   );
   assert(
-    responses[20].error.message ===
-      "draft_ai_ops_adoption_plan reviewOwner must be a non-empty string when provided.",
+    responses[20].id === 21 && responses[20].error.code === -32602 &&
+      responses[20].error.message ===
+        "draft_ai_ops_adoption_plan reviewOwner must be a non-empty string when provided.",
     `${framing}: invalid adoption-plan review owner error failed`
   );
   assert(
@@ -1041,13 +1050,15 @@ async function runSmokeTest(framing) {
     `${framing}: non-string JSON-RPC method error failed`
   );
   assert(
-    responses[23].error.message ===
-      "recommend_ai_ops_template_sequence operation must be a non-empty string when provided.",
+    responses[23].id === 24 && responses[23].error.code === -32602 &&
+      responses[23].error.message ===
+        "recommend_ai_ops_template_sequence operation must be a non-empty string when provided.",
     `${framing}: invalid sequence operation error failed`
   );
   assert(
-    responses[24].error.message ===
-      "draft_ai_ops_adoption_plan currentPain must be a non-empty string when provided.",
+    responses[24].id === 25 && responses[24].error.code === -32602 &&
+      responses[24].error.message ===
+        "draft_ai_ops_adoption_plan currentPain must be a non-empty string when provided.",
     `${framing}: invalid adoption-plan current pain error failed`
   );
   assert(
@@ -1075,13 +1086,15 @@ async function runSmokeTest(framing) {
     `${framing}: template id normalization failed`
   );
   assert(
-    responses[30].error.message ===
-      "build_ai_ops_review_checklist operation must be a non-empty string when provided.",
+    responses[30].id === 31 && responses[30].error.code === -32602 &&
+      responses[30].error.message ===
+        "build_ai_ops_review_checklist operation must be a non-empty string when provided.",
     `${framing}: whitespace-only checklist operation error failed`
   );
   assert(
-    responses[31].error.message ===
-      "draft_ai_ops_adoption_plan currentPain must be a non-empty string when provided.",
+    responses[31].id === 32 && responses[31].error.code === -32602 &&
+      responses[31].error.message ===
+        "draft_ai_ops_adoption_plan currentPain must be a non-empty string when provided.",
     `${framing}: whitespace-only adoption-plan current pain error failed`
   );
   const trimmedReviewOwnerPlan = JSON.parse(responses[32].result.content[0].text);
@@ -1197,8 +1210,8 @@ async function runSmokeTest(framing) {
   for (const [index, priorities] of invalidPriorityInputs.entries()) {
     const response = responses[56 + invalidRequestEnvelopes.length + index];
     assert(
-      response.id === `invalid-priority-${index}` &&
-        response.error?.message ===
+      response.id === `invalid-priority-${index}` && response.error?.code === -32602 &&
+        response.error.message ===
           "Unsupported priority: (empty). Use privacy, faq, crm, intake, review, workflow.",
       `${framing}: blank priorities ${JSON.stringify(priorities)} should be rejected`
     );

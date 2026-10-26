@@ -178,6 +178,10 @@ for public starter releases.
 ### Fixed
 
 - Return the standard JSON-RPC invalid-params code (-32602) for invalid
+  operation, priority, current-pain, and review-owner inputs instead of internal
+  server errors; verify request ids, existing messages, and silent notifications
+  across all supported input framing modes.
+- Return the standard JSON-RPC invalid-params code (-32602) for invalid
   `riskLevel` values in checklist and adoption-plan tools instead of an internal
   server error; verify request ids, error messages, and silent notifications
   across all supported input framing modes.
