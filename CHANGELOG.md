@@ -9,6 +9,9 @@ for public starter releases.
 
 ### Changed
 
+- Added smoke-test coverage for zero-length `Content-Length` frames with spaced
+  and compact headers, checking parse-error ids and continued responsiveness
+  when valid messages follow in the same mixed-framing input buffer.
 - Added smoke-test coverage that retrieves every listed template by id and checks
   that its complete metadata matches the public catalog across all tested input
   framing formats.

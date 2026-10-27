@@ -95,13 +95,26 @@ async function runMixedFramingTest() {
   });
 
   try {
-    send(child, "content-length", { jsonrpc: "2.0", id: "mixed-content-length", method: "ping", params: {} });
-    send(child, "newline", { jsonrpc: "2.0", id: "mixed-newline", method: "ping", params: {} });
+    const framedPing = JSON.stringify({ jsonrpc: "2.0", id: "mixed-content-length", method: "ping", params: {} });
+    const newlinePing = JSON.stringify({ jsonrpc: "2.0", id: "mixed-newline", method: "ping", params: {} });
+    child.stdin.write(
+      "Content-Length: 0\r\n\r\n" +
+        `Content-Length: ${Buffer.byteLength(framedPing, "utf8")}\r\n\r\n${framedPing}` +
+        "Content-Length:0\r\n\r\n" +
+        `${newlinePing}\n`
+    );
 
-    await waitForResponses(responses, 2);
+    await waitForResponses(responses, 4);
+    for (const index of [0, 2]) {
+      assert(
+        responses[index].id === null && responses[index].error?.code === -32700,
+        "zero-length frames should return parse errors with null ids"
+      );
+    }
     assert(
-      responses[0].id === "mixed-content-length" && responses[1].id === "mixed-newline",
-      "mixed framing should preserve response order and ids"
+      responses[1].id === "mixed-content-length" && responses[3].id === "mixed-newline" &&
+        Object.keys(responses[1].result).length === 0 && Object.keys(responses[3].result).length === 0,
+      "mixed framing should preserve valid responses after zero-length frames"
     );
   } finally {
     child.kill();
