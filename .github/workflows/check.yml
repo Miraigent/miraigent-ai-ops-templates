@@ -36,7 +36,7 @@ jobs:
         shell: bash
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            git diff --check "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}"
+            git diff --check "${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}"
           elif [[ "${{ github.event_name }}" == "push" ]]; then
             git diff --check "${{ github.event.before }}" "${{ github.sha }}"
           else

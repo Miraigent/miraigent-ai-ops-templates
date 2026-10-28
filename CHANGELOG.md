@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Check pull request whitespace against the branches' merge base so unrelated
+  base-branch cleanup does not falsely flag unchanged pull request lines.
 - Added smoke-test coverage for zero-length `Content-Length` frames with spaced
   and compact headers, checking parse-error ids and continued responsiveness
   when valid messages follow in the same mixed-framing input buffer.
