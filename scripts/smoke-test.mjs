@@ -891,6 +891,14 @@ async function runSmokeTest(framing) {
 
   assert(responses[0].result.serverInfo.name === "miraigent-ai-ops-template-server", `${framing}: initialize failed`);
   assert(responses[0].result.serverInfo.version === packageJson.version, `${framing}: server version must match package.json`);
+  assert(
+    responses[0].result.protocolVersion === "2024-11-05",
+    `${framing}: initialize must declare the supported MCP protocol version`
+  );
+  assert(
+    isDeepStrictEqual(responses[0].result.capabilities?.tools, {}),
+    `${framing}: initialize must advertise the static tools capability`
+  );
   assert(responses[1].result.tools.length === 5, `${framing}: tools/list failed`);
   const toolSchemas = Object.fromEntries(responses[1].result.tools.map((tool) => [tool.name, tool.inputSchema]));
   assert(
