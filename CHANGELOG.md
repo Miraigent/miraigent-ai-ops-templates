@@ -74,6 +74,9 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage that tool discovery advertises every supported
+  helper exactly once with a description and an object input schema across
+  all supported input framing modes.
 - Added smoke-test coverage for the MCP initialize response's supported protocol
   version and static tool capability across all supported input framing modes.
 - Added smoke-test coverage that every response in the main MCP scenarios has a

@@ -902,6 +902,25 @@ async function runSmokeTest(framing) {
   assert(responses[1].result.tools.length === 5, `${framing}: tools/list failed`);
   const toolSchemas = Object.fromEntries(responses[1].result.tools.map((tool) => [tool.name, tool.inputSchema]));
   assert(
+    isDeepStrictEqual(Object.keys(toolSchemas).sort(), [
+      "build_ai_ops_review_checklist",
+      "draft_ai_ops_adoption_plan",
+      "get_ai_ops_template",
+      "list_ai_ops_templates",
+      "recommend_ai_ops_template_sequence"
+    ]),
+    `${framing}: tools/list should advertise every supported helper exactly once`
+  );
+  assert(
+    responses[1].result.tools.every(
+      (tool) =>
+        typeof tool.description === "string" &&
+        tool.description.trim().length > 0 &&
+        tool.inputSchema?.type === "object"
+    ),
+    `${framing}: tools/list should provide descriptions and object input schemas`
+  );
+  assert(
     toolSchemas.get_ai_ops_template.required.includes("id"),
     `${framing}: get_ai_ops_template schema should require id`
   );
