@@ -931,6 +931,20 @@ async function runSmokeTest(framing) {
       "privacy,faq,crm,intake,review,workflow",
     `${framing}: template sequence schema should advertise supported priorities`
   );
+  for (const response of responses.slice(2, 7)) {
+    const result = response.result;
+    assert(
+      Array.isArray(result?.content) && result.content.length > 0 &&
+        result.content.every(
+          (item) => item?.type === "text" && typeof item.text === "string" && item.text.trim().length > 0
+        ),
+      `${framing}: tool response ${response.id} must return non-empty MCP text content`
+    );
+    assert(
+      result.isError === undefined || result.isError === false,
+      `${framing}: tool response ${response.id} must not mark successful tool calls as errors`
+    );
+  }
   assert(responses[2].result.content[0].text.includes("Human Review Gate"), `${framing}: template listing failed`);
   const templateCatalog = JSON.parse(responses[2].result.content[0].text);
   assert(

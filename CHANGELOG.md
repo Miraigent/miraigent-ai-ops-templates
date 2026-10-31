@@ -74,6 +74,9 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage that all five public MCP tools return non-empty
+  text content without marking successful calls as errors across supported
+  input framing modes.
 - Added smoke-test coverage that tool discovery advertises every supported
   helper exactly once with a description and an object input schema across
   all supported input framing modes.
