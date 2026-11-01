@@ -82,7 +82,7 @@ explicit version:
 ```
 
 Review the changelog before changing the pinned version. The package starts the
-same non-memory AI operations helper documented in this directory.
+same stateless AI operations helper documented in this directory.
 
 ## Connect an MCP Client Locally
 
@@ -232,9 +232,9 @@ the accepted values; keep free-form context in the `operation` field instead.
 Empty or whitespace-only priority values also return an error. Omit
 `priorities` or pass `[]` when no priority is needed.
 
-The response includes `nextSteps.links` with public URLs for the Miraigent
-resource hub, free template library, free diagnosis, and Agent Memories. These
-links are informational; the server does not persist or retrieve client data.
+The response includes `nextSteps.links` for the Miraigent resource hub, free
+template library, and free diagnosis. These links are informational; the server
+does not persist or retrieve prompts, tool results, or operating notes.
 
 ### `draft_ai_ops_adoption_plan`
 
@@ -262,10 +262,11 @@ Many teams adopt AI before they define the operating layer around it:
 - what data can be sent to AI
 - what must be masked
 - when a human must review output
-- how repeated review lessons become reusable operating notes
+- how teams apply consistent review practices across workflows
 - how customer support and CRM notes stay useful without exposing private data
 
 This starter server turns those public patterns into MCP-accessible tools.
 
-It is a non-memory AI operations helper. It is not the MIRAI Memory engine and
-it is not a working memory MCP.
+The server is a stateless AI operations helper for the public template catalog.
+It exposes template discovery and human-review planning tools. It does not
+persist or retrieve prompts, tool results, or operating notes.

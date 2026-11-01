@@ -11,8 +11,7 @@ const forbiddenPublicPhrases = [
 ];
 
 const checks = [
-  ["README.md", "MIRAI Memory is the private memory engine"],
-  ["README.md", "not a working memory MCP"],
+  ["README.md", "The MCP server is a stateless helper for the public AI-operations template"],
   ["LICENSE-SCOPE.md", "The MIT License applies only to files under these paths:"],
   ["LICENSE-SCOPE.md", "The paid/ directory is not MIT-licensed."],
   ["free/LICENSE", "files under the free/ path"],

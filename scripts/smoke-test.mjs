@@ -975,7 +975,7 @@ async function runSmokeTest(framing) {
   assert(responses[3].result.content[0].text.includes("Human Review Gate"), `${framing}: template lookup failed`);
   assert(responses[4].result.content[0].text.includes("escalation owner"), `${framing}: checklist build failed`);
   const sequenceRecommendation = JSON.parse(responses[5].result.content[0].text);
-  assert(sequenceRecommendation.note.includes("not a MIRAI Memory engine"), `${framing}: sequence recommendation failed`);
+  assert(sequenceRecommendation.note.includes("human-reviewed workflow"), `${framing}: sequence recommendation failed`);
   assert(
     indexOfTemplate(sequenceRecommendation, "customer-data-anonymization-mini-guide") <
       indexOfTemplate(sequenceRecommendation, "human-review-gate-ai-drafts"),
@@ -988,8 +988,7 @@ async function runSmokeTest(framing) {
         JSON.stringify([
           "https://miraigent.com/resources.html",
           "https://miraigent.com/en/free-ai-operations-templates.html",
-          "https://miraigent.com/en/diagnosis.html",
-          "https://agentmemories.jp/"
+          "https://miraigent.com/en/diagnosis.html"
         ]),
     `${framing}: sequence recommendation should include the public next-step links`
   );
@@ -1011,8 +1010,10 @@ async function runSmokeTest(framing) {
   assert(
     customPlan.operation === "customer-support" &&
       customPlan.currentPain === "AI replies are drafted before review rules are clear" &&
-      customPlan.reviewOwner === "support lead" && customPlan.riskLevel === "high",
-    `${framing}: adoption plan should use the supplied inputs`
+      customPlan.reviewOwner === "support lead" &&
+      customPlan.riskLevel === "high" &&
+      customPlan.boundary.includes("public AI-operations templates"),
+    `${framing}: adoption plan should use the supplied inputs and public scope`
   );
   assert(
     responses[7].id === 8 && responses[7].error.code === -32602 &&

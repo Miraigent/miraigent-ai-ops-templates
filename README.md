@@ -16,7 +16,6 @@ It is designed for teams that want to use AI for customer support, CRM notes, FA
 - Free diagnosis: https://miraigent.com/diagnosis.html
 - Free template library: https://miraigent.com/en/free-ai-operations-templates.html
 - npm package: https://www.npmjs.com/package/@miraigent/ai-ops-templates
-- Agent Memories: https://agentmemories.jp/
 - Technical articles: https://qiita.com/Miraigent and https://zenn.dev/miraigent
 - Open source readiness: OPEN_SOURCE_READINESS.md
 - Free MCP candidates: FREE_MCP_CANDIDATES.md
@@ -41,45 +40,15 @@ MIT-licensed paths:
 The paid/ directory is not MIT-licensed. It is a public index for paid product
 names, sample previews, sales-page links, and update notes only.
 
-The MIT license does not grant rights to full paid product files, private client
-materials, the MIRAI Memory engine, or working memory MCPs.
-
 This repository does not include private customer records, credentials,
 company-specific internal manuals, or unpublished product specifications.
 
-## Public Boundary
+## MCP Scope
 
-MIRAI Memory is the private memory engine. This repository does not open-source
-the MIRAI Memory engine itself.
-
-Memory MCP servers that would make MIRAI Memory usable as a working memory
-engine are also private and must not be published here.
-
-The public layer is limited to tools and resources that can sit around that
-engine:
-
-- free AI operations templates
-- the starter MCP server in mcp/
-- non-memory skill resources
-- non-memory AI operations helper MCP tools
-- public Agent Memories guidance
-
-In short: this repository opens free support tools, not the MIRAI Memory engine
-and not a working memory MCP.
-
-## Naming Layers
-
-Miraigent uses these public names consistently:
-
-- Service: Agent Memories
-- Private engine / memory concept: MIRAI Memory
-- Public repository: Miraigent AI Ops Templates
-
-In Japanese materials:
-
-- サービス名: エージェントメモリーズ
-- 非公開エンジン名 / 記憶コンセプト: MIRAI Memory
-- 公開repo名: Miraigent AI Ops Templates
+The MCP server is a stateless helper for the public AI-operations template
+catalog. Its tools provide template discovery, human-review checklists, and
+adoption plans. It does not persist or retrieve prompts, tool results, or
+operating notes, and it is not a full orchestration runtime.
 
 ## MCP Starter Server
 
@@ -190,7 +159,6 @@ Miraigent templates are built around that operating layer.
 
 - free/ - free templates, starter kits, and public links
 - mcp/ - runnable MCP servers and examples
-- agent-memories/ - lightweight public introduction to reusable AI operating notes
 - paid/ - paid product indexes and sample previews
 - ja/ - Japanese guidance for domestic buyers
 - LICENSE-SCOPE.md - license scope and paid-directory boundary
@@ -202,27 +170,7 @@ Miraigent templates are built around that operating layer.
    https://miraigent.com/en/free-ai-operations-templates.html
 2. Run the starter MCP server with `npm run --silent mcp`.
 3. Read free/ for the public resource map.
-4. Use agent-memories/ for a lightweight overview of reusable AI operating notes.
-5. Check paid/ for paid kit previews.
-
-## Agent Memories
-
-Agent Memories is a public-facing concept for turning repeated AI operating lessons into reusable notes and templates.
-
-Examples:
-
-- repeated review points
-- safe handling notes
-- writing preferences
-- FAQ candidate rules
-- prompt safety checklists
-- customer data anonymization examples
-
-This repository only contains public-facing resources and tool-layer examples. The MIRAI Memory engine itself and working memory MCPs are private and are not included here. Private company context, internal operating manuals, credentials, customer records, and deep product specifications should not be stored here.
-
-Public introduction page:
-
-https://miraigent.com/en/mirai-memory-mcp.html
+4. Check paid/ for paid kit previews.
 
 ## Roadmap
 
@@ -242,7 +190,6 @@ https://miraigent.com/en/mirai-memory-mcp.html
 ## Links
 
 - Free templates: https://miraigent.com/en/free-ai-operations-templates.html
-- MIRAI Memory public introduction: https://miraigent.com/en/mirai-memory-mcp.html
 - Free diagnosis: https://miraigent.com/en/diagnosis.html
 - Website: https://miraigent.com/
 - note: https://note.com/miraigent

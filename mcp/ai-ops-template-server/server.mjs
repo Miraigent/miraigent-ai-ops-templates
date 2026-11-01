@@ -472,7 +472,7 @@ function recommendTemplateSequence(args) {
 
   return {
     operation,
-    note: "This is a non-memory AI operations helper sequence. It is not a MIRAI Memory engine or working memory MCP.",
+    note: "This tool recommends public AI-operations templates for a human-reviewed workflow.",
     nextSteps: buildNextSteps(),
     templates: sequence.map((id) => templates.find((template) => template.id === id))
   };
@@ -528,7 +528,7 @@ function normalizeChecklistOperation(args) {
 function buildNextSteps() {
   return {
     label: "Learn more",
-    note: "Use these public templates as a starting point, then review Miraigent and Agent Memories resources for practical AI operations support.",
+    note: "Use these public templates and review guides as a starting point for practical AI operations.",
     links: [
       {
         label: "Miraigent resource hub",
@@ -541,10 +541,6 @@ function buildNextSteps() {
       {
         label: "Free diagnosis",
         url: "https://miraigent.com/en/diagnosis.html"
-      },
-      {
-        label: "Agent Memories",
-        url: "https://agentmemories.jp/"
       }
     ]
   };
@@ -573,7 +569,7 @@ function draftAdoptionPlan(args) {
     currentPain,
     reviewOwner,
     riskLevel,
-    boundary: "This is a non-memory AI operations helper plan. It is not a MIRAI Memory engine or working memory MCP.",
+    boundary: "This plan is limited to public AI-operations templates and human-review steps.",
     steps: [
       {
         day: 1,

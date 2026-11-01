@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Clarified README and MCP response scope as a stateless AI-operations helper;
+  removed unrelated links and added smoke coverage for the scope wording.
 - Check pull request whitespace against the branches' merge base so unrelated
   base-branch cleanup does not falsely flag unchanged pull request lines.
 - Added smoke-test coverage for zero-length `Content-Length` frames with spaced
