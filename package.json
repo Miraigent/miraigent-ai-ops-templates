@@ -16,7 +16,6 @@
     "LICENSE-SCOPE.md",
     "free/",
     "mcp/",
-    "agent-memories/",
     "ja/",
     "scripts/"
   ],
@@ -35,7 +34,6 @@
     "model-context-protocol",
     "ai-operations",
     "agent-tools",
-    "agent-memories",
     "human-review",
     "human-in-the-loop",
     "ai-safety",

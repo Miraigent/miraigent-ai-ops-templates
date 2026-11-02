@@ -9,6 +9,9 @@ for public starter releases.
 
 ### Changed
 
+- Aligned the Japanese guide and npm metadata with the stateless AI-operations
+  MCP scope; the npm archive excludes the separate Agent Memories guide and its
+  search keyword.
 - Clarified README and MCP response scope as a stateless AI-operations helper;
   removed unrelated links and added smoke coverage for the scope wording.
 - Check pull request whitespace against the branches' merge base so unrelated

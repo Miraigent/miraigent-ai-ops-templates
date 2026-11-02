@@ -64,4 +64,12 @@ for (const path of packagePaths) {
   if (path === "paid" || path.startsWith("paid/")) {
     throw new Error(`npm package must not include the paid/ boundary: ${path}`);
   }
+
+  if (path === "agent-memories" || path.startsWith("agent-memories/")) {
+    throw new Error(`npm package must not include the separate Agent Memories guide: ${path}`);
+  }
+}
+
+if ((packageJson.keywords ?? []).includes("agent-memories")) {
+  throw new Error("npm package keywords must not imply an agent-memory MCP.");
 }
