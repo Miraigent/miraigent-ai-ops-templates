@@ -27,7 +27,8 @@ for public starter releases.
 - Restricted the repository check workflow token to read-only contents access.
 - Added a package check that keeps the pinned MCP README example aligned with
   the current package version.
-- Expanded CI runtime coverage to Node.js 24 alongside Node.js 20 and 22.
+- Added Node.js 26 (Active LTS) to the CI runtime matrix so MCP checks cover
+  the current LTS release.
 - Corrected the reviewer-facing CI description to match the workflow triggers for
   `main` pushes, pull requests, and manual dispatches.
 - Replaced internal project-specific boundary wording in contribution and
