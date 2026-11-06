@@ -80,6 +80,8 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage that executes all eight manual JSON-RPC examples in
+  the MCP README against the local server and checks their responses.
 - Added smoke-test coverage that all five public MCP tools return non-empty
   text content without marking successful calls as errors across supported
   input framing modes.

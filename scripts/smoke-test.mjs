@@ -18,6 +18,79 @@ await runFragmentedInputTest("newline");
 await runUtf8FragmentedInputTest("content-length");
 await runUtf8FragmentedInputTest("newline");
 await runMixedFramingTest();
+await runDocumentedExamplesTest();
+
+async function runDocumentedExamplesTest() {
+  const readme = await readFile(new URL("../mcp/ai-ops-template-server/README.md", import.meta.url), "utf8");
+  const manualSection = readme.split("## Manual JSON-RPC Examples\n")[1]?.split("\n## ")[0];
+  assert(manualSection, "the MCP README should retain its manual JSON-RPC examples section");
+  const examples = [...manualSection.matchAll(/printf\s+'[^']+'\s+'(\{[^']+\})'/g)]
+    .map((match) => JSON.parse(match[1]));
+
+  assert(examples.length === 8, "the MCP README should contain all eight documented JSON-RPC examples");
+  assert(
+    examples.every((example) =>
+      example.jsonrpc === "2.0" &&
+        ((typeof example.id === "string" && example.id.length > 0) ||
+          (typeof example.id === "number" && Number.isFinite(example.id)))
+    ) && new Set(examples.map((example) => example.id)).size === examples.length,
+    "the MCP README examples should use valid JSON-RPC 2.0 requests with unique ids"
+  );
+  const documentedTools = examples
+    .filter((example) => example.method === "tools/call")
+    .map((example) => example.params?.name)
+    .sort();
+  assert(
+    isDeepStrictEqual(documentedTools, [
+      "build_ai_ops_review_checklist",
+      "draft_ai_ops_adoption_plan",
+      "get_ai_ops_template",
+      "list_ai_ops_templates",
+      "recommend_ai_ops_template_sequence"
+    ]),
+    "the MCP README should demonstrate every public tool exactly once"
+  );
+
+  const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {
+    stdio: ["pipe", "pipe", "inherit"]
+  });
+  const responses = [];
+  let output = "";
+  child.stdout.on("data", (chunk) => {
+    output += chunk.toString("utf8");
+    let lineEnd = output.indexOf("\n");
+    while (lineEnd !== -1) {
+      const line = output.slice(0, lineEnd).trim();
+      output = output.slice(lineEnd + 1);
+      if (line) {
+        responses.push(JSON.parse(line));
+      }
+      lineEnd = output.indexOf("\n");
+    }
+  });
+
+  try {
+    child.stdin.write(`${examples.map((example) => JSON.stringify(example)).join("\n")}\n`);
+    await waitForResponses(responses, examples.length);
+    assert(responses.length === examples.length, "the MCP README requests should produce no extra responses");
+    assert(
+      responses.every((response, index) =>
+        response.jsonrpc === "2.0" && response.id === examples[index].id && response.result && !response.error
+      ),
+      "each documented MCP README example should receive a successful JSON-RPC response"
+    );
+    const toolCallResponses = responses.filter((_, index) => examples[index].method === "tools/call");
+    assert(
+      toolCallResponses.length === 5 && toolCallResponses.every((response) =>
+        response.result.isError !== true &&
+          response.result.content?.some((item) => item.type === "text" && item.text.trim().length > 0)
+      ),
+      "each documented tools/call example should return non-empty text without an MCP error"
+    );
+  } finally {
+    child.kill();
+  }
+}
 
 async function runUtf8FragmentedInputTest(framing) {
   const child = spawn(process.execPath, ["mcp/ai-ops-template-server/server.mjs"], {
