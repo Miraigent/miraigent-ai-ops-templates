@@ -182,10 +182,11 @@ Miraigent templates are built around that operating layer.
 
 ## Japanese
 
-このリポジトリは、MiraigentのAI運用テンプレートと公開向けスターターリソースを置く場所です。
+このリポジトリはMiraigentのAI運用テンプレートとAI運用向けMCPスターターを公開する場です。
 
+MITライセンスは `free/` と `mcp/` 内のファイルにのみ適用されます。`paid/` は商品名、サンプルのプレビュー、販売ページへのリンク、更新情報を掲載する公開用の一覧で、MITライセンスの対象外です。詳細は [LICENSE-SCOPE.md](LICENSE-SCOPE.md) に記載しています。
 
-公開repoには、無料テンプレートと軽い紹介だけを置きます。深い商品仕様、内部運用、顧客情報、非公開の判断基準は置きません。
+非公開の製品仕様、社内向け運用マニュアル、顧客情報、認証情報、非公開の判断基準は掲載していません。
 
 ## Links
 
