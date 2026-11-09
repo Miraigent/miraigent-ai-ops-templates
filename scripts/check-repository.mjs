@@ -29,6 +29,7 @@ for (const file of readdirSync(".")) {
   }
 }
 assertMissing("PUBLICATION_PLAN.md");
+assertMissing("agent-memories");
 assertPackageFilesRespectLicenseScope();
 assertNoForbiddenPublicPositioning(".");
 

@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Removed the out-of-scope standalone guide so the public repository stays
+  focused on AI-operations resources and the ops MCP starter.
 - Clarified the Japanese README's AI-operations MCP scope and license boundaries.
 - Aligned the Japanese guide and npm metadata with the stateless AI-operations
   MCP scope; the npm archive excludes the separate Agent Memories guide and its

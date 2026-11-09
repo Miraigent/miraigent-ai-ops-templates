@@ -27,4 +27,5 @@ jobs:
           test -f free/LICENSE
           test -f mcp/LICENSE
           test ! -f LICENSE
-          grep -R "working memory MCPs are private" README.md agent-memories/README.md
+          test ! -e agent-memories
+          grep -F "The MCP server is a stateless helper for the public AI-operations template" README.md
