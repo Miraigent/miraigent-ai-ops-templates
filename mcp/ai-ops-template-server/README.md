@@ -15,8 +15,8 @@ review, and support process mapping.
 Use Node.js 20 or newer. This matches the runtime declared by the published
 npm package and the repository CI checks.
 
-The server is stateless: it does not persist prompts, tool results, or operating
-notes, and it has no memory or retrieval function. Each response is built from
+The server handles each request independently; it does not retain prompts, tool
+results, or operating notes between requests. Each response is built only from
 the public template catalog bundled with this repository.
 
 ## Run

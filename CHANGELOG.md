@@ -9,6 +9,8 @@ for public starter releases.
 
 ### Changed
 
+- Clarified that the MCP server handles requests independently and builds
+  responses only from the bundled public template catalog.
 - Removed the out-of-scope standalone guide so the public repository stays
   focused on AI-operations resources and the ops MCP starter.
 - Clarified the Japanese README's AI-operations MCP scope and license boundaries.
