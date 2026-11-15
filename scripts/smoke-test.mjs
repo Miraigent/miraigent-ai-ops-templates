@@ -3,6 +3,10 @@ import { readFile } from "node:fs/promises";
 import { isDeepStrictEqual } from "node:util";
 
 const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
+const [rootReadme, freeReadme] = await Promise.all([
+  readFile(new URL("../README.md", import.meta.url), "utf8"),
+  readFile(new URL("../free/README.md", import.meta.url), "utf8")
+]);
 
 await runSmokeTest("content-length");
 await runSmokeTest("content-length-compact");
@@ -1044,6 +1048,28 @@ async function runSmokeTest(framing) {
   assert(
     new Set(templateIds).size === templateIds.length,
     `${framing}: public template catalog should not contain duplicate ids`
+  );
+  const expectedTitles = templateCatalog.map((template) => template.title);
+  const rootTemplateSection = rootReadme.split("## Free Template Library\n")[1]?.split("\n## ")[0];
+  assert(rootTemplateSection, `${framing}: root README should retain its free template list`);
+  const rootTemplateTitles = [...rootTemplateSection.matchAll(/^\d+\. (.+)$/gm)].map((match) => match[1]);
+  assert(
+    isDeepStrictEqual(rootTemplateTitles, expectedTitles),
+    `${framing}: root README template titles should match the public MCP catalog in order`
+  );
+  const freeTemplateSection = freeReadme.split("## Free Template Set\n")[1]?.split("\n## ")[0];
+  assert(freeTemplateSection, `${framing}: free/README should retain its template set`);
+  const freeTemplateHeadings = [...freeTemplateSection.matchAll(/^### \d+\. (.+)$/gm)];
+  const freeTemplateEntries = freeTemplateHeadings.map((heading, index) => {
+    const end = freeTemplateHeadings[index + 1]?.index ?? freeTemplateSection.length;
+    const block = freeTemplateSection.slice(heading.index, end);
+    const urls = [...block.matchAll(/^https:\/\/miraigent\.gumroad\.com\/l\/\S+$/gm)].map((match) => match[0]);
+    assert(urls.length === 1, `${framing}: free/README entry should have one public product URL: ${heading[1]}`);
+    return { title: heading[1], url: urls[0] };
+  });
+  assert(
+    isDeepStrictEqual(freeTemplateEntries, templateCatalog.map(({ title, url }) => ({ title, url }))),
+    `${framing}: free/README titles and product links should match the public MCP catalog`
   );
   assert(responses[3].result.content[0].text.includes("Human Review Gate"), `${framing}: template lookup failed`);
   assert(responses[4].result.content[0].text.includes("escalation owner"), `${framing}: checklist build failed`);

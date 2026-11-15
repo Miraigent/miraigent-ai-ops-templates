@@ -85,6 +85,8 @@ for public starter releases.
 
 ### Added
 
+- Added smoke-test coverage that the root and free README template titles match
+  the MCP catalog and that free/README product links match its public URLs.
 - Added smoke-test coverage that executes all eight manual JSON-RPC examples in
   the MCP README against the local server and checks their responses.
 - Added smoke-test coverage that all five public MCP tools return non-empty
