@@ -9,6 +9,7 @@ for public starter releases.
 
 ### Changed
 
+- Added repository checks that preserve privacy and public-boundary confirmations in GitHub issue and pull-request templates.
 - Clarified that the MCP server handles requests independently and builds
   responses only from the bundled public template catalog.
 - Removed the out-of-scope standalone guide so the public repository stays

@@ -16,7 +16,17 @@ const checks = [
   ["LICENSE-SCOPE.md", "The paid/ directory is not MIT-licensed."],
   ["free/LICENSE", "files under the free/ path"],
   ["mcp/LICENSE", "files under the mcp/ path"],
-  ["package.json", "\"license\": \"SEE LICENSE IN LICENSE-SCOPE.md\""]
+  ["package.json", "\"license\": \"SEE LICENSE IN LICENSE-SCOPE.md\""],
+  [".github/ISSUE_TEMPLATE/bug_report.md", "Do not paste credentials, private client data, or private company context"],
+  [".github/ISSUE_TEMPLATE/bug_report.md", "working memory MCP\ndetails."],
+  [".github/ISSUE_TEMPLATE/template_improvement.md", "This does not include private client information."],
+  [".github/ISSUE_TEMPLATE/template_improvement.md", "This does not include MIRAI Memory engine details."],
+  [".github/ISSUE_TEMPLATE/template_improvement.md", "This does not include full paid product content."],
+  [".github/ISSUE_TEMPLATE/free_mcp_candidate_feedback.md", "This does not include secrets, tokens, passwords, cookies, or credentials."],
+  [".github/ISSUE_TEMPLATE/free_mcp_candidate_feedback.md", "This does not request a working memory MCP."],
+  [".github/ISSUE_TEMPLATE/free_mcp_candidate_feedback.md", "This does not include full paid product content."],
+  [".github/PULL_REQUEST_TEMPLATE.md", "No wording that positions this repository as a memory-focused MCP project"],
+  [".github/PULL_REQUEST_TEMPLATE.md", "No full paid product files"]
 ];
 
 for (const [file, expected] of checks) {
