@@ -121,8 +121,9 @@ for public starter releases.
   return every public catalog entry exactly once.
 - Added smoke-test coverage that validates the public template catalog has ten
   complete HTTPS entries with unique ids.
-- Added public resource, free-template, diagnosis, and Agent Memories links to
-  `recommend_ai_ops_template_sequence` next steps, with smoke-test coverage.
+- Aligned the recommendation-link description with its current smoke-tested
+  destinations: the public resource hub, free AI operations templates, and free
+  diagnosis.
 - Added smoke-test coverage for duplicate `Content-Length` headers so framed
   messages fail fast instead of waiting on an ambiguous body length.
 - Added smoke-test coverage for complete `Content-Length` header blocks over
