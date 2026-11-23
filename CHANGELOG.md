@@ -9,6 +9,9 @@ for public starter releases.
 
 ### Changed
 
+- Clarified that Node.js 20 is the tested minimum-compatibility baseline but
+  is upstream end of life; production users should use a currently supported
+  LTS release.
 - Added repository checks that preserve privacy and public-boundary confirmations in GitHub issue and pull-request templates.
 - Clarified that the MCP server handles requests independently and builds
   responses only from the bundled public template catalog.

@@ -12,8 +12,11 @@ review, and support process mapping.
 
 ## Requirements
 
-Use Node.js 20 or newer. This matches the runtime declared by the published
-npm package and the repository CI checks.
+Node.js 20 or newer is the package's declared runtime baseline. Node.js 20
+reached upstream end of life on April 30, 2026 and remains in CI only as the
+minimum-compatibility check. For production, use a currently supported LTS
+release; see the [Node.js release
+status](https://nodejs.org/en/about/previous-releases).
 
 The server handles each request independently; it does not retain prompts, tool
 results, or operating notes between requests. Each response is built only from
