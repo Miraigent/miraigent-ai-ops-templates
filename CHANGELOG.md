@@ -89,6 +89,7 @@ for public starter releases.
 
 ### Added
 
+- Added a repository check to keep the MCP README runtime baseline and CI minimum aligned with the package's declared Node.js requirement.
 - Added smoke-test coverage that the root and free README template titles match
   the MCP catalog and that free/README product links match its public URLs.
 - Added smoke-test coverage that executes all eight manual JSON-RPC examples in

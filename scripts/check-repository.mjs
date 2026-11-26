@@ -41,6 +41,7 @@ for (const file of readdirSync(".")) {
 assertMissing("PUBLICATION_PLAN.md");
 assertMissing("agent-memories");
 assertPackageFilesRespectLicenseScope();
+assertRuntimeDocsMatchPackage();
 assertNoForbiddenPublicPositioning(".");
 
 function assertFileContains(file, expected) {
@@ -83,6 +84,25 @@ function assertPackageFilesRespectLicenseScope() {
     ) {
       throw new Error(`package.json files must not publish outside the scoped license boundary: ${entry}`);
     }
+  }
+}
+
+function assertRuntimeDocsMatchPackage() {
+  const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
+  const runtimeMatch = packageJson.engines?.node?.match(/^>=(\d+)$/);
+  if (!runtimeMatch) {
+    throw new Error("package.json engines.node must declare a minimum Node.js major version.");
+  }
+
+  const minimumVersion = runtimeMatch[1];
+  const mcpReadme = readFileSync("mcp/ai-ops-template-server/README.md", "utf8");
+  if (!mcpReadme.includes(`Node.js ${minimumVersion} or newer is the package's declared runtime baseline.`)) {
+    throw new Error("MCP README runtime baseline must match package.json engines.node.");
+  }
+
+  const workflow = readFileSync(".github/workflows/check.yml", "utf8");
+  if (!workflow.includes(`node-version: [\"${minimumVersion}\"`)) {
+    throw new Error("CI runtime matrix must include the package's minimum Node.js version.");
   }
 }
 
